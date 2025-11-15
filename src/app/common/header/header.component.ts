@@ -1,0 +1,26 @@
+import { Component } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupSignupComponent } from '../popup-signup/popup-signup.component';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-header',
+  imports: [MatIconModule],
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.scss'
+})
+export class HeaderComponent {
+  constructor(private dialog: MatDialog, private router: Router) {}
+  openRagistration() {
+    this.dialog.open(PopupSignupComponent, {
+      width: '500px'
+    });
+  }
+  openUniversity() {
+    this.router.navigate(['university-details/1']);
+  }
+  openHome(){
+    this.router.navigate(['home']);
+  }
+}

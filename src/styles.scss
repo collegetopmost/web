@@ -1,0 +1,163 @@
+:root {
+    --primary-color: #f58634;
+    --secondary-color: #403e87;
+    --theme-button-color: rgb(63, 221, 0);
+    --theme-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, .16), 0 2px 10px 0 rgba(0, 0, 0, .12);
+    --danger-color: #ff0000;
+    --warning-color: #ffcc00;
+    --success-color: #00ff00;
+    --theme-font-family: 'Open Sans', sans-serif;
+    --soft-highlight: #fdf3eb;
+
+    --primary-gradient: linear-gradient(135deg, #f58634, #403e87);
+    --primary-soft-gradient: linear-gradient(135deg, #f58634, #ffb56e);
+    --secondary-soft-gradient: linear-gradient(135deg, #403e87, #2a2766);
+    --glass-gradient: linear-gradient(135deg, rgba(245, 134, 52, 0.22), rgba(64, 62, 135, 0.22));
+    --primary-3d-gradient: radial-gradient(circle at 30% 30%, #ffb77a, #f58634, #9a4ecf, #403e87);
+    --button-3d-gradient: linear-gradient(135deg, #f8a05a 0%, #f58634 35%, #7648b7 80%, #403e87 100%);
+    --cta-velvet-gradient: radial-gradient(circle at top left, #4a43a3, #29255c 60%, #1c173e);
+    --grad-primary: linear-gradient(135deg, #ff7a3d 0%, #9247ff 100%);
+    --grad-hover: linear-gradient(135deg, #ffa76f 0%, #a37bff 100%);
+
+
+    --theme-box-shadow: 0 4px 25px rgba(0, 0, 0, 0.12);
+    --theme-soft-shadow: 0 12px 40px rgba(0, 0, 0, 0.18);
+    --danger-color: #ff0000;
+    --warning-color: #ffcc00;
+    --success-color: #00ff00;
+}
+
+body,
+html {
+    font-family: var(--theme-font-family);
+    margin: 0px;
+    padding: 0px;
+    color: #666666;
+    font-size: 14px;
+}
+
+.primary-color {
+    color: var(--primary-color);
+}
+
+.secondary-color {
+    color: var(--secondary-color);
+}
+
+.primary-bgcolor {
+    background: var(--primary-color);
+}
+
+.secondary-color {
+    background: var(--secondary-color);
+}
+
+.global_submit_button {
+    width: 100%;
+    padding: 14px 0;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 14px;
+    background: var(--grad-primary) !important;
+    color: #fff !important;
+    box-shadow: var(--shadow-main);
+    cursor: pointer;
+    transition: 0.35s ease;
+    min-height: 50px;
+    border: none;
+
+    &:hover {
+        background: var(--grad-hover);
+        transform: translateY(-2px);
+    }
+}
+
+
+.global_theme_btn {
+    background: var(--button-3d-gradient);
+    border: none;
+    color: #fff;
+    padding: 10px 22px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.35s;
+
+    &:hover {
+        background: var(--grad-hover);
+        transform: translateY(-3px);
+    }
+}
+
+.global_textbox .mat-form-field-flex {
+    min-height: 48px;
+    /* Medium Height */
+    padding: 4px 12px !important;
+    display: flex;
+    align-items: center;
+
+    .mat-mdc-text-field-wrapper {
+        max-height: 46px;
+        font-size: 14px;
+    }
+}
+
+.global_textbox .mat-form-field-infix {
+    padding: 8px 0 !important;
+}
+
+.global_textbox .mat-input-element,
+.global_textbox .mat-select-value {
+    font-size: 14px !important;
+    line-height: 1.4;
+}
+
+.section-heading {
+    font-family: var(--theme-font-family);
+    font-size: 34px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 38px;
+    background: radial-gradient(circle at 30% 30%, #ffb77a, #f58634, #8a54d6, #403e87);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0px 4px 14px rgba(0, 0, 0, 0.18));
+    letter-spacing: 0.7px;
+
+    &::after {
+        content: "";
+        display: block;
+        margin: 12px auto 0;
+        width: 100px;
+        height: 5px;
+        border-radius: 5px;
+        background: linear-gradient(135deg, #f58634, #403e87);
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
+    }
+}
+
+.section-head-gradient {
+    margin-bottom: 32px;
+
+    .label {
+        font-size: 13px;
+        color: #8b8b8b;
+        margin-bottom: 8px;
+        display: inline-block;
+    }
+
+    .main-title {
+        font-size: 30px;
+        font-weight: 700;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+}
+
+.logowithmenu_bar.scrolled {
+    position: fixed !important;
+}

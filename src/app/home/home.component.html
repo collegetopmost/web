@@ -1,0 +1,426 @@
+<div class="home_page_container">
+    <section class="banner_section">
+        <div class="banner-slider">
+            <div class="slides" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+                <ng-container *ngFor="let item of banners; index as i">
+                    <div class="slide" [ngStyle]="{'background-image': 'url(' + item.image + ')'}">
+                        <!-- <img [src]="item.image" alt="banner" /> 
+                        <div class="content">
+                            <h1 class="title animate-text">{{ item.title }}</h1>
+                            <p class="subtitle animate-fade">{{ item.subtitle }}</p>
+                            <button class="btn-primary">Join Now</button>
+                        </div>-->
+                    </div>
+                </ng-container>
+            </div>
+
+            <!-- Dots -->
+            <div class="dots">
+                <span *ngFor="let _ of banners; index as i" [class.active]="i === currentIndex"
+                    (click)="currentIndex = i">
+                </span>
+            </div>
+        </div>
+
+    </section>
+    <section class="features_section">
+        <div class="container">
+            <div class="stats-section">
+                <div class="stat-card" *ngFor="let s of stats">
+
+                    <div class="icon-box" *ngIf="!s.isImage">
+                        {{ s.icon }}
+                    </div>
+
+                    <div class="icon-box img" *ngIf="s.isImage">
+                        <img [src]="s.icon" alt="stat icon" />
+                    </div>
+
+                    <h3>{{ s.value }}</h3>
+                    <p>{{ s.label }}</p>
+                </div>
+            </div>
+            <div class="courses-container">
+                <!-- LEFT SIDEBAR -->
+                <aside class="sidebar">
+                    <h3>PG Courses</h3>
+                    <ul>
+                        <li class="active">After Graduation</li>
+                    </ul>
+
+                    <h3>Executive Education</h3>
+                    <ul>
+                        <li>Working Professionals & CXOs</li>
+                    </ul>
+
+                    <h3>Doctorate/Ph.D.</h3>
+                    <ul>
+                        <li>Get Dr. Title (After UG + Work Ex)</li>
+                    </ul>
+
+                    <h3>UG Courses</h3>
+                    <ul>
+                        <li>After 12<sup>th</sup></li>
+                    </ul>
+
+                    <h3>Job Guarantee</h3>
+                    <ul>
+                        <li>100% Placement*</li>
+                    </ul>
+
+                    <h3>Study Abroad</h3>
+                    <ul>
+                        <li>Pathway/Hybrid Mode</li>
+                    </ul>
+
+                    <h3>Advanced Diploma</h3>
+                    <ul>
+                        <li>After 10<sup>th</sup> & 12<sup>th</sup></li>
+                    </ul>
+                </aside>
+
+                <!-- MAIN COURSE GRID -->
+                <div class="courses-grid">
+                    <!-- Each Card -->
+                    <div class="course-card">
+                        <span class="badge">80+ Specializations</span>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2983/2983995.png" alt="icon" />
+                        <h4>Online MBA</h4>
+                        <button>Compare 37 Now</button>
+                    </div>
+
+                    <div class="course-card">
+                        <span class="badge success">ROI 100%</span>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="icon" />
+                        <h4>1 Year MBA Online</h4>
+                        <button>Compare 10 Now</button>
+                    </div>
+
+                    <div class="course-card">
+                        <span class="badge neutral">2 Years</span>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1197/1197460.png" alt="icon" />
+                        <h4>Distance MBA</h4>
+                        <button>Compare 15 Now</button>
+                    </div>
+                    <div class="course-card">
+                        <span class="badge">80+ Specializations</span>
+                        <img src="https://cdn-icons-png.flaticon.com/512/2983/2983995.png" alt="icon" />
+                        <h4>Online MBA</h4>
+                        <button>Compare 37 Now</button>
+                    </div>
+
+                    <div class="course-card">
+                        <span class="badge success">ROI 100%</span>
+                        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="icon" />
+                        <h4>1 Year MBA Online</h4>
+                        <button>Compare 10 Now</button>
+                    </div>
+
+                    <div class="course-card">
+                        <span class="badge neutral">2 Years</span>
+                        <img src="https://cdn-icons-png.flaticon.com/512/1197/1197460.png" alt="icon" />
+                        <h4>Distance MBA</h4>
+                        <button>Compare 15 Now</button>
+                    </div>
+                </div>
+                <!-- <div class="view_all_btnblock"><button class="view_all_btn">View All Courses</button></div> -->
+            </div>
+
+            <div class="services-section">
+                <div class="service-card" *ngFor="let s of services" [style.background]="s.bg">
+
+                    <div class="left">
+                        <h3>{{ s.title }}</h3>
+                        <div class="mini-tag">{{ s.subtitle }}</div>
+                        <p class="sub">{{ s.tag }}</p>
+
+                        <button class="action-btn">
+                            <mat-icon>arrow_forward</mat-icon>
+                            {{ s.button }}
+                        </button>
+                    </div>
+
+                    <div class="right">
+                        <img [src]="s.image" alt="service icon">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="plate_endtotend_section">
+        <div class="platform-section">
+            <h2 class="section-title">College Top Most That Supports You End-to-End</h2>
+
+            <div class="feature-box">
+                <div class="feature-item" *ngFor="let item of platformList">
+                    <span class="count" [ngClass]="item.count">{{ item.count }}</span>
+                    <div class="icon" [innerHTML]="getIcon(item.icon)"></div>
+                    <p class="title">{{ item.title }}</p>
+                </div>
+            </div>
+
+            <div class="view-all">
+                <button class="view-btn">VIEW ALL</button>
+            </div>
+        </div>
+
+
+    </section>
+    <section class="univercity_section">
+        <div class="container">
+            <h5 class="small-title">Compare Universities Based Multiple Factors</h5>
+            <h2 class="section-heading">Explore Top Online Universitiess</h2>
+            <div class="university-section">
+                <div class="university-grid">
+
+                    <div class="university-card" (click)="openUniversity()" *ngFor="let uni of universities">
+                        <div class="logo-box">
+                            <img [src]="uni.logo" [alt]="uni.name" />
+                        </div>
+
+                        <div class="course-count">
+                            {{ uni.courses }} Courses
+                        </div>
+
+                        <div class="uni-name">
+                            {{ uni.name }}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="export_section">
+        <div class="mentors-section">
+            <div class="header-top">
+                <span class="emoji">👋</span> Say Goodbye to Traditional Counselling
+            </div>
+            <h2 class="main-title">Expert Guidance From Best Mentors</h2>
+            <p class="subtitle">
+                A team of 500+ experts helping students to build successful careers.
+            </p>
+
+            <div class="container">
+                <button class="nav-btn left" (click)="scrollLeft()">
+                    <mat-icon>chevron_left</mat-icon>
+                </button>
+
+                <div class="mentor-slider" #sliderRef>
+
+                    <div class="mentor-card" *ngFor="let m of mentors">
+
+                        <div class="rating-tag">
+                            ⭐ {{ m.rating }}
+                        </div>
+
+                        <div class="counselling-tag">
+                            <mat-icon>verified</mat-icon> {{ m.counselling }}+ Counselling
+                        </div>
+
+                        <div class="image-box">
+                            <img [src]="m.image" [alt]="m.name" />
+                        </div>
+
+                        <div class="info-box">
+                            <h3>{{ m.name }}</h3>
+                            <p class="role">{{ m.title }} <span>{{ m.qualification }}</span></p>
+                            <p class="exp">{{ m.experience }} experience</p>
+
+                            <button class="consult-btn">Consult Now</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <button class="nav-btn right" (click)="scrollRight()">
+                    <mat-icon>chevron_right</mat-icon>
+                </button>
+
+            </div>
+
+        </div>
+    </section>
+    <section class="student_talk_container">
+        <h5 class="small-title">Students Speak Their Experience</h5>
+        <h2 class="section-heading">Their Journey, Their Words</h2>
+        <div class="container">
+            <div class="student-reviews">
+                <div class="reviews-container">
+                    <button class="arrow-btn left" (click)="scrollLeft()">
+                        <mat-icon>chevron_left</mat-icon>
+                    </button>
+                    <div class="reviews-slider" #sliderRef>
+                        <div class="review-card">
+                            <div class="video-box">
+                                <iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" frameborder="0" allowfullscreen>
+                                </iframe>
+
+                                <div class="view-tag">
+                                    <mat-icon>visibility</mat-icon> 9.8K
+                                </div>
+                            </div>
+
+                            <div class="info-box">
+                                <h3>Rahul Verma</h3>
+                                <p>College Top Most Guided Me Perfectly</p>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="video-box">
+                                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen>
+                                </iframe>
+
+                                <div class="view-tag">
+                                    <mat-icon>visibility</mat-icon> 15.1K
+                                </div>
+                            </div>
+
+                            <div class="info-box">
+                                <h3>Anjali Dixit</h3>
+                                <p>Helped Me Choose The Right Course</p>
+                            </div>
+                        </div>
+                        <div class="review-card">
+                            <div class="video-box">
+                                <iframe src="https://www.youtube.com/embed/aqz-KE-bpKQ" frameborder="0" allowfullscreen>
+                                </iframe>
+
+                                <div class="view-tag">
+                                    <mat-icon>visibility</mat-icon> 6.7K
+                                </div>
+                            </div>
+
+                            <div class="info-box">
+                                <h3>Mohit Soni</h3>
+                                <p>Very Smooth Admission Experience</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="arrow-btn right" (click)="scrollRight()">
+                        <mat-icon>chevron_right</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="selected_people_section">
+        <div class="cv-testimonials-cloud">
+            <h5 class="small-title">1 Lakh+ Students ne Apna Career Yaha Se Start Kiya</h5>
+            <h2 class="section-heading">Career Confusion Ends Here</h2>
+
+            <div class="floating-avatars">
+                <div class="avatar" *ngFor="let user of testimonialUsers; index as i"
+                    [ngClass]="{ 'highlight': i === currentSpotlight }" [style]="positions[i]">
+                    <img [src]="user.image" alt="client" />
+                    <div class="company-badge">
+                        <img [src]="user.company" alt="company" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="features_info_section">
+        <h2 class="section-heading">Your Queries, Our Answers</h2>
+        <div class="container">
+            <div class="accordian_main_container card">
+                <div class="accordion-item" *ngFor="let item of faqList; let i = index">
+                    <h2 class="accordion-header">
+                        <button class="accordion-button" [class.collapsed]="!item.open" (click)="toggle(i)">
+                            <span class="star">⭐</span> <span class="text">{{ item.question }}</span>
+                            <i class="mdi mdi-chevron-down"></i>
+                        </button>
+
+                    </h2>
+
+                    <div class="accordion-collapse" [class.show]="item.open">
+                        <div class="accordion-body">
+                            {{ item.answer }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cv-feature-cards">
+            <div class="feature-card">
+                <div class="icon-bubble">
+                    <mat-icon>help_outline</mat-icon>
+                </div>
+                <h3>Every Query is Essential</h3>
+                <p>Our expert counsellors respond to every question with clarity and guidance within 24 hours.</p>
+                <button class="global_theme_btn">Ask Any Question <mat-icon>arrow_forward</mat-icon></button>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-bubble">
+                    <mat-icon>calculate</mat-icon>
+                </div>
+                <h3>Popular Calculators</h3>
+                <p>Compare universities, courses & ROI based on fees, placements and learning outcomes.</p>
+                <button class="global_theme_btn">Explore Calculators <mat-icon>arrow_forward</mat-icon></button>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon-bubble">
+                    <mat-icon>psychology</mat-icon>
+                </div>
+                <h3>Career Finder Test</h3>
+                <p>Discover the best career path based on strengths, skills & future opportunities.</p>
+                <button class="global_theme_btn">Start Career Test <mat-icon>arrow_forward</mat-icon></button>
+            </div>
+
+        </div>
+    </section>
+    <section class="expart_talk_section">
+        <div class="container">
+            <div class="experts-section">
+                <h2 class="section-heading">Talk to our Experts</h2>
+
+                <div class="experts-layout">
+
+                    <!-- Contact Card -->
+                    <div class="contact-card mat-elevation-z4">
+                        <span class="badge">24/7 Support</span>
+                        <ul class="contact-list">
+                            <li><mat-icon>call</mat-icon> New Student: <strong>1800-420-5757</strong></li>
+                            <li><mat-icon>call</mat-icon> Existing Student: <strong>1800-309-7947</strong></li>
+                            <li><i class="mdi mdi-whatsapp"></i> WhatsApp Support: <strong>+91
+                                    7428805824</strong></li>
+                            <li><mat-icon>email</mat-icon> Email: <strong>cvcare&#64;collegevidya.com</strong></li>
+                            <li><mat-icon>schedule</mat-icon> Visit: <strong>(10 AM to 7 PM)</strong></li>
+                            <li><mat-icon>home</mat-icon> Book: <strong>Home Visit</strong></li>
+                        </ul>
+
+                        <button class="global_submit_button">
+                            Book Your Expert Career Advice
+                        </button>
+                    </div>
+
+                    <div class="experts-grid">
+                        <div class="expert-card" *ngFor="let member of expertList">
+                            <img [src]="member.photo" alt="Expert" />
+                            <h4>{{ member.name }}</h4>
+                            <p>{{ member.role }}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="checklist_section">
+        <div class="container">
+            <div class="talk_section">
+                <div class="cta-box">
+                    <div class="cta-content">
+                        <h2>College Top Most Checkilist</h2>
+                        <p>Get personalized guidance based on your career goals.</p>
+                    </div>
+                    <button class="cta-btn">Let's Talk →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
