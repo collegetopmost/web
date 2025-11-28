@@ -156,7 +156,7 @@
                 }
 
                 button {
-                    background: var(--primary-color);
+                    background: var(--button-3d-gradient);
                     border: none;
                     color: #fff;
                     padding: 5px 15px;
@@ -209,3 +209,5 @@
         }
     }
 }
+
+@import '../../../assets/scss/media.scss';

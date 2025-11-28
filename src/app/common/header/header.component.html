@@ -18,22 +18,22 @@
                                         <span class="nav_txt">topmostcollage&#64;gmail.com</span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a> <i class="mdi mdi-facebook"></i></a>
+                                <li class="mobile_none">
+                                    <a> <i class="mdi mdi-facebook social-icon"></i></a>
                                 </li>
-                                <li>
-                                    <a><i class="mdi mdi-instagram"></i></a>
+                                <li class="mobile_none">
+                                    <a><i class="mdi mdi-instagram social-icon"></i></a>
                                 </li>
-                                <li>
-                                    <a><i class="mdi mdi-linkedin"></i></a>
+                                <li class="mobile_none">
+                                    <a><i class="mdi mdi-linkedin social-icon"></i></a>
                                 </li>
-                                <li>
-                                    <a><i class="mdi mdi-youtube"></i></a>
+                                <li class="mobile_none">
+                                    <a><i class="mdi mdi-youtube social-icon"></i></a>
                                 </li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-4 col-md-4">
+                    <div class="col-lg-4 col-md-4 mobile_none">
                         <div class="nav_icon_withtxt"><span class="nav_txt">What makes us different?</span>
                         </div>
                     </div>
@@ -43,14 +43,20 @@
         <div class="logowithmenu_bar" id="top_navigation_bar">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-3">
+                   <div class="col-6 col-md-3">
                         <div class="logo_block">
                             <a>
-                                <img class="responsive top_logo" (click)="openHome()" src="assets/images/logo.png" alt="Car Rental">
+                                <img class="responsive top_logo" (click)="openHome()" src="assets/images/logo.png"
+                                    alt="Car Rental">
                             </a>
                         </div>
                     </div>
-                    <div class="col-lg-9 pull-right">
+                    <div class="col-6 text-right d-md-none">
+                        <div class="hamburger" (click)="toggleMenu()">
+                            &#9776;
+                        </div>
+                    </div>
+                    <div class="col-md-9 d-none d-md-block">
                         <nav class="text-right main-menu">
                             <ul class="top_menu_ul list-unstyled">
                                 <li class="active"><a (click)="openHome()">Home</a></li>
@@ -65,4 +71,16 @@
             </div>
         </div>
     </nav>
+    <div class="mobile-sidebar" [class.open]="isMenuOpen">
+        <ul>
+            <li (click)="openHome()">Home</li>
+            <li>About Us</li>
+            <li (click)="openUniversity()">University</li>
+            <li>Career</li>
+            <li (click)="openRagistration()">Contact Us</li>
+        </ul>
+    </div>
+
+    <!-- Sidebar backdrop -->
+    <div [class.open_backdrop]="isMenuOpen" (click)="toggleMenu()"></div>
 </header>

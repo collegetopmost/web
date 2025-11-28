@@ -1,0 +1,355 @@
+@media (max-width: 1024px) {
+    .footer {
+        .footer-top {
+            width: 90%;
+            left: 5%;
+        }
+    }
+
+    .home_page_container {
+        .features_section {
+            .stats-section {
+                gap: 2%;
+
+                .stat-card {
+                    width: 31.3%;
+                }
+            }
+
+            .courses-container {
+                padding: 1rem 0px;
+            }
+
+            .services-section {
+                .service-card {
+                    padding: 15px;
+                    flex-flow: column-reverse;
+                    justify-content: center;
+                    align-items: center;
+
+                    .left {
+                        margin-top: 20px;
+                        width: 100% !important;
+                        text-align: center;
+
+                        h3 {
+                            font-size: 16px;
+                        }
+
+                        .action-btn {
+                            padding: 10px;
+
+                            mat-icon {
+                                min-width: 22px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        .plate_endtotend_section {
+            .platform-section {
+                .feature-box {
+                    .feature-item {
+                        width: 24%;
+                        margin-bottom: 1%;
+                    }
+                }
+            }
+        }
+
+    }
+
+    app-university-details {
+        .university-hero {
+            .container {
+                width: 100%;
+            }
+        }
+
+        .hero-content {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            .hero-left {
+                width: 100%;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                flex: none !important;
+
+                .rating,
+                .accreditation-logos {
+                    justify-content: center;
+                }
+
+                .actions,
+                .secondary-actions {
+                    justify-content: center;
+                }
+
+                .talk {
+                    justify-content: center;
+                }
+            }
+
+            .hero-right {
+                width: 100%;
+                flex: none !important;
+
+                .university-hero {
+                    .container {
+                        width: 100%;
+                    }
+                }
+
+                img {
+                    max-width: 100%;
+                }
+            }
+        }
+
+        .university_details {
+            .sidebar_fixed {
+                top: 85px !important;
+
+                ul.left_ul_fixed {
+                    display: flex;
+                    align-items: center;
+                    width: 100%;
+                    overflow: auto;
+                    padding: 10px;
+                    background: #ffffff;
+                    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+                    border-radius: 10px;
+                    white-space: nowrap;
+
+                    .active {
+                        background: var(--primary-soft-gradient) !important;
+                    }
+                }
+            }
+
+            .main_right_blcok {
+                padding-top: 25px !important;
+            }
+        }
+
+        .bottom_other_section {
+            .university_final_review {
+                .review-card {
+                    flex-flow: column;
+                    padding: 15px !important;
+
+                    .review-score {
+                        width: auto !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    .mobile_none {
+        display: none !important;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .section-title,
+    .main-title {
+        font-size: 24px !important;
+    }
+
+    .home_page_container {
+        .section-title {
+            font-size: 24px;
+        }
+
+        .features_section {
+            padding: 10px 0px;
+
+            .stats-section {
+                gap: 0%;
+                padding: 10px;
+
+                .stat-card {
+                    width: 96%;
+                    margin-bottom: 20px;
+                }
+            }
+
+            .courses-container {
+                padding: 0px;
+                flex-flow: column;
+            }
+
+            .sidebar {
+                overflow: auto;
+                padding: 10px 5px 15px 5px !important;
+                width: 100%;
+                display: flex;
+
+                ul {
+                    display: none;
+                }
+
+                h3 {
+                    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+                    padding: 5px 20px;
+                    text-align: center;
+                    font-size: 12px !important;
+                    background: #f5f5ff;
+                    border-radius: 5px;
+                    margin: 0px 5px !important;
+                    border: solid thin;
+                }
+            }
+
+            .courses-grid {
+                width: 100%;
+                display: flex !important;
+                flex-flow: wrap;
+
+                .course-card {
+                    width: 47%;
+                }
+            }
+
+            .services-section {
+                .service-card {
+                    width: 100%;
+                    margin-bottom: 15px;
+
+                    .left {
+
+                        h3 {
+                            font-size: 14px;
+                        }
+
+                        .action-btn {
+                            margin: 0px auto;
+
+                        }
+                    }
+                }
+            }
+        }
+
+        .plate_endtotend_section {
+            .platform-section {
+                padding: 30px 0;
+
+                .feature-box {
+                    .feature-item {
+                        width: 48%;
+                        margin-bottom: 2%;
+                    }
+                }
+            }
+        }
+
+        .expart_talk_section {
+            .experts-section {
+                .experts-layout {
+                    .experts-grid {
+                        display: flex;
+                        flex-flow: wrap;
+                        gap: 2%;
+
+                        .expert-card {
+                            width: 48%;
+                        }
+                    }
+                }
+            }
+        }
+
+        .cta-box {
+            padding: 30px 15px !important;
+            flex-flow: column;
+        }
+    }
+
+    .contact-box {
+        flex-flow: column;
+    }
+
+    .footer-top {
+        margin-top: -100px !important;
+    }
+
+    .footer-main {
+        padding-top: 180px !important;
+    }
+
+    .slider-container {
+        button.nav-btn.left {
+            left: 10px !important;
+        }
+
+        button.nav-btn.right {
+            right: 10px !important;
+        }
+    }
+
+    app-university-details {
+        .university-hero {
+            .container {
+                .hero-content {
+                    .hero-left {
+                        h1 {
+                            font-size: 2rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        .tabs_sub_title {
+            font-size: 20px !important;
+        }
+
+        .course_type_block {
+            width: 100% !important;
+            margin-bottom: 20px !important;
+        }
+
+        .certificate_card_container {
+            flex-flow: column;
+
+            .certificate_image {
+                max-width: 100% !important;
+            }
+        }
+
+        .faculty_container {
+            flex-flow: column;
+
+            .faculty_block {
+                width: 100% !important;
+                margin-bottom: 15px !important;
+            }
+        }
+
+        .review-details {
+            grid-template-columns: auto !important;
+
+            .detail-block {
+                padding: 15px !important;
+            }
+        }
+
+        .cta-box {
+            margin-top: 30px !important;
+            flex-flow: column;
+            .cta-btn {
+                margin-top: 20px !important;
+            }
+        }
+    }
+}

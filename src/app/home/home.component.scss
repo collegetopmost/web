@@ -23,6 +23,7 @@
                 height: 400px;
                 background-size: cover;
                 background-repeat: no-repeat;
+                background-position: center center;
 
                 // &:before {
                 //     content: "";
@@ -252,17 +253,31 @@
         .courses-container {
             display: flex;
             gap: 2rem;
-            padding: 2rem;
+            flex-flow: column;
             align-items: flex-start;
         }
 
         /* Sidebar */
         .sidebar {
-            width: 260px;
+            width: 100%;
             background: white;
             padding: 1.5rem;
             border-radius: 5px;
             box-shadow: 0 5px 18px rgba(0, 0, 0, 0.06);
+            display: flex;
+            overflow: auto;
+            white-space: nowrap;
+            position: sticky;
+            top: 85px;
+            z-index: 10;
+
+            .internal_card_block {
+                display: flex;
+                flex-flow: column;
+                margin-right: 10px;
+                border-right: dashed 1px #666666;
+                padding-right: 10px;
+            }
 
             h3 {
                 font-size: 15px;
@@ -272,7 +287,6 @@
             }
 
             ul {
-                margin-bottom: 1rem;
                 list-style: none;
                 padding: 0;
 
@@ -298,6 +312,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
             gap: 1.4rem;
+            width: 100%;
+            margin-bottom: 20px;
         }
 
         /* Course Card */
@@ -526,6 +542,10 @@
                 font-size: 16px;
                 opacity: 0.75;
                 margin-bottom: 40px;
+            }
+
+            .slider-container {
+                position: relative;
             }
 
             /* Slider navigation buttons */
@@ -775,8 +795,8 @@
             }
 
             .arrow-btn {
-                width: 50px;
-                height: 50px;
+                min-width: 50px;
+                min-height: 50px;
                 border-radius: 50%;
                 border: none;
                 background: var(--primary-gradient);
@@ -788,6 +808,12 @@
                 box-shadow: var(--theme-soft-shadow);
                 cursor: pointer;
                 transition: 0.3s;
+
+                mat-icon {
+                    font-size: 40px;
+                    height: 40px;
+                    width: 40px;
+                }
 
                 &:hover {
                     transform: scale(1.1);
@@ -1366,9 +1392,17 @@
     .avatar {
         width: 65px !important;
         height: 65px !important;
+        margin: 5px 10px 40px 10px;
+        position: relative !important;
+        left: 0px !important;
+        top: 0px !important;
     }
 
     .floating-avatars {
-        min-height: 350px;
+        display: flex;
+        flex-flow: wrap;
+        justify-content: center;
     }
 }
+
+@import '../../assets/scss/media.scss';

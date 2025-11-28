@@ -11,16 +11,24 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-  constructor(private dialog: MatDialog, private router: Router) {}
+  constructor(private dialog: MatDialog, private router: Router) { }
+  isMenuOpen = false;
   openRagistration() {
+    this.toggleMenu();
     this.dialog.open(PopupSignupComponent, {
       width: '500px'
     });
   }
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
   openUniversity() {
+    this.toggleMenu();
     this.router.navigate(['university-details/1']);
   }
-  openHome(){
+  openHome() {
+    this.toggleMenu();
     this.router.navigate(['home']);
   }
 }

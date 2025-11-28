@@ -132,3 +132,67 @@
         }
     }
 }
+
+.hamburger {
+    font-size: 30px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    justify-content: right;
+}
+
+/* Sidebar container */
+.mobile-sidebar {
+    position: fixed;
+    top: 0;
+    right: -250px;
+    width: 250px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    transition: right 0.3s ease-in-out;
+    padding-top: 60px;
+    z-index: 9999;
+}
+
+
+
+.mobile-sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.mobile-sidebar li {
+    padding: 15px 20px;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+
+/* Dark overlay when sidebar opens */
+
+
+/* Hide desktop menu SM & XS screens */
+@media (max-width: 768px) {
+    .left_nav {
+        justify-content: center;
+    }
+
+    .mobile-sidebar.open {
+        right: 0;
+    }
+
+    .open_backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 9998;
+    }
+}
+
+// @import '../../../assets/scss/media.scss';
