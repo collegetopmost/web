@@ -3,10 +3,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupSignupComponent } from '../popup-signup/popup-signup.component';
 import { Router } from '@angular/router';
+import { CdkAutofill } from "@angular/cdk/text-field";
 
 @Component({
   selector: 'app-header',
-  imports: [MatIconModule],
+  imports: [MatIconModule, CdkAutofill],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
@@ -30,5 +31,10 @@ export class HeaderComponent {
   openHome() {
     this.toggleMenu();
     this.router.navigate(['home']);
+  }
+  openCompaired() {
+    debugger;
+    this.toggleMenu();
+    this.router.navigate(['compare-university']);
   }
 }

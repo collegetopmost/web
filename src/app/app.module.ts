@@ -11,12 +11,14 @@ import { HomeComponent } from './home/home.component';
 import { UniversityDetailsComponent } from './university-details/university-details.component';
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
+import { CompareUniversityComponent } from './compare-university/compare-university.component';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     HomeComponent,
     UniversityDetailsComponent,
+    CompareUniversityComponent,
     HeaderComponent,
     FooterComponent,
     BrowserModule,
