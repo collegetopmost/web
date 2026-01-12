@@ -32,8 +32,11 @@ export class HeaderComponent {
     this.toggleMenu();
     this.router.navigate(['home']);
   }
+  openAbout() {
+    this.toggleMenu();
+    this.router.navigate(['about-us']);
+  }
   openCompaired() {
-    debugger;
     this.toggleMenu();
     this.router.navigate(['compare-university']);
   }
