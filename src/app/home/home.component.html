@@ -324,7 +324,8 @@
             <div class="floating-avatars">
                 <div class="avatar" *ngFor="let user of testimonialUsers; index as i"
                     [ngClass]="{ 'highlight': i === currentSpotlight }" [style]="positions[i]">
-                    <img [src]="user.image" alt="client" />
+                    <img [src]="user.image" alt="client" [alt]="'Photo of ' + user.companyName + ' employee'"
+                        (error)="onImageError($event, 'user')" />
                     <div class="company-badge">
                         <img [src]="user.company" alt="company" />
                     </div>

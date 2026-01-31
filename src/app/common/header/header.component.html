@@ -43,7 +43,7 @@
         <div class="logowithmenu_bar" id="top_navigation_bar">
             <div class="container">
                 <div class="row">
-                   <div class="col-6 col-md-3">
+                    <div class="col-6 col-md-3">
                         <div class="logo_block">
                             <a>
                                 <img class="responsive top_logo" (click)="openHome()" src="assets/images/logo.png"
@@ -62,6 +62,7 @@
                                 <li class="active"><a (click)="openHome()">Home </a></li>
                                 <li id="nav_about"><a (click)="openAbout()">About Us</a></li>
                                 <li id="nav_jobs"><a (click)="openUniversity()">University</a></li>
+                                <li id="nav_contact"><a (click)="openCompaired()">Compare</a></li>
                                 <li id="nav_contact"><a (click)="openCompaired()">Career</a></li>
                                 <li id="nav_touch" (click)="openRagistration()"><a>Contact Us</a></li>
                             </ul>
@@ -74,8 +75,9 @@
     <div class="mobile-sidebar" [class.open]="isMenuOpen">
         <ul>
             <li (click)="openHome()">Home</li>
-            <li>About Us</li>
+            <li (click)="openAbout()">About Us</li>
             <li (click)="openUniversity()">University</li>
+            <li (click)="openCompaired()">Compare</li>
             <li (click)="openCompaired()">Career</li>
             <li (click)="openRagistration()">Contact Us</li>
         </ul>

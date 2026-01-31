@@ -253,25 +253,27 @@
             }
         }
 
-        .expart_talk_section {
-            .experts-section {
-                .experts-layout {
-                    .experts-grid {
-                        display: flex;
-                        flex-flow: wrap;
-                        gap: 2%;
 
-                        .expert-card {
-                            width: 48%;
-                        }
-                    }
-                }
-            }
-        }
 
         .cta-box {
             padding: 30px 15px !important;
             flex-flow: column;
+        }
+    }
+
+    .expart_talk_section {
+        .experts-section {
+            .experts-layout {
+                .experts-grid {
+                    display: flex;
+                    flex-flow: wrap;
+                    gap: 2%;
+
+                    .expert-card {
+                        width: 48%;
+                    }
+                }
+            }
         }
     }
 
@@ -320,10 +322,20 @@
         }
 
         .certificate_card_container {
-            flex-flow: column;
+            flex-flow: column !important;
 
             .certificate_image {
                 max-width: 100% !important;
+            }
+
+            .certificate_card {
+                padding: 20px !important;
+            }
+        }
+
+        .main_company_block {
+            li {
+                width: 48% !important;
             }
         }
 
@@ -347,6 +359,7 @@
         .cta-box {
             margin-top: 30px !important;
             flex-flow: column;
+
             .cta-btn {
                 margin-top: 20px !important;
             }

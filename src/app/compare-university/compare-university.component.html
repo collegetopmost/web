@@ -1,1 +1,468 @@
-<p>compare-university works!</p>
+<!-- compare-university.component.html -->
+<div class="compare-universities-container">
+    <!-- Header Section -->
+    <div class="compare-header">
+        <div class="header-content">
+            <h1 class="page-title">Compare Universities</h1>
+            <p class="page-subtitle">Make informed decisions by comparing multiple universities side by side</p>
+            <div class="header-actions">
+                <!-- <button class="btn-primary" (click)="addUniversity()">
+          <span class="icon">+</span> Add University
+        </button> -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Selection Section <div class="main_section_bg"></div>-->
+    
+        <div class="selection-section">
+            <div class="section-header">
+                <h2 class="section-title">Select Universities to Compare</h2>
+                <p class="section-description">Choose up to 3 universities to compare their key features, fees, rankings
+                    and more</p>
+            </div>
+
+            <div class="university-selectors">
+                <!-- University 1 -->
+                <div class="university-selector" [class.active]="selectedUniversities[0]">
+                    <div class="selector-header">
+                        <div class="selector-number">1</div>
+                        <h3>University 1</h3>
+                        <button class="remove-btn" *ngIf="selectedUniversities[0]" (click)="removeUniversity(0)">
+                            <span>×</span>
+                        </button>
+                    </div>
+
+                    <div class="search-container" *ngIf="!selectedUniversities[0]">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search university name..." class="search-input"
+                                [(ngModel)]="searchQuery1" (keyup)="searchUniversities(1)" />
+                            <span class="search-icon">🔍</span>
+                        </div>
+
+                        <div class="search-results" *ngIf="searchResults1.length > 0">
+                            <div class="result-item" *ngFor="let uni of searchResults1"
+                                (click)="selectUniversity(uni, 0)">
+                                <div class="result-logo">{{uni.name.charAt(0)}}</div>
+                                <div class="result-info">
+                                    <div class="result-name">{{uni.name}}</div>
+                                    <div class="result-location">{{uni.location}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="selected-university" *ngIf="selectedUniversities[0]">
+                        <div class="selected-card">
+                            <div class="uni-logo">
+                                <div class="logo-placeholder">{{selectedUniversities[0].name.charAt(0)}}</div>
+                            </div>
+                            <div class="uni-details">
+                                <h4 class="uni-name">{{selectedUniversities[0].name}}</h4>
+                                <p class="uni-location">{{selectedUniversities[0].location}}</p>
+                                <div class="uni-rating">
+                                    <div class="stars">
+                                        <span *ngFor="let star of getStarArray(selectedUniversities[0].rating)">
+                                            {{star}}
+                                        </span>
+                                    </div>
+                                    <span class="rating-value">{{selectedUniversities[0].rating}}/5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- University 2 -->
+                <div class="university-selector" [class.active]="selectedUniversities[1]">
+                    <div class="selector-header">
+                        <div class="selector-number">2</div>
+                        <h3>University 2</h3>
+                        <button class="remove-btn" *ngIf="selectedUniversities[1]" (click)="removeUniversity(1)">
+                            <span>×</span>
+                        </button>
+                    </div>
+
+                    <div class="search-container" *ngIf="!selectedUniversities[1]">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search university name..." class="search-input"
+                                [(ngModel)]="searchQuery2" (keyup)="searchUniversities(2)" />
+                            <span class="search-icon">🔍</span>
+                        </div>
+
+                        <div class="search-results" *ngIf="searchResults2.length > 0">
+                            <div class="result-item" *ngFor="let uni of searchResults2"
+                                (click)="selectUniversity(uni, 1)">
+                                <div class="result-logo">{{uni.name.charAt(0)}}</div>
+                                <div class="result-info">
+                                    <div class="result-name">{{uni.name}}</div>
+                                    <div class="result-location">{{uni.location}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="selected-university" *ngIf="selectedUniversities[1]">
+                        <div class="selected-card">
+                            <div class="uni-logo">
+                                <div class="logo-placeholder">{{selectedUniversities[1].name.charAt(0)}}</div>
+                            </div>
+                            <div class="uni-details">
+                                <h4 class="uni-name">{{selectedUniversities[1].name}}</h4>
+                                <p class="uni-location">{{selectedUniversities[1].location}}</p>
+                                <div class="uni-rating">
+                                    <div class="stars">
+                                        <span *ngFor="let star of getStarArray(selectedUniversities[1].rating)">
+                                            {{star}}
+                                        </span>
+                                    </div>
+                                    <span class="rating-value">{{selectedUniversities[1].rating}}/5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- University 3 -->
+                <div class="university-selector" [class.active]="selectedUniversities[2]">
+                    <div class="selector-header">
+                        <div class="selector-number">3</div>
+                        <h3>University 3</h3>
+                        <button class="remove-btn" *ngIf="selectedUniversities[2]" (click)="removeUniversity(2)">
+                            <span>×</span>
+                        </button>
+                    </div>
+
+                    <div class="search-container" *ngIf="!selectedUniversities[2]">
+                        <div class="search-box">
+                            <input type="text" placeholder="Search university name..." class="search-input"
+                                [(ngModel)]="searchQuery3" (keyup)="searchUniversities(3)" />
+                            <span class="search-icon">🔍</span>
+                        </div>
+
+                        <div class="search-results" *ngIf="searchResults3.length > 0">
+                            <div class="result-item" *ngFor="let uni of searchResults3"
+                                (click)="selectUniversity(uni, 2)">
+                                <div class="result-logo">{{uni.name.charAt(0)}}</div>
+                                <div class="result-info">
+                                    <div class="result-name">{{uni.name}}</div>
+                                    <div class="result-location">{{uni.location}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="selected-university" *ngIf="selectedUniversities[2]">
+                        <div class="selected-card">
+                            <div class="uni-logo">
+                                <div class="logo-placeholder">{{selectedUniversities[2].name.charAt(0)}}</div>
+                            </div>
+                            <div class="uni-details">
+                                <h4 class="uni-name">{{selectedUniversities[2].name}}</h4>
+                                <p class="uni-location">{{selectedUniversities[2].location}}</p>
+                                <div class="uni-rating">
+                                    <div class="stars">
+                                        <span *ngFor="let star of getStarArray(selectedUniversities[2].rating)">
+                                            {{star}}
+                                        </span>
+                                    </div>
+                                    <span class="rating-value">{{selectedUniversities[2].rating}}/5</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="compare-button-container" *ngIf="selectedCount > 1">
+                <button class="btn-compare" (click)="compareUniversities()">
+                    <span class="compare-icon">📊</span>
+                    Compare {{selectedCount}} Universities
+                </button>
+                <button class="btn-outline" (click)="clearAll()">
+                    <span class="icon">🗑️</span> Clear All
+                </button>
+            </div>
+
+        </div>
+    
+
+    <!-- Comparison Section -->
+    <div class="comparison-section" *ngIf="showComparison">
+        <div class="comparison-header">
+            <h2 class="comparison-title">Comparison Results</h2>
+            <div class="comparison-actions">
+                <button class="btn-outline" (click)="downloadComparison()">
+                    <span class="icon">📥</span> Download Report
+                </button>
+                <button class="btn-outline" (click)="shareComparison()">
+                    <span class="icon">↗️</span> Share
+                </button>
+                <button class="btn-primary">
+                    <span class="icon">💰</span> Calculate Loan
+                </button>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="comparison-container">
+            <div class="comparison-grid">
+                <!-- Criteria Column -->
+                <div class="criteria-column">
+                    <div class="criteria-header">
+                        <h3>Comparison Criteria</h3>
+                    </div>
+                    <div class="criteria-list">
+                        <div class="criteria-section" *ngFor="let section of comparisonSections">
+                            <div class="section-title">{{section.title}}</div>
+                            <div class="criteria-items">
+                                <div class="criteria-item" *ngFor="let item of section.items">
+                                    {{item}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- University Columns -->
+                <div class="university-columns">
+                    <div class="university-column" *ngFor="let uni of selectedUniversities; let i = index"
+                        [class.top-pick]="i === topUniversityIndex">
+                        <div class="uni-column-header" [class.top-pick]="i === topUniversityIndex">
+                            <div class="uni-header-content">
+                                <div class="uni-logo-small">
+                                    <div class="logo-small">{{uni.name.charAt(0)}}</div>
+                                </div>
+                                <h4 class="uni-name">{{uni.name}}</h4>
+                                <div class="uni-rank" *ngIf="i === topUniversityIndex">
+                                    <span class="rank-badge">🏆 Top Pick</span>
+                                </div>
+                                <div class="uni-rating-small">
+                                    <span class="stars-small">★★★★★</span>
+                                    <span class="rating-small">{{uni.rating}}/5</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="uni-data">
+                            <!-- Basic Info -->
+                            <div class="data-section">
+                                <div class="data-item">
+                                    <div class="data-value">{{uni.location}}</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value">{{uni.type}}</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value">{{uni.established}}</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value">
+                                        <span class="status-badge" [class.active]="uni.accredited === 'Yes'">
+                                            {{uni.accredited}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Rankings -->
+                            <div class="data-section">
+                                <div class="data-item">
+                                    <div class="rating-display">
+                                        <div class="stars">{{getStars(uni.rating)}}</div>
+                                        <div class="rating-value">{{uni.rating}}/5</div>
+                                    </div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value ranking">{{uni.nirfRanking || 'N/A'}}</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value ranking">{{uni.qsRanking || 'N/A'}}</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="progress-container">
+                                        <div class="progress-label">{{uni.placementRate}}%</div>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" [style.width.%]="uni.placementRate"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Fees -->
+                            <div class="data-section">
+                                <div class="data-item">
+                                    <div class="data-value fee">₹{{uni.tuitionFees | number:'1.0-0'}}</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value fee">₹{{uni.hostelFees | number:'1.0-0'}}</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value total-fee">₹{{uni.totalFees | number:'1.0-0'}}</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value">
+                                        <span class="status-badge" [class.available]="uni.scholarship === 'Available'">
+                                            {{uni.scholarship}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Courses -->
+                            <div class="data-section courses-section">
+                                <div class="data-item">
+                                    <div class="course-tags">
+                                        <span class="course-tag"
+                                            *ngFor="let course of uni.courses.engineering">{{course}}</span>
+                                    </div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="course-tags">
+                                        <span class="course-tag"
+                                            *ngFor="let course of uni.courses.management">{{course}}</span>
+                                    </div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="course-tags">
+                                        <span class="course-tag"
+                                            *ngFor="let course of uni.courses.arts">{{course}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Placements -->
+                            <div class="data-section">
+                                <div class="data-item">
+                                    <div class="data-value package">₹{{uni.highestPackage}} LPA</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value package">₹{{uni.averagePackage}} LPA</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="recruiter-tags">
+                                        <span class="recruiter-tag"
+                                            *ngFor="let recruiter of uni.topRecruiters">{{recruiter}}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Features -->
+                            <div class="data-section">
+                                <div class="data-item">
+                                    <div class="data-value">{{uni.campusSize}} acres</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value">{{uni.studentFacultyRatio}}</div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value">
+                                        <span class="status-badge" [class.active]="uni.internationalExposure === 'Yes'">
+                                            {{uni.internationalExposure}}
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="data-item">
+                                    <div class="data-value">
+                                        <span class="status-badge" [class.active]="uni.hostelAvailable === 'Yes'">
+                                            {{uni.hostelAvailable}}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="uni-actions">
+                            <button class="action-btn apply-btn">Apply Now</button>
+                            <button class="action-btn details-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recommendation Card -->
+        <div class="recommendation-card" *ngIf="topUniversityIndex !== -1">
+            <div class="rec-header">
+                <div class="rec-icon">🏆</div>
+                <div class="rec-title">
+                    <h3>Our Recommendation</h3>
+                    <p>Based on overall rating, placement record, and value for money</p>
+                </div>
+            </div>
+            <div class="rec-content">
+                <div class="rec-university">
+                    <div class="rec-uni-logo">
+                        <div class="logo-rec">{{selectedUniversities[topUniversityIndex].name.charAt(0)}}</div>
+                    </div>
+                    <div class="rec-uni-info">
+                        <h4>{{selectedUniversities[topUniversityIndex].name}}</h4>
+                        <div class="rec-stats">
+                            <div class="stat">
+                                <span class="stat-value">{{selectedUniversities[topUniversityIndex].rating}}/5</span>
+                                <span class="stat-label">Rating</span>
+                            </div>
+                            <div class="stat">
+                                <span
+                                    class="stat-value">{{selectedUniversities[topUniversityIndex].placementRate}}%</span>
+                                <span class="stat-label">Placement</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">₹{{selectedUniversities[topUniversityIndex].totalFees |
+                                    number:'1.0-0'}}</span>
+                                <span class="stat-label">Annual Fees</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rec-actions">
+                    <button class="btn-primary">Apply to this University</button>
+                    <button class="btn-outline">Compare with Others</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer CTA -->
+    <div class="footer-cta" *ngIf="!showComparison">
+        <div class="cta-content">
+            <div class="cta-icon">🎓</div>
+            <h2>Start Comparing Now!</h2>
+            <p>Select 2 or 3 universities to see detailed comparison and make the best choice for your future</p>
+            <div class="cta-tips">
+                <div class="tip">
+                    <span class="tip-icon">✅</span>
+                    <span>Compare up to 3 universities</span>
+                </div>
+                <div class="tip">
+                    <span class="tip-icon">✅</span>
+                    <span>View detailed side-by-side analysis</span>
+                </div>
+                <div class="tip">
+                    <span class="tip-icon">✅</span>
+                    <span>Get personalized recommendations</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Help Section -->
+    <div class="help-section">
+        <div class="help-content">
+            <h3>Need Help Deciding?</h3>
+            <p>Our education experts can help you choose the right university based on your goals and budget</p>
+            <div class="help-actions">
+                <button class="btn-primary">
+                    <span class="icon">👨‍🏫</span> Book Free Consultation
+                </button>
+                <button class="btn-outline">
+                    <span class="icon">📞</span> Call: 9589883533
+                </button>
+                <button class="btn-outline">
+                    <span class="icon">✉️</span> Email: topmostcollege&#64;gmail.com
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

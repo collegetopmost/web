@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
   currentIndex = 0;
-  constructor(private sanitizer: DomSanitizer, private router: Router ){ }
+  constructor(private sanitizer: DomSanitizer, private router: Router) { }
   banners = [
     {
       title: "Those who can see into your eyes never lie",
@@ -202,6 +202,49 @@ export class HomeComponent {
     }
   ];
 
+  // universities = [
+  //   {
+  //     "logo": "https://www.amityonline.com/applynow/assets/images/amity-logo.svg",
+  //     "name": "Amity University Online",
+  //     "courses": 78
+  //   },
+  //   {
+  //     "logo": "https://onlinejain.com/img/Jain-Online-Logo.addc71da.webp",
+  //     "name": "Jain University Online",
+  //     "courses": 69
+  //   },
+  //   {
+  //     "logo": "https://www.dypatilonline.com/wp-content/uploads/2023/06/logo-dark.png",
+  //     "name": "DY Patil University Online",
+  //     "courses": 38
+  //   },
+  //   {
+  //     "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/8/84/Liverpool_John_Moores_University_logo.svg/800px-Liverpool_John_Moores_University_logo.svg.png",
+  //     "name": "Liverpool John Moores University",
+  //     "courses": 28
+  //   },
+  //   {
+  //     "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Golden_Gate_University_logo.svg/1200px-Golden_Gate_University_logo.svg.png",
+  //     "name": "Golden Gate University",
+  //     "courses": 35
+  //   },
+  //   {
+  //     "logo": "https://www.onlinemanipal.com/wp-content/themes/flamingo/assets/images/OM_Logo.svg",
+  //     "name": "MAHE Manipal Online",
+  //     "courses": 37
+  //   },
+  //   {
+  //     "logo": "https://iimk.ac.in/img/iimk-logo.svg",
+  //     "name": "IIM Nagpur",
+  //     "courses": 9
+  //   },
+  //   {
+  //     "logo": "https://admission.lpu.in/OnlineAssets/logo/lpu-logo.svg",
+  //     "name": "LPU Online",
+  //     "courses": 24
+  //   }
+  // ];
+
   platformList = [
     { count: '3565+', icon: 'job', title: 'Job Portal' },
     { count: '3000+', icon: 'internship', title: 'Internship Portal' },
@@ -334,7 +377,7 @@ export class HomeComponent {
     this.faqList[index].open = !this.faqList[index].open;
   }
 
-  testimonialUsers = [
+  testimonialUsers_past = [
     { image: 'https://randomuser.me/api/portraits/men/32.jpg', company: 'https://logo.clearbit.com/nykaa.com' },
     { image: 'https://randomuser.me/api/portraits/women/44.jpg', company: 'https://logo.clearbit.com/livspace.com' },
     { image: 'https://randomuser.me/api/portraits/men/12.jpg', company: 'https://logo.clearbit.com/salesforce.com' },
@@ -364,7 +407,51 @@ export class HomeComponent {
     { image: 'https://randomuser.me/api/portraits/women/78.jpg', company: 'https://logo.clearbit.com/adityabirlacapital.com' },
     { image: 'https://randomuser.me/api/portraits/men/9.jpg', company: 'https://logo.clearbit.com/phonepe.com' }
   ];
+  // Alternative with more reliable SVG sources
+  // Alternative with more reliable SVG sources
+  testimonialUsers = [
+    { image: 'https://randomuser.me/api/portraits/men/32.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/nykaa-logo.png', companyName: 'Nykaa' },
+    { image: 'https://randomuser.me/api/portraits/women/44.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/livspace-logo.png', companyName: 'Livspace' },
+    { image: 'https://randomuser.me/api/portraits/men/12.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/09/salesforce-logo.png', companyName: 'Salesforce' },
+    { image: 'https://randomuser.me/api/portraits/women/81.jpg', company: 'https://www.magicbricks.com/img/mb-logo-2x.png', companyName: 'Magicbricks' },
+    { image: 'https://randomuser.me/api/portraits/men/60.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/paytm-logo.png', companyName: 'Paytm' },
+    { image: 'https://randomuser.me/api/portraits/men/35.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/12/ntt-data-logo.png', companyName: 'NTT Data' },
+    { image: 'https://randomuser.me/api/portraits/men/19.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/metlife-logo.png', companyName: 'MetLife' },
+    { image: 'https://randomuser.me/api/portraits/women/15.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/12/wipro-logo.png', companyName: 'Wipro' },
+    { image: 'https://randomuser.me/api/portraits/men/5.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/12/tcs-logo.png', companyName: 'TCS' },
+    { image: 'https://randomuser.me/api/portraits/men/41.jpg', company: 'https://brandlogos.net/wp-content/uploads/2016/11/google-logo-512x181.png', companyName: 'Google' },
+    { image: 'https://randomuser.me/api/portraits/women/55.jpg', company: 'https://brandlogos.net/wp-content/uploads/2016/08/accenture-logo.png', companyName: 'Accenture' },
+    { image: 'https://randomuser.me/api/portraits/men/88.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/09/infosys-logo.png', companyName: 'Infosys' },
+    { image: 'https://randomuser.me/api/portraits/men/77.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/hdfc-bank-logo.png', companyName: 'HDFC Bank' },
+    { image: 'https://randomuser.me/api/portraits/women/66.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/byjus-logo.png', companyName: 'BYJU\'S' },
+    { image: 'https://randomuser.me/api/portraits/men/13.jpg', company: 'https://brandlogos.net/wp-content/uploads/2016/06/amazon-logo-preview.png', companyName: 'Amazon' },
+    { image: 'https://randomuser.me/api/portraits/women/23.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/flipkart-logo.png', companyName: 'Flipkart' },
+    { image: 'https://randomuser.me/api/portraits/men/29.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/zoho-logo.png', companyName: 'Zoho' },
+    { image: 'https://randomuser.me/api/portraits/women/12.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/deloitte-logo.png', companyName: 'Deloitte' },
+    { image: 'https://randomuser.me/api/portraits/men/16.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/ola-logo.png', companyName: 'Ola' },
+    { image: 'https://randomuser.me/api/portraits/women/37.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/reliance-logo.png', companyName: 'Reliance' },
+    { image: 'https://randomuser.me/api/portraits/men/23.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/myntra-logo.png', companyName: 'Myntra' },
+    { image: 'https://randomuser.me/api/portraits/women/89.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/12/capgemini-logo.png', companyName: 'Capgemini' },
+    { image: 'https://randomuser.me/api/portraits/men/71.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/ibm-logo.png', companyName: 'IBM' },
+    { image: 'https://randomuser.me/api/portraits/women/78.jpg', company: 'https://brandlogos.net/wp-content/uploads/2022/01/aditya-birla-group-logo.png', companyName: 'Aditya Birla' },
+    { image: 'https://randomuser.me/api/portraits/men/9.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/phonepe-logo.png', companyName: 'PhonePe' }
+  ];
+  onImageError(event: any, type: string) {
+    const img = event.target;
+    if (type === 'user') {
+      // Fallback for user avatar
+      img.src = 'assets/images/default-avatar.svg';
+      img.classList.add('default-avatar');
+    } else if (type === 'company') {
+      // Fallback for company logo
+      img.src = 'assets/images/default-company-logo.svg';
+      img.style.opacity = '0.7';
+    }
 
+    // Hide broken image icon
+    img.style.display = 'block';
+    img.onerror = null;
+  }
   currentSpotlight = 0;
   /* Avatar cloud positions (adjust for your screen size) */
   positions = [
