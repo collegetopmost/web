@@ -2,10 +2,12 @@
 import { Component, AfterViewInit, HostListener, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-university-details',
-  imports: [CommonModule, MatIcon],
+  imports: [CommonModule, MatIcon, ReactiveFormsModule],
   templateUrl: './university-details.component.html',
   styleUrl: './university-details.component.scss'
 })
@@ -33,14 +35,29 @@ export class UniversityDetailsComponent {
     }
   ];
 
+  reviewForm: FormGroup;
+  rating = 0;
+  isSubmitting = false;
+  showPreview = false;
+  today = new Date();
+
   toggle(index: number) {
     this.faqList[index].open = !this.faqList[index].open;
   }
 
   private observer: IntersectionObserver | undefined;
 
-  constructor(private el: ElementRef) { }
-  private isClickScrolling = false;
+  constructor(private fb: FormBuilder, private el: ElementRef) {
+    this.reviewForm = this.fb.group({
+      rating: [0, [Validators.required, Validators.min(1), Validators.max(5)]],
+      title: ['', [Validators.required, Validators.maxLength(100)]],
+      course: ['', [Validators.required, Validators.maxLength(100)]],
+      content: ['', [Validators.required, Validators.maxLength(500)]],
+      verified: [false, [Validators.requiredTrue]]
+    });
+  }
+
+   private isClickScrolling = false;
   ngAfterViewInit() {
     const menuItems = document.querySelectorAll('.sidebar_li');
     const sections = document.querySelectorAll('h3.tabs_title');
@@ -80,5 +97,69 @@ export class UniversityDetailsComponent {
 
     sections.forEach(sec => observer.observe(sec));
   }
+
+
+  ngOnInit(): void {
+    // Auto-show preview when form values change
+    this.reviewForm.valueChanges.subscribe(() => {
+      this.showPreview = true;
+    });
+  }
+
+  setRating(value: number): void {
+    this.rating = value;
+    this.reviewForm.patchValue({ rating: value });
+  }
+
+  getRatingText(): string {
+    const rating = this.rating;
+    if (rating === 5) return 'Excellent';
+    if (rating === 4) return 'Very Good';
+    if (rating === 3) return 'Good';
+    if (rating === 2) return 'Average';
+    if (rating === 1) return 'Poor';
+    return 'Select your rating';
+  }
+
+  submitReview(): void {
+    if (this.reviewForm.valid) {
+      this.isSubmitting = true;
+
+      // Simulate API call
+      setTimeout(() => {
+        console.log('Review submitted:', this.reviewForm.value);
+
+        // In real app, you would call your service here
+        // this.reviewService.submitReview(this.reviewForm.value).subscribe(...)
+
+        // Reset form after successful submission
+        this.resetForm();
+        this.isSubmitting = false;
+
+        // Show success message (you can implement a toast/notification)
+        alert('Thank you for your review! It has been submitted successfully.');
+      }, 1500);
+    } else {
+      // Mark all fields as touched to show validation errors
+      Object.keys(this.reviewForm.controls).forEach(key => {
+        const control = this.reviewForm.get(key);
+        control?.markAsTouched();
+      });
+    }
+  }
+
+  resetForm(): void {
+    this.rating = 0;
+    this.reviewForm.reset({
+      rating: 0,
+      title: '',
+      course: '',
+      content: '',
+      verified: false
+    });
+    this.showPreview = false;
+  }
+
+ 
 
 }

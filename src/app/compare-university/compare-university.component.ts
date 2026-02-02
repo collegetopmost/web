@@ -268,14 +268,14 @@ export class CompareUniversityComponent implements OnInit {
     this.showComparison = this.selectedCount >= 2;
   }
 
-  // addUniversity() {
-  //   // Find first empty slot
-  //   const emptyIndex = this.selectedUniversities.findIndex(uni => uni === null);
-  //   if (emptyIndex !== -1) {
-  //     // Focus on that search box (implementation depends on your needs)
-  //     console.log('Focus on search box', emptyIndex + 1);
-  //   }
-  // }
+  addUniversity() {
+    // Find first empty slot
+    const emptyIndex = this.selectedUniversities.findIndex(uni => uni === null);
+    if (emptyIndex !== -1) {
+      // Focus on that search box (implementation depends on your needs)
+      console.log('Focus on search box', emptyIndex + 1);
+    }
+  }
 
   clearAll() {
     this.selectedUniversities = [null, null, null];

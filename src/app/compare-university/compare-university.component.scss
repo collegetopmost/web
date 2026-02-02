@@ -69,40 +69,59 @@
 // Header Section
 .compare-header {
     padding: 3rem 2rem;
-    background: linear-gradient(135deg, rgba(245, 134, 52, 0.1), rgba(64, 62, 135, 0.1));
     border-radius: 0 0 50px 50px;
     margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f58634, #403e87);
+
+    &:before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        top: -150px;
+        right: -150px;
+        z-index: 2;
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.05);
+        bottom: -50px;
+        left: -75px;
+        z-index: 22;
+    }
 
     .header-content {
         max-width: 1200px;
         margin: 0 auto;
         text-align: center;
+        color: #ffffff;
 
         .page-title {
             font-size: 3rem;
             font-weight: 800;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #ffffff;
             margin-bottom: 1rem;
             line-height: 1.2;
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
 
         .page-subtitle {
             font-size: 1.2rem;
-            color: var(--light-text);
             margin-bottom: 2rem;
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
+            opacity: .9;
         }
     }
 }
@@ -474,8 +493,15 @@
 
             h3 {
                 margin: 0;
-                font-size: 1.3rem;
+                font-size: 2rem;
                 font-weight: 600;
+                margin-bottom: 20px;
+                border-bottom: dashed 1px;
+                padding-bottom: 15px;
+            }
+
+            .section-subtitle {
+                font-size: 20px;
             }
         }
 
@@ -584,7 +610,7 @@
                     }
 
                     .uni-rank {
-                        margin-bottom: 0.5rem;
+                        margin-top: 1rem;
 
                         .rank-badge {
                             background: linear-gradient(135deg, #ffc107, #ff9800);
@@ -620,8 +646,19 @@
             .uni-data {
                 .data-section {
                     border-bottom: 1px solid var(--border-color);
-                    padding-top: 50px;
-                    border-top: solid 2px var(--secondary-color);
+                    margin-top: 50px;
+                    position: relative;
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        height: 50px;
+                        background: rgba(245, 134, 52, 0.05);
+                        top: -50px;
+                        left: 0px;
+                        border-bottom: dashed 1px #cccccc;
+                    }
 
                     &:last-child {
                         border-bottom: none;
@@ -749,12 +786,12 @@
                     }
                 }
 
-                .courses-section {
-                    .data-item {
-                        min-height: 80px;
-                        align-items: flex-start;
-                    }
-                }
+                // .courses-section {
+                //     .data-item {
+                //         min-height: 80px;
+                //         align-items: flex-start;
+                //     }
+                // }
             }
 
             .uni-actions {
