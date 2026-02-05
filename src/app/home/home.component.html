@@ -43,19 +43,22 @@
             <div class="courses-container">
                 <!-- LEFT SIDEBAR -->
                 <aside class="sidebar">
-                    <div class="internal_card_block">
-                        <h3>PG Courses</h3>
-                        <ul>
+                    <ng-container *ngFor="let cat of course_cateogry">
+    <div class="internal_card_block">
+                        <h3 [ngClass]="selectedCategory?.id==cat?.id ? 'redColor' : ''" (click)="seeCouses(cat)" class="active">{{cat?.name}}</h3>
+                        <!-- <ul>
                             <li class="active">After Graduation</li>
-                        </ul>
+                        </ul> -->
                     </div>
-                    <div class="internal_card_block">
+                    </ng-container>
+                
+                    <!-- <div class="internal_card_block">
                         <h3>Executive Education</h3>
                         <ul>
                             <li>Working Professionals & CXOs</li>
                         </ul>
-                    </div>
-                    <div class="internal_card_block">
+                    </div> -->
+                    <!-- <div class="internal_card_block">
 
                         <h3>Doctorate/Ph.D.</h3>
                         <ul>
@@ -86,20 +89,22 @@
                         <ul>
                             <li>After 10<sup>th</sup> & 12<sup>th</sup></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </aside>
 
                 <!-- MAIN COURSE GRID -->
                 <div class="courses-grid">
                     <!-- Each Card -->
+                     <ng-container *ngFor="let course of selectedCourses">
                     <div class="course-card">
-                        <span class="badge">80+ Specializations</span>
-                        <img src="https://cdn-icons-png.flaticon.com/512/2983/2983995.png" alt="icon" />
-                        <h4>Online MBA</h4>
-                        <button>Compare 37 Now</button>
+                        <span *ngIf="course?.courseDetails?.showDurationOnWeb==0" class="badge">{{course?.courseDetails?.markheading}}</span>
+                        <span  *ngIf="course?.courseDetails?.showDurationOnWeb==1" class="badge neutral">{{course?.courseDetails?.duration}}</span>
+                        <img [src]="course?.courseDetails?.logoUrl" alt="icon" />
+                        <h4>{{course?.courseDetails?.name}}</h4>
+                        <button>Apply Now</button>
                     </div>
-
-                    <div class="course-card">
+</ng-container>
+                    <!-- <div class="course-card">
                         <span class="badge success">ROI 100%</span>
                         <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="icon" />
                         <h4>1 Year MBA Online</h4>
@@ -131,7 +136,7 @@
                         <img src="https://cdn-icons-png.flaticon.com/512/1197/1197460.png" alt="icon" />
                         <h4>Distance MBA</h4>
                         <button>Compare 15 Now</button>
-                    </div>
+                    </div> -->
                 </div>
                 <!-- <div class="view_all_btnblock"><button class="view_all_btn">View All Courses</button></div> -->
             </div>
@@ -184,17 +189,17 @@
             <div class="university-section">
                 <div class="university-grid">
 
-                    <div class="university-card" (click)="openUniversity()" *ngFor="let uni of universities">
+                    <div class="university-card" (click)="openUniversity()" *ngFor="let university of universityList">
                         <div class="logo-box">
-                            <img [src]="uni.logo" [alt]="uni.name" />
+                            <img [src]="university?.logoUrl" [alt]="university?.name" />
                         </div>
 
                         <div class="course-count">
-                            {{ uni.courses }} Courses
+                           {{university?.coursesCount}} Courses
                         </div>
 
                         <div class="uni-name">
-                            {{ uni.name }}
+                            {{ university.name }}
                         </div>
                     </div>
 

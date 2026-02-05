@@ -12,11 +12,12 @@ import { UniversityDetailsComponent } from './university-details/university-deta
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { CompareUniversityComponent } from './compare-university/compare-university.component';
-
+import { provideHttpClient,withInterceptorsFromDi } from '@angular/common/http';
 @NgModule({
   declarations: [AppComponent],
   imports: [
     HomeComponent,
+    
     UniversityDetailsComponent,
     CompareUniversityComponent,
     HeaderComponent,
@@ -34,6 +35,9 @@ import { CompareUniversityComponent } from './compare-university/compare-univers
   ],
   exports: [
     MatIconModule
+  ],
+    providers: [
+    provideHttpClient(withInterceptorsFromDi())
   ],
   bootstrap: [AppComponent]
 })

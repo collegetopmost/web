@@ -3,86 +3,160 @@ import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
+import { ApiService } from '../api.service';
+import { ShareService } from '../share.service';
 
 @Component({
   selector: 'app-home',
   imports: [CommonModule, MatIcon],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
 })
 export class HomeComponent {
   currentIndex = 0;
-  constructor(private sanitizer: DomSanitizer, private router: Router) { }
+  constructor(
+    private sanitizer: DomSanitizer,
+    private router: Router,
+    private api: ApiService,
+    private share: ShareService,
+  ) {
+    this.getListCourses();
+    this.getUniversityList()
+    //this.getListSub_Category()
+  }
+  courses: any = [];
+  getListCourses() {
+    this.courses = [];
+
+    this.api.getapi('getListCourses').subscribe(
+      (res: any) => {
+        console.log('getListCourses', res?.data);
+
+        this.courses = res?.data;
+        this.getListSub_Category();
+      },
+      (error: any) => {},
+    );
+  }
+  course_cateogry: any = [];
+  getListSub_Category() {
+    this.course_cateogry = [];
+    this.api.getapi('getListcourseCatWise').subscribe(
+      (res: any) => {
+        console.log('getListcourseCatWise', res?.data);
+        this.course_cateogry = res?.data;
+        this.course_cateogry=this.course_cateogry.reverse()
+        this.course_cateogry?.forEach((element: any) => {
+          if (element?.coursesInCat?.length) {
+            element?.coursesInCat?.forEach((bond: any) => {
+              let course = this.courses.find(
+                (cou: any) => cou.id == bond.course_id,
+              );
+              if (course) {
+                bond.courseDetails = course;
+              } else {
+                bond.courseDetails = null;
+              }
+            });
+          }
+        });
+        this.seeCouses(this.course_cateogry[0])
+           // this.selectedCourses=this.course_cateogry[0]?.coursesInCat
+      },
+      (error: any) => {},
+    );
+  }
+  universityList:any=[]
+    getUniversityList() {
+    this.courses = [];
+
+    this.api.getapi('getUniversityList').subscribe(
+      (res: any) => {
+        console.log('getUniversityList', res?.data);
+
+        this.universityList = res?.data;
+        
+      },
+      (error: any) => {},
+    );
+  }
+  selectedCourses:any=[]
+  selectedCategory:any
+  seeCouses(cat:any){
+    console.log("seeCouses",cat);
+    this.selectedCategory=cat
+this.selectedCourses=cat?.coursesInCat
+  }
   banners = [
     {
-      title: "Those who can see into your eyes never lie",
-      subtitle: "Say Hi 👋 to Video Counselling",
-      image: "assets/images/banner_0.png"
+      title: 'Those who can see into your eyes never lie',
+      subtitle: 'Say Hi 👋 to Video Counselling',
+      image: 'assets/images/banner_0.png',
     },
     {
-      title: "Your Vision Matters",
-      subtitle: "Book Online Appointment Easily",
-      image: "assets/images/banner_1.png"
-    }
+      title: 'Your Vision Matters',
+      subtitle: 'Book Online Appointment Easily',
+      image: 'assets/images/banner_1.png',
+    },
   ];
   @ViewChild('sliderRef') slider!: ElementRef;
 
   scrollLeft() {
     this.slider.nativeElement.scrollBy({
       left: -300,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }
 
   scrollRight() {
     this.slider.nativeElement.scrollBy({
       left: 300,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }
   stats = [
     {
-      icon: "😄",
-      value: "1 Lakh+",
-      label: "Trusted by Students"
+      icon: '😄',
+      value: '1 Lakh+',
+      label: 'Trusted by Students',
     },
     {
-      icon: "🧑‍🏫",
-      value: "500+",
-      label: "Expert Mentors"
+      icon: '🧑‍🏫',
+      value: '500+',
+      label: 'Expert Mentors',
     },
     {
-      icon: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg",
-      value: "4.8/5 (3000)",
-      label: "Google Rating",
-      isImage: true
-    }
+      icon: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg',
+      value: '4.8/5 (3000)',
+      label: 'Google Rating',
+      isImage: true,
+    },
   ];
   services = [
     {
-      bg: "linear-gradient(135deg, #ffecd2, #fcb69f)",
-      title: "Empower Your Dreams with Fast Financial Support",
-      subtitle: "Lowest interest rates",
-      tag: "Loans Available",
-      image: "https://cdn-icons-png.flaticon.com/512/201/201623.png",
-      button: "College Top Most Loans"
+      bg: 'linear-gradient(135deg, #ffecd2, #fcb69f)',
+      title: 'Empower Your Dreams with Fast Financial Support',
+      subtitle: 'Lowest interest rates',
+      tag: 'Loans Available',
+      image: 'https://cdn-icons-png.flaticon.com/512/201/201623.png',
+      button: 'College Top Most Loans',
     },
     {
-      bg: "linear-gradient(135deg, #d4fc79, #96e6a1)",
-      title: "Find Answers to All Edu-Questions from Experts",
-      subtitle: "24/7",
-      tag: "Q&A Portal",
-      image: "https://cdn-icons-png.flaticon.com/512/5948/5948534.png",
-      button: "College Top Most Q&A Portal"
+      bg: 'linear-gradient(135deg, #d4fc79, #96e6a1)',
+      title: 'Find Answers to All Edu-Questions from Experts',
+      subtitle: '24/7',
+      tag: 'Q&A Portal',
+      image: 'https://cdn-icons-png.flaticon.com/512/5948/5948534.png',
+      button: 'College Top Most Q&A Portal',
     },
     {
-      bg: "linear-gradient(135deg, #84fab0, #8fd3f4)",
-      title: "Explore Jobs in One Click",
-      subtitle: "500+ Jobs everyday",
-      tag: "Job Portal",
-      image: "https://cdn-icons-png.flaticon.com/512/3135/3135768.png",
-      button: "College Top Most Job Portal"
-    }
+      bg: 'linear-gradient(135deg, #84fab0, #8fd3f4)',
+      title: 'Explore Jobs in One Click',
+      subtitle: '500+ Jobs everyday',
+      tag: 'Job Portal',
+      image: 'https://cdn-icons-png.flaticon.com/512/3135/3135768.png',
+      button: 'College Top Most Job Portal',
+    },
   ];
   openUniversity() {
     this.router.navigate(['university-details/1']);
@@ -90,69 +164,66 @@ export class HomeComponent {
   @ViewChild('sliderRef') sliderExpart!: ElementRef;
   mentors = [
     {
-      name: "Divyanshi Rai",
-      title: "Sr. Mentor",
-      qualification: "MBA",
-      experience: "5 years",
+      name: 'Divyanshi Rai',
+      title: 'Sr. Mentor',
+      qualification: 'MBA',
+      experience: '5 years',
       rating: 4.8,
       counselling: 1278,
-      image:
-        "assets/images/experts_5.jpg",
+      image: 'assets/images/experts_5.jpg',
     },
     {
-      name: "Raghavendra Singh",
-      title: "Sr. Mentor",
-      qualification: "MCA",
-      experience: "4 years",
+      name: 'Raghavendra Singh',
+      title: 'Sr. Mentor',
+      qualification: 'MCA',
+      experience: '4 years',
       rating: 4.7,
       counselling: 2174,
-      image:
-        "assets/images/experts_4.jpg",
+      image: 'assets/images/experts_4.jpg',
     },
     {
-      name: "Sakshi Rajput",
-      title: "Sr. Mentor",
-      qualification: "M.Com",
-      experience: "5 years",
+      name: 'Sakshi Rajput',
+      title: 'Sr. Mentor',
+      qualification: 'M.Com',
+      experience: '5 years',
       rating: 4.5,
       counselling: 1724,
-      image:
-        "assets/images/experts_3.jpg",
+      image: 'assets/images/experts_3.jpg',
     },
     {
-      name: "Manish Thapliyal",
-      title: "Sr. Mentor",
-      qualification: "MA",
-      experience: "6 years",
+      name: 'Manish Thapliyal',
+      title: 'Sr. Mentor',
+      qualification: 'MA',
+      experience: '6 years',
       rating: 4.6,
       counselling: 1943,
-      image:
-        "assets/images/experts_2.jpg",
+      image: 'assets/images/experts_2.jpg',
     },
     {
-      name: "Divyanshi Rai",
-      title: "Sr. Mentor",
-      qualification: "MBA",
-      experience: "5 years",
+      name: 'Divyanshi Rai',
+      title: 'Sr. Mentor',
+      qualification: 'MBA',
+      experience: '5 years',
       rating: 4.8,
       counselling: 1278,
-      image:
-        "assets/images/experts_1.jpg",
+      image: 'assets/images/experts_1.jpg',
     },
     {
-      name: "Raghavendra Singh",
-      title: "Sr. Mentor",
-      qualification: "MCA",
-      experience: "4 years",
+      name: 'Raghavendra Singh',
+      title: 'Sr. Mentor',
+      qualification: 'MCA',
+      experience: '4 years',
       rating: 4.7,
       counselling: 2174,
-      image:
-        "assets/images/experts_0.jpg",
+      image: 'assets/images/experts_0.jpg',
     },
   ];
 
   scrollLeftExpart() {
-    this.sliderExpart.nativeElement.scrollBy({ left: -320, behavior: 'smooth' });
+    this.sliderExpart.nativeElement.scrollBy({
+      left: -320,
+      behavior: 'smooth',
+    });
   }
 
   scrollRightExpart() {
@@ -161,45 +232,45 @@ export class HomeComponent {
 
   universities = [
     {
-      "logo": "https://amityonline.com/_s/amity_logo_c_white_ffbfeced80.svg",
-      "name": "Amity University Online",
-      "courses": 78
+      logo: 'https://amityonline.com/_s/amity_logo_c_white_ffbfeced80.svg',
+      name: 'Amity University Online',
+      courses: 78,
     },
     {
-      "logo": "https://onlinejain.com/img/Jain-Online-Logo.addc71da.webp",
-      "name": "Jain University Online",
-      "courses": 69
+      logo: 'https://onlinejain.com/img/Jain-Online-Logo.addc71da.webp',
+      name: 'Jain University Online',
+      courses: 69,
     },
     {
-      "logo": "https://www.dypatilonlinemba.jaro.in/public/images/dpu-logo.webp",
-      "name": "DY Patil University Online",
-      "courses": 38
+      logo: 'https://www.dypatilonlinemba.jaro.in/public/images/dpu-logo.webp',
+      name: 'DY Patil University Online',
+      courses: 38,
     },
     {
-      "logo": "https://collegevidya.com/_next/image/?url=https%3A%2F%2Fd1aeya7jd2fyco.cloudfront.net%2Flogo%2FLiverpool_John_Moores_University.webp&w=128&q=100",
-      "name": "Liverpool John Moores University",
-      "courses": 28
+      logo: 'https://collegevidya.com/_next/image/?url=https%3A%2F%2Fd1aeya7jd2fyco.cloudfront.net%2Flogo%2FLiverpool_John_Moores_University.webp&w=128&q=100',
+      name: 'Liverpool John Moores University',
+      courses: 28,
     },
     {
-      "logo": "https://collegevidya.com/_next/image/?url=https%3A%2F%2Fd1aeya7jd2fyco.cloudfront.net%2Flogo%2FGolden_Gate_University.webp&w=128&q=100",
-      "name": "Golden Gate University",
-      "courses": 35
+      logo: 'https://collegevidya.com/_next/image/?url=https%3A%2F%2Fd1aeya7jd2fyco.cloudfront.net%2Flogo%2FGolden_Gate_University.webp&w=128&q=100',
+      name: 'Golden Gate University',
+      courses: 35,
     },
     {
-      "logo": "https://www.onlinemanipal.com/wp-content/themes/flamingo/assets/images/OM_Logo.svg",
-      "name": "MAHE Manipal Online",
-      "courses": 37
+      logo: 'https://www.onlinemanipal.com/wp-content/themes/flamingo/assets/images/OM_Logo.svg',
+      name: 'MAHE Manipal Online',
+      courses: 37,
     },
     {
-      "logo": "https://cdn.itm.edu/assets/Logo_1_da908f25bf.png",
-      "name": "IIM Nagpur",
-      "courses": 9
+      logo: 'https://cdn.itm.edu/assets/Logo_1_da908f25bf.png',
+      name: 'IIM Nagpur',
+      courses: 9,
     },
     {
-      "logo": "https://collegevidya.com/_next/image/?url=https%3A%2F%2Fd1aeya7jd2fyco.cloudfront.net%2Flogo%2FLovely-Professional-University-Online-logo.jpg&w=128&q=100",
-      "name": "LPU Online",
-      "courses": 24
-    }
+      logo: 'https://collegevidya.com/_next/image/?url=https%3A%2F%2Fd1aeya7jd2fyco.cloudfront.net%2Flogo%2FLovely-Professional-University-Online-logo.jpg&w=128&q=100',
+      name: 'LPU Online',
+      courses: 24,
+    },
   ];
 
   // universities = [
@@ -253,7 +324,7 @@ export class HomeComponent {
     { count: 'Education', icon: 'loan', title: 'Education Loans' },
     { count: 'Info', icon: 'roi', title: 'ROI Calculator' },
     { count: 'Post', icon: 'post', title: 'Post Admission Services' },
-    { count: 'Identify', icon: 'verify', title: 'Verify Your University' }
+    { count: 'Identify', icon: 'verify', title: 'Verify Your University' },
   ];
   getIcon(name: string): SafeHtml {
     const gradient = `
@@ -322,119 +393,345 @@ export class HomeComponent {
         <path d="M12 40V18l12-8 12 8v22"></path>
         <path d="M18 28l6 6 10-10"></path>
       </svg>
-    `
+    `,
     };
 
     return this.sanitizer.bypassSecurityTrustHtml(icons[name]);
   }
   expertList = [
-    { name: 'Rahul Kumar', role: 'Senior Counsellor', photo: 'assets/images/experts_0.jpg' },
-    { name: 'Ankit Verma', role: 'Career Advisor', photo: 'assets/images/experts_1.jpg' },
-    { name: 'Riya Sharma', role: 'Student Support', photo: 'assets/images/experts_2.jpg' },
-    { name: 'Kunal Singh', role: 'Mentor', photo: 'assets/images/experts_3.jpg' },
-    { name: 'Priya Nair', role: 'Guidance Coach', photo: 'assets/images/experts_4.jpg' },
-    { name: 'Neha Gupta', role: 'Support Lead', photo: 'assets/images/experts_5.jpg' }
+    {
+      name: 'Rahul Kumar',
+      role: 'Senior Counsellor',
+      photo: 'assets/images/experts_0.jpg',
+    },
+    {
+      name: 'Ankit Verma',
+      role: 'Career Advisor',
+      photo: 'assets/images/experts_1.jpg',
+    },
+    {
+      name: 'Riya Sharma',
+      role: 'Student Support',
+      photo: 'assets/images/experts_2.jpg',
+    },
+    {
+      name: 'Kunal Singh',
+      role: 'Mentor',
+      photo: 'assets/images/experts_3.jpg',
+    },
+    {
+      name: 'Priya Nair',
+      role: 'Guidance Coach',
+      photo: 'assets/images/experts_4.jpg',
+    },
+    {
+      name: 'Neha Gupta',
+      role: 'Support Lead',
+      photo: 'assets/images/experts_5.jpg',
+    },
   ];
 
   faqList = [
     {
       question: 'What are your charges?',
       answer: 'CV will always be free for students/ learners.',
-      open: false
+      open: false,
     },
     {
       question: 'How is College Top Most different from others?',
-      answer: 'We at College Top Most are a one-stop solution for all who wish to pursue their higher education via online universities/ edtech. Since our foundation in 2019, we have believed selecting the right university/ edtech is the first step to achieving your career goals. This is why we :',
-      open: false
+      answer:
+        'We at College Top Most are a one-stop solution for all who wish to pursue their higher education via online universities/ edtech. Since our foundation in 2019, we have believed selecting the right university/ edtech is the first step to achieving your career goals. This is why we :',
+      open: false,
     },
     {
       question: 'Why take admission through College Top Most?',
-      answer: 'There are scholarship and fee concessions for certain special categories- students from a defence background or with special abilities and alumni of the university.',
-      open: false
+      answer:
+        'There are scholarship and fee concessions for certain special categories- students from a defence background or with special abilities and alumni of the university.',
+      open: false,
     },
     {
       question: 'Independent Platform? What is the process?',
-      answer: 'The university conducts online proctored exams at designated exam centres for the online courses.',
-      open: false
+      answer:
+        'The university conducts online proctored exams at designated exam centres for the online courses.',
+      open: false,
     },
     {
       question: 'How is College Top Most different from others?',
-      answer: 'We at College Top Most are a one-stop solution for all who wish to pursue their higher education via online universities/ edtech. Since our foundation in 2019, we have believed selecting the right university/ edtech is the first step to achieving your career goals. This is why we :',
-      open: false
+      answer:
+        'We at College Top Most are a one-stop solution for all who wish to pursue their higher education via online universities/ edtech. Since our foundation in 2019, we have believed selecting the right university/ edtech is the first step to achieving your career goals. This is why we :',
+      open: false,
     },
     {
       question: 'Why take admission through College Top Most?',
-      answer: 'There are scholarship and fee concessions for certain special categories- students from a defence background or with special abilities and alumni of the university.',
-      open: false
+      answer:
+        'There are scholarship and fee concessions for certain special categories- students from a defence background or with special abilities and alumni of the university.',
+      open: false,
     },
     {
       question: 'Independent Platform? What is the process?',
-      answer: 'The university conducts online proctored exams at designated exam centres for the online courses.',
-      open: false
-    }
+      answer:
+        'The university conducts online proctored exams at designated exam centres for the online courses.',
+      open: false,
+    },
   ];
   toggle(index: number) {
     this.faqList[index].open = !this.faqList[index].open;
   }
 
   testimonialUsers_past = [
-    { image: 'https://randomuser.me/api/portraits/men/32.jpg', company: 'https://logo.clearbit.com/nykaa.com' },
-    { image: 'https://randomuser.me/api/portraits/women/44.jpg', company: 'https://logo.clearbit.com/livspace.com' },
-    { image: 'https://randomuser.me/api/portraits/men/12.jpg', company: 'https://logo.clearbit.com/salesforce.com' },
-    { image: 'https://randomuser.me/api/portraits/women/81.jpg', company: 'https://logo.clearbit.com/magicbricks.com' },
-    { image: 'https://randomuser.me/api/portraits/men/60.jpg', company: 'https://logo.clearbit.com/paytm.com' },
-    { image: 'https://randomuser.me/api/portraits/men/35.jpg', company: 'https://logo.clearbit.com/nttdata.com' },
-    { image: 'https://randomuser.me/api/portraits/men/19.jpg', company: 'https://logo.clearbit.com/metlife.com' },
-    { image: 'https://randomuser.me/api/portraits/women/15.jpg', company: 'https://logo.clearbit.com/wipro.com' },
-    { image: 'https://randomuser.me/api/portraits/men/5.jpg', company: 'https://logo.clearbit.com/tcs.com' },
-    { image: 'https://randomuser.me/api/portraits/men/41.jpg', company: 'https://logo.clearbit.com/google.com' },
+    {
+      image: 'https://randomuser.me/api/portraits/men/32.jpg',
+      company: 'https://logo.clearbit.com/nykaa.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/44.jpg',
+      company: 'https://logo.clearbit.com/livspace.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/12.jpg',
+      company: 'https://logo.clearbit.com/salesforce.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/81.jpg',
+      company: 'https://logo.clearbit.com/magicbricks.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/60.jpg',
+      company: 'https://logo.clearbit.com/paytm.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/35.jpg',
+      company: 'https://logo.clearbit.com/nttdata.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/19.jpg',
+      company: 'https://logo.clearbit.com/metlife.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/15.jpg',
+      company: 'https://logo.clearbit.com/wipro.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/5.jpg',
+      company: 'https://logo.clearbit.com/tcs.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/41.jpg',
+      company: 'https://logo.clearbit.com/google.com',
+    },
 
-    { image: 'https://randomuser.me/api/portraits/women/55.jpg', company: 'https://logo.clearbit.com/accenture.com' },
-    { image: 'https://randomuser.me/api/portraits/men/88.jpg', company: 'https://logo.clearbit.com/infosys.com' },
-    { image: 'https://randomuser.me/api/portraits/men/77.jpg', company: 'https://logo.clearbit.com/hdfcbank.com' },
-    { image: 'https://randomuser.me/api/portraits/women/66.jpg', company: 'https://logo.clearbit.com/byjus.com' },
-    { image: 'https://randomuser.me/api/portraits/men/13.jpg', company: 'https://logo.clearbit.com/amazon.com' },
+    {
+      image: 'https://randomuser.me/api/portraits/women/55.jpg',
+      company: 'https://logo.clearbit.com/accenture.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/88.jpg',
+      company: 'https://logo.clearbit.com/infosys.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/77.jpg',
+      company: 'https://logo.clearbit.com/hdfcbank.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/66.jpg',
+      company: 'https://logo.clearbit.com/byjus.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/13.jpg',
+      company: 'https://logo.clearbit.com/amazon.com',
+    },
 
-    { image: 'https://randomuser.me/api/portraits/women/23.jpg', company: 'https://logo.clearbit.com/flipkart.com' },
-    { image: 'https://randomuser.me/api/portraits/men/29.jpg', company: 'https://logo.clearbit.com/zoho.com' },
-    { image: 'https://randomuser.me/api/portraits/women/12.jpg', company: 'https://logo.clearbit.com/deloitte.com' },
-    { image: 'https://randomuser.me/api/portraits/men/16.jpg', company: 'https://logo.clearbit.com/ola.com' },
-    { image: 'https://randomuser.me/api/portraits/women/37.jpg', company: 'https://logo.clearbit.com/reliance.com' },
+    {
+      image: 'https://randomuser.me/api/portraits/women/23.jpg',
+      company: 'https://logo.clearbit.com/flipkart.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/29.jpg',
+      company: 'https://logo.clearbit.com/zoho.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/12.jpg',
+      company: 'https://logo.clearbit.com/deloitte.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/16.jpg',
+      company: 'https://logo.clearbit.com/ola.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/37.jpg',
+      company: 'https://logo.clearbit.com/reliance.com',
+    },
 
-    { image: 'https://randomuser.me/api/portraits/men/23.jpg', company: 'https://logo.clearbit.com/myntra.com' },
-    { image: 'https://randomuser.me/api/portraits/women/89.jpg', company: 'https://logo.clearbit.com/capgemini.com' },
-    { image: 'https://randomuser.me/api/portraits/men/71.jpg', company: 'https://pngimg.com/uploads/ibm/ibm_PNG19663.png' },
-    { image: 'https://randomuser.me/api/portraits/women/78.jpg', company: 'https://logo.clearbit.com/adityabirlacapital.com' },
-    { image: 'https://randomuser.me/api/portraits/men/9.jpg', company: 'https://logo.clearbit.com/phonepe.com' }
+    {
+      image: 'https://randomuser.me/api/portraits/men/23.jpg',
+      company: 'https://logo.clearbit.com/myntra.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/89.jpg',
+      company: 'https://logo.clearbit.com/capgemini.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/71.jpg',
+      company: 'https://pngimg.com/uploads/ibm/ibm_PNG19663.png',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/78.jpg',
+      company: 'https://logo.clearbit.com/adityabirlacapital.com',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/9.jpg',
+      company: 'https://logo.clearbit.com/phonepe.com',
+    },
   ];
   // Alternative with more reliable SVG sources
   // Alternative with more reliable SVG sources
   testimonialUsers = [
-    { image: 'https://randomuser.me/api/portraits/men/32.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/nykaa-logo.png', companyName: 'Nykaa' },
-    { image: 'https://randomuser.me/api/portraits/women/44.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/livspace-logo.png', companyName: 'Livspace' },
-    { image: 'https://randomuser.me/api/portraits/men/12.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/09/salesforce-logo.png', companyName: 'Salesforce' },
-    { image: 'https://randomuser.me/api/portraits/women/81.jpg', company: 'https://www.magicbricks.com/img/mb-logo-2x.png', companyName: 'Magicbricks' },
-    { image: 'https://randomuser.me/api/portraits/men/60.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/paytm-logo.png', companyName: 'Paytm' },
-    { image: 'https://randomuser.me/api/portraits/men/35.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/12/ntt-data-logo.png', companyName: 'NTT Data' },
-    { image: 'https://randomuser.me/api/portraits/men/19.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/metlife-logo.png', companyName: 'MetLife' },
-    { image: 'https://randomuser.me/api/portraits/women/15.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/12/wipro-logo.png', companyName: 'Wipro' },
-    { image: 'https://randomuser.me/api/portraits/men/5.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/12/tcs-logo.png', companyName: 'TCS' },
-    { image: 'https://randomuser.me/api/portraits/men/41.jpg', company: 'https://brandlogos.net/wp-content/uploads/2016/11/google-logo-512x181.png', companyName: 'Google' },
-    { image: 'https://randomuser.me/api/portraits/women/55.jpg', company: 'https://brandlogos.net/wp-content/uploads/2016/08/accenture-logo.png', companyName: 'Accenture' },
-    { image: 'https://randomuser.me/api/portraits/men/88.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/09/infosys-logo.png', companyName: 'Infosys' },
-    { image: 'https://randomuser.me/api/portraits/men/77.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/hdfc-bank-logo.png', companyName: 'HDFC Bank' },
-    { image: 'https://randomuser.me/api/portraits/women/66.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/byjus-logo.png', companyName: 'BYJU\'S' },
-    { image: 'https://randomuser.me/api/portraits/men/13.jpg', company: 'https://brandlogos.net/wp-content/uploads/2016/06/amazon-logo-preview.png', companyName: 'Amazon' },
-    { image: 'https://randomuser.me/api/portraits/women/23.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/flipkart-logo.png', companyName: 'Flipkart' },
-    { image: 'https://randomuser.me/api/portraits/men/29.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/zoho-logo.png', companyName: 'Zoho' },
-    { image: 'https://randomuser.me/api/portraits/women/12.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/deloitte-logo.png', companyName: 'Deloitte' },
-    { image: 'https://randomuser.me/api/portraits/men/16.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/ola-logo.png', companyName: 'Ola' },
-    { image: 'https://randomuser.me/api/portraits/women/37.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/reliance-logo.png', companyName: 'Reliance' },
-    { image: 'https://randomuser.me/api/portraits/men/23.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/myntra-logo.png', companyName: 'Myntra' },
-    { image: 'https://randomuser.me/api/portraits/women/89.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/12/capgemini-logo.png', companyName: 'Capgemini' },
-    { image: 'https://randomuser.me/api/portraits/men/71.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/ibm-logo.png', companyName: 'IBM' },
-    { image: 'https://randomuser.me/api/portraits/women/78.jpg', company: 'https://brandlogos.net/wp-content/uploads/2022/01/aditya-birla-group-logo.png', companyName: 'Aditya Birla' },
-    { image: 'https://randomuser.me/api/portraits/men/9.jpg', company: 'https://brandlogos.net/wp-content/uploads/2021/11/phonepe-logo.png', companyName: 'PhonePe' }
+    {
+      image: 'https://randomuser.me/api/portraits/men/32.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/nykaa-logo.png',
+      companyName: 'Nykaa',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/44.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/livspace-logo.png',
+      companyName: 'Livspace',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/12.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/09/salesforce-logo.png',
+      companyName: 'Salesforce',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/81.jpg',
+      company: 'https://www.magicbricks.com/img/mb-logo-2x.png',
+      companyName: 'Magicbricks',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/60.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/paytm-logo.png',
+      companyName: 'Paytm',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/35.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/12/ntt-data-logo.png',
+      companyName: 'NTT Data',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/19.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/metlife-logo.png',
+      companyName: 'MetLife',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/15.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/12/wipro-logo.png',
+      companyName: 'Wipro',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/5.jpg',
+      company: 'https://brandlogos.net/wp-content/uploads/2021/12/tcs-logo.png',
+      companyName: 'TCS',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/41.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2016/11/google-logo-512x181.png',
+      companyName: 'Google',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/55.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2016/08/accenture-logo.png',
+      companyName: 'Accenture',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/88.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/09/infosys-logo.png',
+      companyName: 'Infosys',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/77.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/hdfc-bank-logo.png',
+      companyName: 'HDFC Bank',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/66.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/byjus-logo.png',
+      companyName: "BYJU'S",
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/13.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2016/06/amazon-logo-preview.png',
+      companyName: 'Amazon',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/23.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/flipkart-logo.png',
+      companyName: 'Flipkart',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/29.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/zoho-logo.png',
+      companyName: 'Zoho',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/12.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/deloitte-logo.png',
+      companyName: 'Deloitte',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/16.jpg',
+      company: 'https://brandlogos.net/wp-content/uploads/2021/11/ola-logo.png',
+      companyName: 'Ola',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/37.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/reliance-logo.png',
+      companyName: 'Reliance',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/23.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/myntra-logo.png',
+      companyName: 'Myntra',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/89.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/12/capgemini-logo.png',
+      companyName: 'Capgemini',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/71.jpg',
+      company: 'https://brandlogos.net/wp-content/uploads/2021/11/ibm-logo.png',
+      companyName: 'IBM',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/women/78.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2022/01/aditya-birla-group-logo.png',
+      companyName: 'Aditya Birla',
+    },
+    {
+      image: 'https://randomuser.me/api/portraits/men/9.jpg',
+      company:
+        'https://brandlogos.net/wp-content/uploads/2021/11/phonepe-logo.png',
+      companyName: 'PhonePe',
+    },
   ];
   onImageError(event: any, type: string) {
     const img = event.target;
@@ -488,7 +785,7 @@ export class HomeComponent {
     { top: '90px', right: '14%' },
     { top: '170px', right: '8%' },
     { top: '250px', right: '12%' },
-    { top: '330px', right: '5%' }
+    { top: '330px', right: '5%' },
   ];
 
   ngOnInit(): void {
