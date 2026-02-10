@@ -13,14 +13,21 @@ import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { CompareUniversityComponent } from './compare-university/compare-university.component';
 import { provideHttpClient,withInterceptorsFromDi } from '@angular/common/http';
+import { PopupSignupComponent } from './common/popup-signup/popup-signup.component';
+import { SelectCityComponent } from './common/popup-signup/select-city/select-city.component';
+import { FormsModule } from '@angular/forms';
+import { ToastComponent } from './toast/toast.component';
+
 @NgModule({
   declarations: [AppComponent],
   imports: [
     HomeComponent,
-    
+    FormsModule,
     UniversityDetailsComponent,
     CompareUniversityComponent,
     HeaderComponent,
+    PopupSignupComponent,
+    SelectCityComponent,
     FooterComponent,
     BrowserModule,
     BrowserAnimationsModule,
@@ -28,6 +35,8 @@ import { provideHttpClient,withInterceptorsFromDi } from '@angular/common/http';
     RouterOutlet,
     MatIconModule,
     NgbModule,
+    ToastComponent,
+    //  SnackbarModule.forRoot(),
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'top',   
       anchorScrolling: 'enabled'

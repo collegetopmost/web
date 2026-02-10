@@ -33,3 +33,104 @@
     }
 }
 
+.global_textbox {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .global_textbox {
+    max-width: 100%;
+  }
+}
+
+/* =========================
+   THANK YOU SUCCESS UI
+========================= */
+
+.thank-you-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Icon wrapper */
+.thank-you-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: #e8f5e9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  overflow: hidden; /* prevents half cut icon */
+}
+
+/* Material icon fix */
+.thank-you-icon mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  color: #2e7d32;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Heading */
+.thank-you-container h2 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 4px 0;
+}
+
+/* Message */
+.thank-you-container p {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.4;
+  max-width: 320px;
+}
+
+/* =========================
+   TABLET
+========================= */
+@media (min-width: 600px) {
+  .thank-you-icon {
+    width: 72px;
+    height: 72px;
+  }
+
+  .thank-you-icon mat-icon {
+    font-size: 44px;
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+  }
+
+  .thank-you-container h2 {
+    font-size: 20px;
+  }
+
+  .thank-you-container p {
+    font-size: 14px;
+    max-width: 420px;
+  }
+}
+
+/* =========================
+   DESKTOP
+========================= */
+@media (min-width: 1024px) {
+  .thank-you-container {
+    padding: 32px;
+  }
+}

@@ -1,0 +1,25 @@
+<div class="close-header">
+  <button mat-icon-button class="close-btn" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div class="dialog-content">
+  <mat-form-field appearance="outline" class="search-box">
+    <input
+      matInput
+      placeholder="Search {{title}}"
+      [(ngModel)]="searchText"
+    />
+  </mat-form-field>
+
+  <div class="city-list">
+    <div
+      class="city-item"
+      *ngFor="let city of filteredCities()"
+      (click)="selectCity(city)"
+    >
+      {{ city?.name }}
+    </div>
+  </div>
+</div>

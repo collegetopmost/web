@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { DomSanitizer, SafeHtml,SafeResourceUrl } from '@angular/platform-browser';
 import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
@@ -22,6 +22,10 @@ export class HomeComponent {
   ) {
     this.getListCourses();
     this.getUniversityList()
+    this.getListExpert()
+    this.getListstudentvideojourney()
+    this.getListstudentSuccesStory()
+    this.getfaqList()
     //this.getListSub_Category()
   }
   courses: any = [];
@@ -30,7 +34,7 @@ export class HomeComponent {
 
     this.api.getapi('getListCourses').subscribe(
       (res: any) => {
-        console.log('getListCourses', res?.data);
+   
 
         this.courses = res?.data;
         this.getListSub_Category();
@@ -38,12 +42,93 @@ export class HomeComponent {
       (error: any) => {},
     );
   }
+  getVideo(url:any){
+     return  this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+  
+  expertsMentor: any = [];
+  expertsOur: any = [];
+  getListExpert() {
+    this.expertsMentor = [];
+    this.expertsOur = [];
+
+    this.api.getapi('getListExpert').subscribe(
+      (res: any) => {
+    
+
+        this.expertsMentor = res?.data?.filter((f:any)=>f.typeOfExperts=='MENTOR');
+        this.expertsOur = res?.data?.filter((f:any)=>f.typeOfExperts=='OUR_EXPERTS');
+        this.expertsMentor=    this.sortBySrNo(this.expertsMentor)
+        this.expertsOur=   this.sortBySrNo(this.expertsOur)
+      },
+      (error: any) => {},
+    );
+  }
+  studentvideojourney:any=[]
+  getListstudentvideojourney(){
+     this.studentvideojourney = [];
+
+    this.api.getapi('getListstudentvideojourney').subscribe(
+      (res: any) => {
+    
+
+        this.studentvideojourney = res?.data
+        this.studentvideojourney?.forEach((f:any)=>{
+      f.link=    this.sanitizer.bypassSecurityTrustResourceUrl(f?.video_link)
+        })
+      this.studentvideojourney=   this.sortBySrNo(this.studentvideojourney)
+      },
+      (error: any) => {},
+    );
+  }
+  successStudents:any=[]
+    getListstudentSuccesStory(){
+     this.successStudents = [];
+
+    this.api.getapi('getListstudentSuccess').subscribe(
+      (res: any) => {
+    
+
+        this.successStudents = res?.data
+       this.successStudents?.forEach((f:any)=>{
+      f.user_url=this.sanitizer.bypassSecurityTrustResourceUrl(f?.logoUrl)
+      f.company_url=this.sanitizer.bypassSecurityTrustResourceUrl(f?.company_logoUrl)
+        })
+     this.successStudents= this.sortBySrNo(this.successStudents)
+   
+     
+      },
+      (error: any) => {},
+    );
+  }
+    faqListAll:any=[]
+    getfaqList(){
+     this.successStudents = [];
+
+    this.api.getapi('getListFaq').subscribe(
+      (res: any) => {
+    
+
+        this.faqListAll = res?.data
+     this.faqListAll.forEach((f:any)=>{
+      f.open=false
+     })
+     
+  this.faqListAll= this.sortBySrNo(this.faqListAll)
+     
+      },
+      (error: any) => {},
+    );
+  }
+   sortBySrNo(arr:any) {
+  return arr.sort((a:any, b:any) => a.srNo - b.srNo);
+}
   course_cateogry: any = [];
   getListSub_Category() {
     this.course_cateogry = [];
     this.api.getapi('getListcourseCatWise').subscribe(
       (res: any) => {
-        console.log('getListcourseCatWise', res?.data);
+   
         this.course_cateogry = res?.data;
         this.course_cateogry=this.course_cateogry.reverse()
         this.course_cateogry?.forEach((element: any) => {
@@ -158,66 +243,11 @@ this.selectedCourses=cat?.coursesInCat
       button: 'College Top Most Job Portal',
     },
   ];
-  openUniversity() {
-    this.router.navigate(['university-details/1']);
+  openUniversity(name:any) {
+    this.router.navigate(['university-details',name]);
   }
   @ViewChild('sliderRef') sliderExpart!: ElementRef;
-  mentors = [
-    {
-      name: 'Divyanshi Rai',
-      title: 'Sr. Mentor',
-      qualification: 'MBA',
-      experience: '5 years',
-      rating: 4.8,
-      counselling: 1278,
-      image: 'assets/images/experts_5.jpg',
-    },
-    {
-      name: 'Raghavendra Singh',
-      title: 'Sr. Mentor',
-      qualification: 'MCA',
-      experience: '4 years',
-      rating: 4.7,
-      counselling: 2174,
-      image: 'assets/images/experts_4.jpg',
-    },
-    {
-      name: 'Sakshi Rajput',
-      title: 'Sr. Mentor',
-      qualification: 'M.Com',
-      experience: '5 years',
-      rating: 4.5,
-      counselling: 1724,
-      image: 'assets/images/experts_3.jpg',
-    },
-    {
-      name: 'Manish Thapliyal',
-      title: 'Sr. Mentor',
-      qualification: 'MA',
-      experience: '6 years',
-      rating: 4.6,
-      counselling: 1943,
-      image: 'assets/images/experts_2.jpg',
-    },
-    {
-      name: 'Divyanshi Rai',
-      title: 'Sr. Mentor',
-      qualification: 'MBA',
-      experience: '5 years',
-      rating: 4.8,
-      counselling: 1278,
-      image: 'assets/images/experts_1.jpg',
-    },
-    {
-      name: 'Raghavendra Singh',
-      title: 'Sr. Mentor',
-      qualification: 'MCA',
-      experience: '4 years',
-      rating: 4.7,
-      counselling: 2174,
-      image: 'assets/images/experts_0.jpg',
-    },
-  ];
+
 
   scrollLeftExpart() {
     this.sliderExpart.nativeElement.scrollBy({
@@ -475,7 +505,7 @@ this.selectedCourses=cat?.coursesInCat
     },
   ];
   toggle(index: number) {
-    this.faqList[index].open = !this.faqList[index].open;
+    this.faqListAll[index].open = !this.faqListAll[index].open;
   }
 
   testimonialUsers_past = [

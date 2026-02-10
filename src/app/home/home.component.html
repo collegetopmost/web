@@ -189,7 +189,7 @@
             <div class="university-section">
                 <div class="university-grid">
 
-                    <div class="university-card" (click)="openUniversity()" *ngFor="let university of universityList">
+                    <div class="university-card" (click)="openUniversity(university?.fullName)" *ngFor="let university of universityList">
                         <div class="logo-box">
                             <img [src]="university?.logoUrl" [alt]="university?.name" />
                         </div>
@@ -225,24 +225,23 @@
 
                 <div class="mentor-slider" #sliderRef>
 
-                    <div class="mentor-card" *ngFor="let m of mentors">
+                    <div class="mentor-card" *ngFor="let mentor of expertsMentor">
 
-                        <div class="rating-tag">
-                            ⭐ {{ m.rating }}
-                        </div>
 
-                        <div class="counselling-tag">
+                        <!-- <div class="counselling-tag">
                             <mat-icon>verified</mat-icon> {{ m.counselling }}+ Counselling
-                        </div>
+                        </div> -->
 
                         <div class="image-box">
-                            <img [src]="m.image" [alt]="m.name" />
+                            <img [src]="mentor.logoUrl" [alt]="mentor.name" />
                         </div>
 
                         <div class="info-box">
-                            <h3>{{ m.name }}</h3>
-                            <p class="role">{{ m.title }} <span>{{ m.qualification }}</span></p>
-                            <p class="exp">{{ m.experience }} experience</p>
+                            <h3>{{ mentor?.name }}</h3>
+                            <p class="role">{{ mentor.post_of_employee }}
+                                 <!-- <span>{{ m.qualification }}</span> -->
+                                </p>
+                            <p class="exp">{{ mentor.years_experience }} experience</p>
 
                             <button class="consult-btn">Consult Now</button>
                         </div>
@@ -267,10 +266,10 @@
                     <button class="arrow-btn left" (click)="scrollLeft()">
                         <mat-icon>chevron_left</mat-icon>
                     </button>
-                    <div class="reviews-slider" #sliderRef>
-                        <div class="review-card">
+                    <div *ngIf="studentvideojourney?.length" class="reviews-slider" #sliderRef>
+                        <div *ngFor="let videoJ of studentvideojourney" class="review-card">
                             <div class="video-box">
-                                <iframe src="https://www.youtube.com/embed/jNQXAC9IVRw" frameborder="0" allowfullscreen>
+                                <iframe  [src]="videoJ.link" frameborder="0" allowfullscreen>
                                 </iframe>
 
                                 <div class="view-tag">
@@ -279,11 +278,11 @@
                             </div>
 
                             <div class="info-box">
-                                <h3>Rahul Verma</h3>
-                                <p>College Top Most Guided Me Perfectly</p>
+                                <h3>{{videoJ?.name}}</h3>
+                                <p>{{videoJ?.comment}}</p>
                             </div>
                         </div>
-                        <div class="review-card">
+                        <!-- <div class="review-card">
                             <div class="video-box">
                                 <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen>
                                 </iframe>
@@ -312,7 +311,7 @@
                                 <h3>Mohit Soni</h3>
                                 <p>Very Smooth Admission Experience</p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                     <button class="arrow-btn right" (click)="scrollRight()">
                         <mat-icon>chevron_right</mat-icon>
@@ -327,12 +326,12 @@
             <h2 class="section-heading">Career Confusion Ends Here</h2>
 
             <div class="floating-avatars">
-                <div class="avatar" *ngFor="let user of testimonialUsers; index as i"
+                <div class="avatar" *ngFor="let user of successStudents; index as i"
                     [ngClass]="{ 'highlight': i === currentSpotlight }" [style]="positions[i]">
-                    <img [src]="user.image" alt="client" [alt]="'Photo of ' + user.companyName + ' employee'"
-                        (error)="onImageError($event, 'user')" />
+                    <img [src]="user.user_url" alt="client" [alt]="'Photo of ' + user.university_name + ' Student'"
+                        />
                     <div class="company-badge">
-                        <img [src]="user.company" alt="company" />
+                        <img [src]="user.company_url" alt="company" />
                     </div>
                 </div>
             </div>
@@ -342,7 +341,7 @@
         <h2 class="section-heading">Your Queries, Our Answers</h2>
         <div class="container">
             <div class="accordian_main_container card">
-                <div class="accordion-item" *ngFor="let item of faqList; let i = index">
+                <div class="accordion-item" *ngFor="let item of faqListAll; let i = index">
                     <h2 class="accordion-header">
                         <button class="accordion-button" [class.collapsed]="!item.open" (click)="toggle(i)">
                             <span class="star">⭐</span> <span class="text">{{ item.question }}</span>
@@ -415,10 +414,10 @@
                     </div>
 
                     <div class="experts-grid">
-                        <div class="expert-card" *ngFor="let member of expertList">
-                            <img [src]="member.photo" alt="Expert" />
-                            <h4>{{ member.name }}</h4>
-                            <p>{{ member.role }}</p>
+                        <div class="expert-card" *ngFor="let member of expertsOur">
+                            <img [src]="member.logoUrl" alt="Expert" />
+                            <h4>{{ member?.name }}</h4>
+                            <p>{{ member?.post_of_employee }}</p>
                         </div>
                     </div>
 

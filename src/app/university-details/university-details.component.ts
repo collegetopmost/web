@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MatIcon } from '@angular/material/icon';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-university-details',
@@ -47,7 +48,7 @@ export class UniversityDetailsComponent {
 
   private observer: IntersectionObserver | undefined;
 
-  constructor(private fb: FormBuilder, private el: ElementRef) {
+  constructor(private fb: FormBuilder, private el: ElementRef,private activatedRoute:ActivatedRoute) {
     this.reviewForm = this.fb.group({
       rating: [0, [Validators.required, Validators.min(1), Validators.max(5)]],
       title: ['', [Validators.required, Validators.maxLength(100)]],
@@ -97,13 +98,19 @@ export class UniversityDetailsComponent {
 
     sections.forEach(sec => observer.observe(sec));
   }
-
+universityName:any
 
   ngOnInit(): void {
     // Auto-show preview when form values change
     this.reviewForm.valueChanges.subscribe(() => {
       this.showPreview = true;
     });
+        this.activatedRoute.params.subscribe((params: any) => {
+      this.universityName = params?.name;
+ 
+    });
+    console.log("universityName",this.universityName);
+    
   }
 
   setRating(value: number): void {

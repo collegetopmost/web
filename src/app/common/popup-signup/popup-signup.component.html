@@ -37,42 +37,108 @@
 </div> -->
 
 <div class="popup-container">
-    <h2>Compare & Select from 100+</h2>
-    <p class="subtitle">Best University for your Top Online Course</p>
+  <ng-container *ngIf="!formSubmitted">
+    <h2>Mark Your Path</h2>
+    <p class="subtitle">TopMost place to choose  virtuous...</p>
 
-    <form>
+    <form [formGroup]="form">
         <mat-form-field appearance="outline" class="global_textbox">
-            <input matInput placeholder="Your Name" />
+            <input matInput formControlName="name"  placeholder="Your Name" />
+                 <mat-error
+  *ngIf="
+    form.get('name')?.invalid &&
+    (form.get('name')?.touched || form.get('name')?.dirty)
+  "
+>
+  <span *ngIf="form.get('name')?.hasError('required')">
+    Name is required
+  </span>
+  </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="global_textbox">
-            <input matInput type="email" placeholder="Your Email" />
+            <input matInput type="email" formControlName="email"  placeholder="Your Email" />
+       <mat-error
+  *ngIf="
+    form.get('email')?.invalid &&
+    (form.get('email')?.touched || form.get('email')?.dirty)
+  "
+>
+  <span *ngIf="form.get('email')?.hasError('required')">
+    Email is required
+  </span>
+
+  <span *ngIf="form.get('email')?.hasError('email')">
+    Enter a valid email address
+  </span>
+</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="global_textbox">
-            <input matInput type="tel" placeholder="Contact No." />
+            <input formControlName="contactNo" matInput type="number" placeholder="Contact No." />
+ <mat-error
+  *ngIf="
+    form.get('contactNo')?.invalid &&
+    (form.get('contactNo')?.touched || form.get('contactNo')?.dirty)
+  "
+>
+  <span *ngIf="form.get('contactNo')?.hasError('required')">
+    Mobile number is required
+  </span>
+
+  <span *ngIf="form.get('contactNo')?.hasError('pattern')">
+    Enter a valid 10-digit mobile number
+  </span>
+</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" class="global_textbox">
-            <mat-select placeholder="Select Course">
-                <mat-option value="mba">MBA</mat-option>
-                <mat-option value="bca">BCA</mat-option>
-                <mat-option value="bba">BBA</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="global_textbox">
-            <mat-select placeholder="Select State">
-                <mat-option value="delhi">Delhi</mat-option>
-                <mat-option value="up">Uttar Pradesh</mat-option>
-                <mat-option value="mh">Maharashtra</mat-option>
-            </mat-select>
-        </mat-form-field>
+        <mat-form-field appearance="outline" class="global_textbox" (click)="openSelectDialog(courseList,'Course')">
+  <input
+    matInput
+    placeholder="Select Course"
+    [value]="selectedCourse?.name"
+    readonly
+  />
+  <mat-icon matSuffix>arrow_drop_down</mat-icon>
+</mat-form-field>
+<mat-form-field appearance="outline" class="global_textbox" (click)="openSelectDialog(stateList,'State')">
+  <input
+    matInput
+    placeholder="Select State"
+    [value]="selectedState?.name"
+    readonly
+  />
+  <mat-icon matSuffix>arrow_drop_down</mat-icon>
+</mat-form-field>
+<mat-form-field appearance="outline" class="global_textbox" (click)="openSelectDialog(cityList,'City')">
+  <input
+    matInput
+    placeholder="Select City"
+    [value]="selectedCity?.name"
+    readonly
+  />
+  <mat-icon matSuffix>arrow_drop_down</mat-icon>
+</mat-form-field>
+     
     </form>
 
     <div class="submit_btnbox">
-        <button class="global_submit_button" mat-raised-button>
-            FIND BEST UNIVERSITY
+        <button (click)="save()" class="global_submit_button" mat-raised-button>
+         Best Find On The Way
         </button>
     </div>
+</ng-container>
+    <ng-container *ngIf="formSubmitted" >
+<div class="thank-you-container">
+  <div class="thank-you-icon">
+    <mat-icon>check_circle</mat-icon>
+  </div>
+
+  <h2>Thank You!</h2>
+  <p>
+    Your enquiry has been submitted successfully.<br />
+    Our team will contact you soon.
+  </p>
+</div>
+    </ng-container>
 </div>
