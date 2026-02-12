@@ -2,44 +2,49 @@
     <div class="container">
         <div class="hero-content">
             <div class="hero-left">
-                <h1>DY Patil University Online</h1>
-                <p class="accreditation">Accredited with grade <strong>A++</strong> by NAAC</p>
+                <h1>{{universityDetails?.fullName}}</h1>
+                <p *ngIf="universityDetails?.accreditedDeatils" class="accreditation">Accredited with grade <strong>{{universityDetails?.accredited_grade}}</strong> by {{universityDetails?.accreditedDeatils?.name}}</p>
 
-                <div class="rating">
+                <!-- <div class="rating">
                     <span class="stars">★★★★☆</span>
                     <a href="#" class="reviews">(738 Reviews)</a>
-                </div>
+                </div> -->
 
-                <div class="accreditation-logos">
-                    <img src="assets/images/ugc-deb-logo.jpg" alt="UGC-DEB" />
+                <div *ngIf="boardsDetails?.length" class="accreditation-logos">
+                    <ng-container *ngFor="let board of boardsDetails">
+   <img  [src]="board?.logoUrl" alt="{{board?.boardName}}" />
+                    </ng-container>
+<!--                  
                     <img src="assets/images/aicte-logo.jpg" alt="AICTE" />
-                    <img src="assets/images/aiu-logo.jpg" alt="NAAC" />
-                    <span class="info">Info</span>
+                    <img src="assets/images/aiu-logo.jpg" alt="NAAC" /> -->
+                    <!-- <span class="info">Info</span> -->
                 </div>
 
                 <div class="actions">
-                    <button class="primary details_button">Apply to University →</button>
-                    <button class="outline details_button">Talk to University</button>
+                    <button (click)="openRagistration()" class="primary details_button">Know More →</button>
+                    <button class="outline details_button">Whatsup Button</button>
                 </div>
 
-                <div class="secondary-actions">
+                <!-- <div class="secondary-actions">
                     <button class="link">+ Add to Compare</button>
                     <button class="link">⬇ Download Brochure</button>
-                </div>
+                </div> -->
 
                 <p class="note">Not sure what you are looking for?</p>
 
                 <div class="talk">
                     <div class="avatars">
-                        <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="user1" />
-                        <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="user2" />
-                        <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="user3" />
+                        <ng-container *ngFor="let expert of expertsOur">
+                        <img [src]="expert?.logoUrl" alt="{{expert?.name}}" />
+                        </ng-container>
+                        <!-- <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="user2" />
+                        <img src="https://randomuser.me/api/portraits/men/3.jpg" alt="user3" /> -->
                     </div>
-                    <a href="#" class="talk-link">Let’s Talk →</a>
+                    <a (click)="openRagistration()" class="talk-link">Let’s Talk →</a>
                 </div>
             </div>
-            <div class="hero-right">
-                <iframe class="ifame_class" src="https://www.youtube.com/embed/dmoeRQtGutw" title="YouTube video player"
+            <div *ngIf="universityDetails?.youtubeSanitizeLink" class="hero-right">
+                <iframe class="ifame_class" [src]="universityDetails?.youtubeSanitizeLink" title="YouTube video player"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen>
@@ -53,89 +58,89 @@
         <div class="m-0 row main_content_area">
             <div class="sidebar_fixed col-12 col-lg-3 col">
                 <ul class="left_ul_fixed list-unstyled">
-                    <li class="sidebar_li active" data-target="about_tab">
+                    <li *ngIf="aboutusDetails?.length" class="sidebar_li active" data-target="about_tab">
                         <a class="d-flex justify-content-between">
                             <span>About</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
                     </li>
-
-                    <li class="sidebar_li" data-target="approvals_tab">
+    <li *ngIf="courseDetails?.length" class="sidebar_li" data-target="courses_tab">
+                        <a class="d-flex justify-content-between">
+                            <span>Courses</span>
+                            <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
+                        </a>
+                    </li>
+                    <li *ngIf="boardsDetails?.length"  class="sidebar_li" data-target="approvals_tab">
                         <a class="d-flex justify-content-between">
                             <span>Approvals</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
                     </li>
 
-                    <li class="sidebar_li" data-target="courses_tab">
-                        <a class="d-flex justify-content-between">
-                            <span>Courses</span>
-                            <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
-                        </a>
-                    </li>
+                
 
-                    <li class="sidebar_li" data-target="jobs_tab">
+                    <!-- <li class="sidebar_li" data-target="jobs_tab">
                         <a class="d-flex justify-content-between">
                             <span>Jobs & Internships</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
-                    </li>
+                    </li> -->
 
-                    <li class="sidebar_li" data-target="certificate_tab">
+                    <!-- <li class="sidebar_li" data-target="certificate_tab">
                         <a class="d-flex justify-content-between">
                             <span>Sample Certificate</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
-                    </li>
+                    </li> -->
 
-                    <li class="sidebar_li" data-target="loan_tab">
+                    <!-- <li class="sidebar_li" data-target="loan_tab">
                         <a class="d-flex justify-content-between">
                             <span>Education Loan/EMI</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
-                    </li>
+                    </li> -->
 
-                    <li class="sidebar_li" data-target="admission_tab">
+                    <!-- <li class="sidebar_li" data-target="admission_tab">
                         <a class="d-flex justify-content-between">
                             <span>Admission Open 2025</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
-                    </li>
+                    </li> -->
 
-                    <li class="sidebar_li" data-target="exam_tab">
+                    <!-- <li  class="sidebar_li" data-target="exam_tab">
                         <a class="d-flex justify-content-between">
                             <span>Examination Pattern</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
-                    </li>
-
+                    </li> -->
+<!-- 
                     <li class="sidebar_li" data-target="placement_tab">
                         <a class="d-flex justify-content-between">
                             <span>Placement Partners</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
-                    </li>
+                    </li> -->
 
-                    <li class="sidebar_li" data-target="faculty_tab">
+                    <li *ngIf="faculty_list?.length" class="sidebar_li" data-target="faculty_tab">
                         <a class="d-flex justify-content-between">
                             <span>Faculty</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
                     </li>
 
-                    <li class="sidebar_li" data-target="faqs_tab">
+                    <li  *ngIf="faq_university?.length" class="sidebar_li" data-target="faqs_tab">
                         <a class="d-flex justify-content-between">
                             <span>FAQs</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
                     </li>
 
-                    <li class="sidebar_li" data-target="testimonials_tab">
+                    <!-- <li class="sidebar_li" data-target="testimonials_tab">
                         <a class="d-flex justify-content-between">
                             <span>Testimonials / Reviews</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
 
                 <!-- <ul class="left_ul_fixed list-unstyled">
@@ -155,13 +160,21 @@
                                 </svg></span></a></li>
                 </ul> -->
             </div>
-            <div class="p-0 col-12 col-lg-9 right_content_wrap col">
+            <div  class="p-0 col-12 col-lg-9 right_content_wrap col">
                 <div class="main_right_blcok">
-                    <h3 class="tabs_title" id="about_tab">About DY Patil University Online
+                    <h3 *ngIf="aboutusDetails?.length" class="tabs_title" id="about_tab">About {{universityDetails?.fullName}}
                     </h3>
                     <div class="tabs_block">
                         <div class="custom_list">
-                            <p>Dr. D.Y. Patil Vidyapeeth is a deemed-to-be university in Pune which was established in
+                            <ng-container *ngFor="let aboutus of aboutusDetails;let abIndex=index">
+                                     <ng-container *ngIf="abIndex<3">
+ <p>{{aboutus?.paragraph}}
+        </p>
+                                     </ng-container>
+
+                        
+                            </ng-container>
+                            <!-- <p>Dr. D.Y. Patil Vidyapeeth is a deemed-to-be university in Pune which was established in
                                 the year 2003. Starting off as a medical institution, the university today provides
                                 courses across a number of fields, with the best in class educational services.&nbsp;
                             </p>
@@ -176,324 +189,46 @@
                                 healthcare management and digital marketing through its online learning cell. The
                                 educational services of the university for its online courses include LMS support,
                                 online live lecture facilities, virtual course content and learning materials and many
-                                more.&nbsp;</p>
+                                more.&nbsp;</p> -->
 
-                            <div class="table-responsive rounded">
+                            <div *ngIf="streamDetail?.length" class="table-responsive rounded">
                                 <table class="about_table">
                                     <thead>
                                         <tr>
-                                            <th colspan="2"><strong>Explorer Online Learning Courses In India</strong>
+                                            <th colspan="2"><strong>Streams In University</strong>
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
+                                        <tr *ngFor="let stram of streamDetail" >
                                             <td>
                                                 <p><span><span style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-mba/"
+                                                             
                                                                 style="text-decoration:none"><span
                                                                     style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
                                                                                 style="font-weight:400"><span
                                                                                     style="font-style:normal"><span><span
                                                                                             style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">MBA
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
+                                                                                                style="text-decoration-skip-ink:none">{{stram?.streamName}}</span></span></span></span></span></span></span></span></a></span></span>
                                                 </p>
                                             </td>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:398px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-mca/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">MCA
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
+                                         
                                         </tr>
-                                        <tr>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:358px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/mtech-online/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">MTech
-                                                                                                Course
-                                                                                                Online?</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:398px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-mcom/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">MCom
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:358px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-msc/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">MSc
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:398px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-ma/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">MA
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:358px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-bba/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">BBA
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:398px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-bca/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">BCA
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:358px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/btech-online/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">BTech
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:398px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-bcom/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">BCom
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:358px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-bsc/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">BSc
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:398px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-ba/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">BA
-                                                                                                Course
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:358px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/one-year-mba-online/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">1
-                                                                                                year MBA
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:398px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/online-global-mba/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">Global
-                                                                                                MBA
-                                                                                                Online</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:358px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/job-guarantee-program/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">Job
-                                                                                                Linked
-                                                                                                Programs</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:398px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses/pay-after-placement/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">Pay
-                                                                                                After Placement
-                                                                                                Programs</span></span></span></span></span></span></span></span></a></span></span>
-                                                </p>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:358px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/courses-online/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">Explorer
-                                                                                                more online and
-                                                                                                distance courses In
-                                                                                                India</span></span></span></span></span></span></span></span></a><span
-                                                                style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span
-                                                                        style="color:#000000"><span
-                                                                            style="font-weight:400"><span
-                                                                                style="font-style:normal"><span
-                                                                                    style="text-decoration:none">!</span></span></span></span></span></span></span></span>
-                                                </p>
-                                            </td>
-                                            <td
-                                                style="border-bottom:1px solid #000000; vertical-align:top; padding:7px 7px 7px 7px; border-top:1px solid #000000; border-right:1px solid #000000; border-left:1px solid #000000; width:398px">
-                                                <p style="line-height:1.2"><span style="overflow:hidden"><span
-                                                            style="overflow-wrap:break-word"><a
-                                                                href="https://collegevidya.com/universities/"
-                                                                style="text-decoration:none"><span
-                                                                    style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span><span
-                                                                                style="font-weight:400"><span
-                                                                                    style="font-style:normal"><span><span
-                                                                                            style="-webkit-text-decoration-skip:none"><span
-                                                                                                style="text-decoration-skip-ink:none">Click
-                                                                                                here for all
-                                                                                                approved distance
-                                                                                                and online
-                                                                                                university in
-                                                                                                India</span></span></span></span></span></span></span></span></a><span
-                                                                style="font-size:10pt; font-variant:normal; white-space:pre-wrap"><span><span
-                                                                        style="color:#000000"><span
-                                                                            style="font-weight:400"><span
-                                                                                style="font-style:normal"><span
-                                                                                    style="text-decoration:none">!</span></span></span></span></span></span></span></span>
-                                                </p>
-                                            </td>
-                                        </tr>
+                                    
                                     </tbody>
                                 </table>
                             </div>
 
                             <p>&nbsp;</p>
+      <ng-container *ngFor="let aboutus of aboutusDetails;let abIndex=index">
+                                     <ng-container *ngIf="abIndex>2">
+ <p>{{aboutus?.paragraph}}
+        </p>
+                                     </ng-container>
 
-                            <p>Courses in the online mode also have a dedicated placement assistance body, so students
+                        
+                            </ng-container>
+                            <!-- <p>Courses in the online mode also have a dedicated placement assistance body, so students
                                 can easily get practical and professional exposure integrated with the course as well as
                                 find job opportunities in a number of top MNCs and companies through the virtual
                                 placement services.&nbsp;</p>
@@ -501,147 +236,60 @@
                             <p>The university provides affordable education to students with a number of fee concession
                                 facilities for special and needy categories. Driven by the motto of equitable and
                                 democratic access to higher education,&nbsp;&nbsp;the university seeks to provide an
-                                in-depth learning experience to students through online mode.</p>
+                                in-depth learning experience to students through online mode.</p> -->
                         </div>
                         <div class="About_about_cards_wrap__lyKcd row">
-                            <div class="mb-3 col-md-4">
+                            <div *ngFor="let tag of tagDetails" class="mb-3 col-md-4">
                                 <div class="about_inner_card card">
-                                    <p class="fw-bold">Reputed University<!-- --> <svg stroke="currentColor" fill="none"
+                                    <p class="fw-bold">{{tag?.tag}}<!-- --> <svg stroke="currentColor" fill="none"
                                             stroke-width="0" viewBox="0 0 24 24" class="ms-1" height="1em" width="1em"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                         </svg> </p>
-                                    <p>Top accreditations and approvals with excellent reputation</p>
+                                    <p>T{{tag?.description}}</p>
                                 </div>
                             </div>
-                            <div class="mb-3 col-md-4">
-                                <div class="about_inner_card card">
-                                    <p class="fw-bold">Industry-Relevant Courses<!-- --> <svg stroke="currentColor"
-                                            fill="none" stroke-width="0" viewBox="0 0 24 24" class="ms-1" height="1em"
-                                            width="1em" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                        </svg> </p>
-                                    <p>Course curricula are up to date and industry-relevant</p>
-                                </div>
-                            </div>
-                            <div class="mb-3 col-md-4">
-                                <div class="about_inner_card card">
-                                    <p class="fw-bold">Excellent Placement Record<!-- --> <svg stroke="currentColor"
-                                            fill="none" stroke-width="0" viewBox="0 0 24 24" class="ms-1" height="1em"
-                                            width="1em" xmlns="http://www.w3.org/2000/svg">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-                                        </svg> </p>
-                                    <p>Top placement partners with a high placement record</p>
-                                </div>
-                            </div>
+                        
                         </div>
                         <div>
-                            <h3 class="tabs_sub_title">Course Wise Updated Fees 2025</h3>
-                            <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <h3  *ngIf="courseDetails?.length" class="tabs_sub_title">Course Wise Updated Fees </h3>
+                            <!-- <div class="d-flex align-items-center gap-2 flex-wrap">
                                 <p><a class="details_button primary">View Fees
                                         Structure</a></p>
                                 <p><a class="details_button primary">ROI
                                         Calculator</a></p>
-                            </div>
+                            </div> -->
                             <div class="rounded right_table_wrap table-responsive mt-3">
                                 <div class="table-responsive">
-                                    <table class="rounded about_table table">
+                                    <table *ngIf="courseDetails?.length" class="rounded about_table table">
                                         <tbody>
                                             <tr>
                                                 <td class="py-2 px-4 fw-bold">Course</td>
                                                 <td class="py-2 px-4 fw-bold">Full Fees</td>
                                                 <td class="py-2 px-4 fw-bold">Duration</td>
                                             </tr>
-                                            <tr>
-                                                <td class="py-2 px-4">Online BBA<!-- --> <span class="fs-13">(10
-                                                        Specializations Available)</span><a target="_blank" class="ms-1"
-                                                        href="https://collegevidya.com/university/dy-patil-university-online/bba/"><svg
-                                                            stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                            viewBox="0 0 512 512" height="1em" width="1em"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z">
-                                                            </path>
-                                                        </svg></a></td>
+                                            <tr *ngFor="let course of courseDetails">
+                                                <td class="py-2 px-4">{{course?.courseName}}
+                                                    </td>
                                                 <td class="py-2 px-4"><span
-                                                        style="font-family:monospace">₹</span>1,45,400</td>
-                                                <td class="py-2 px-4">3 Years</td>
+                                                        style="font-family:monospace">₹</span>{{course?.feesStructure}}</td>
+                                                <td class="py-2 px-4">{{course?.duration}}</td>
                                             </tr>
-                                            <tr>
-                                                <td class="py-2 px-4">Online Certificate<!-- --> <span class="fs-13">(2
-                                                        Specializations Available)</span><a target="_blank" class="ms-1"
-                                                        href="https://collegevidya.com/university/dy-patil-university-online/certificate-programs/"><svg
-                                                            stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                            viewBox="0 0 512 512" height="1em" width="1em"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z">
-                                                            </path>
-                                                        </svg></a></td>
-                                                <td class="py-2 px-4"><span style="font-family:monospace">₹</span>28,000
-                                                </td>
-                                                <td class="py-2 px-4">Upto 6 Months</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="py-2 px-4">Online MBA<!-- --> <span class="fs-13">(17
-                                                        Specializations Available)</span><a target="_blank" class="ms-1"
-                                                        href="https://collegevidya.com/university/dy-patil-university-online/mba/"><svg
-                                                            stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                            viewBox="0 0 512 512" height="1em" width="1em"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z">
-                                                            </path>
-                                                        </svg></a></td>
-                                                <td class="py-2 px-4"><span
-                                                        style="font-family:monospace">₹</span>1,89,400</td>
-                                                <td class="py-2 px-4">2 Years</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="py-2 px-4">Online MBA (Dual)<!-- --> <span class="fs-13">(3
-                                                        Specializations Available)</span><a target="_blank" class="ms-1"
-                                                        href="https://collegevidya.com/university/dy-patil-university-online/dual-mba/"><svg
-                                                            stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                            viewBox="0 0 512 512" height="1em" width="1em"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z">
-                                                            </path>
-                                                        </svg></a></td>
-                                                <td class="py-2 px-4"><span
-                                                        style="font-family:monospace">₹</span>1,89,400</td>
-                                                <td class="py-2 px-4">2 Years</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="py-2 px-4">Online MCA<!-- --> <span class="fs-13"></span><a
-                                                        target="_blank" class="ms-1"
-                                                        href="https://collegevidya.com/university/dy-patil-university-online/mca/"><svg
-                                                            stroke="currentColor" fill="currentColor" stroke-width="0"
-                                                            viewBox="0 0 512 512" height="1em" width="1em"
-                                                            xmlns="http://www.w3.org/2000/svg">
-                                                            <path
-                                                                d="M432,320H400a16,16,0,0,0-16,16V448H64V128H208a16,16,0,0,0,16-16V80a16,16,0,0,0-16-16H48A48,48,0,0,0,0,112V464a48,48,0,0,0,48,48H400a48,48,0,0,0,48-48V336A16,16,0,0,0,432,320ZM488,0h-128c-21.37,0-32.05,25.91-17,41l35.73,35.73L135,320.37a24,24,0,0,0,0,34L157.67,377a24,24,0,0,0,34,0L435.28,133.32,471,169c15,15,41,4.5,41-17V24A24,24,0,0,0,488,0Z">
-                                                            </path>
-                                                        </svg></a></td>
-                                                <td class="py-2 px-4"><span
-                                                        style="font-family:monospace">₹</span>1,40,000</td>
-                                                <td class="py-2 px-4">2 Years</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="py-2 px-4">MBA WX<!-- --> <span class="fs-13"> </span></td>
-                                                <td class="py-2 px-4"><span
-                                                        style="font-family:monospace">₹</span>2,50,000</td>
-                                                <td class="py-2 px-4">2 Years</td>
-                                            </tr>
+                                       
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
-                        <h3 class="tabs_sub_title mt-3">DY Patil University Online Facts</h3>
+                        <ng-container *ngFor="let topic of topicDetails">
+     <h3 class="tabs_sub_title mt-3">{{topic?.title}}</h3>
+                        <ul class="UniversityFacts_list__MlMxd">
+                            <li *ngFor="let explain of topic?.explainArray" class="mb-3">{{explain?.explain}}</li>
+                        
+                        </ul>
+                        </ng-container>
+                        <!-- <h3 class="tabs_sub_title mt-3">DY Patil University Online Facts</h3>
                         <ul class="UniversityFacts_list__MlMxd">
                             <li class="mb-3">The university has all the accreditations and recognitions for providing
                                 full-time online education: UGC-DEB as well as AICTE, NIRF (Rank 44 in University
@@ -658,23 +306,23 @@
                                 fields.</li>
                             <li class="mb-3">The university has a network of over one lakh experienced alumni across the
                                 globe.</li>
-                        </ul>
+                        </ul> -->
                     </div>
-                    <div class="d-flex align-items-center gap-2">
+                    <div *ngIf="boardsDetails?.length" class="d-flex align-items-center gap-2">
                         <h3 class="tabs_title" id="approvals_tab">DY Patil University Online Approved By </h3>
                     </div>
                     <div class="mb-4">
 
                         <div
                             class="list-unstyled row-cols-2 row-cols-sm-4 row-cols-md-5 row-cols-lg-col row dynamic_approved_col">
-                            <div class="col">
+                            <div *ngFor="let board of boardsDetails" class="col">
                                 <div class="card mb-3 border rounded py-2 py-sm-3 px-1 text-center position-relative">
-                                    <img src="https://d1aeya7jd2fyco.cloudfront.net/approvals/ugc-deb-logo.jpg"
+                                    <img [src]="board?.logoUrl"
                                         class="w-100" alt="ugc deb logo" loading="lazy" style="max-width:70px">
-                                    <p class="fs-14 px-1 rounded mt-3 mb-0 text-center text-truncate">UGC-DEB</p>
+                                    <p class="fs-14 px-1 rounded mt-3 mb-0 text-center text-truncate">{{board?.boardName }}</p>
                                 </div>
                             </div>
-                            <div class="col">
+                            <!-- <div class="col">
                                 <div class="card mb-3 border rounded py-2 py-sm-3 px-1 text-center position-relative">
                                     <img src="https://d1aeya7jd2fyco.cloudfront.net/approvals/aicte-logo.jpg"
                                         class="w-100" alt="aicte logo" loading="lazy" style="max-width:70px">
@@ -715,10 +363,68 @@
                                         class="w-100" alt="iso logo" loading="lazy" style="max-width:70px">
                                     <p class="fs-14 px-1 rounded mt-3 mb-0 text-center text-truncate">ISO</p>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
+                         <div *ngIf="accreditedDetail?.length" class="d-flex align-items-center gap-2">
+                        <h3 class="tabs_title" id="approvals_tab">Accredited By </h3>
+                    </div>
                     <div class="mb-4">
+
+                        <div
+                            class="list-unstyled row-cols-2 row-cols-sm-4 row-cols-md-5 row-cols-lg-col row dynamic_approved_col">
+                            <div *ngFor="let accredited of accreditedDetail" class="col">
+                                <div class="card mb-3 border rounded py-2 py-sm-3 px-1 text-center position-relative">
+                                    <img [src]="accredited?.logoUrl"
+                                        class="w-100" alt="ugc deb logo" loading="lazy" style="max-width:70px">
+                                    <p class="fs-14 px-1 rounded mt-3 mb-0 text-center text-truncate">{{accredited?.accreditedName }}</p>
+                                </div>
+                            </div>
+                            <!-- <div class="col">
+                                <div class="card mb-3 border rounded py-2 py-sm-3 px-1 text-center position-relative">
+                                    <img src="https://d1aeya7jd2fyco.cloudfront.net/approvals/aicte-logo.jpg"
+                                        class="w-100" alt="aicte logo" loading="lazy" style="max-width:70px">
+                                    <p class="fs-14 px-1 rounded mt-3 mb-0 text-center text-truncate">AICTE</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card mb-3 border rounded py-2 py-sm-3 px-1 text-center position-relative">
+                                    <img src="https://d1aeya7jd2fyco.cloudfront.net/approvals/aiu-logo.jpg"
+                                        class="w-100" alt="aiu logo" loading="lazy" style="max-width:70px">
+                                    <p class="fs-14 px-1 rounded mt-3 mb-0 text-center text-truncate">AIU</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card mb-3 border rounded py-2 py-sm-3 px-1 text-center position-relative">
+                                    <img src="https://d1aeya7jd2fyco.cloudfront.net/approvals/nirf-logo.jpg"
+                                        class="w-100" alt="nirf logo" loading="lazy" style="max-width:70px">
+                                    <p class="fs-14 px-1 rounded mt-3 mb-0 text-center text-truncate">NIRF</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card mb-3 border rounded py-2 py-sm-3 px-1 text-center position-relative">
+                                    <img src="https://d1aeya7jd2fyco.cloudfront.net/approvals/wes-logo.jpg"
+                                        class="w-100" alt="wes logo" loading="lazy" style="max-width:70px">
+                                    <p class="fs-14 px-1 rounded mt-3 mb-0 text-center text-truncate">WES</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card mb-3 border rounded py-2 py-sm-3 px-1 text-center position-relative">
+                                    <img src="https://d1aeya7jd2fyco.cloudfront.net/approvals/logo-naac-a-plus-plus.jpg"
+                                        class="w-100" alt="logo naac a plus plus" loading="lazy" style="max-width:70px">
+                                    <p class="fs-14 px-1 rounded mt-3 mb-0 text-center text-truncate">NAAC A++</p>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="card mb-3 border rounded py-2 py-sm-3 px-1 text-center position-relative">
+                                    <img src="https://d1aeya7jd2fyco.cloudfront.net/approvals/iso-logo.jpg"
+                                        class="w-100" alt="iso logo" loading="lazy" style="max-width:70px">
+                                    <p class="fs-14 px-1 rounded mt-3 mb-0 text-center text-truncate">ISO</p>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <!-- <div class="mb-4">
                         <div class="d-flex align-items-center justify-content-between">
                             <div class="d-flex align-items-center gap-2">
                                 <h3 id="courses_tab" class="tabs_title">Courses</h3>
@@ -765,8 +471,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mb-4">
+                    </div> -->
+                    <!-- <div class="mb-4">
                         <h3 id="jobs_tab" class="tabs_title">Enjoy Extra Benefits with College Top Most
                         </h3>
                         <div class="d-flex align-items-center gap-2 flex-wrap">
@@ -775,8 +481,8 @@
                             <a class="details_button primary">4000+
                                 Internships Offers </a>
                         </div>
-                    </div>
-                    <div class="mb-4">
+                    </div> -->
+                    <!-- <div class="mb-4">
                         <h3 id="certificate_tab" class="tabs_title">Sample Certificate from DY Patil University
                             Online </h3>
                         <div class="card certificate_card_container rounded">
@@ -794,8 +500,8 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    <div class="mb-4">
+                    </div> -->
+                    <!-- <div class="mb-4">
                         <div class="d-flex align-items-center gap-2">
                             <h3 id="loan_tab" class="tabs_title">DY Patil University Online EMI Details
                             </h3>
@@ -1749,20 +1455,18 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                    <h3 id="admission_tab" class="tabs_title">DY Patil University Online Admission Process</h3>
+                    </div> -->
+                    <ng-container *ngFor="let process of processDetails">
+    <h3 id="admission_tab" class="tabs_title">{{process?.title}}</h3>
                     <div class="mb-4">
-                        <p>Admission process in the DY Patil University is in online mode. Admission sessions are
-                            conducted twice in a year that is in January and July month. No entrance exams are
-                            conducted to take admission in the DY Patil university. Admissions are done on
-                            direct-basis. The admission procedure 2023 for the online courses at DPU-COL is as
-                            follows:</p>
+                        <p>{{process?.description}}</p>
                         <div class="admission_block card">
-                            <p><strong>Step 1</strong> Go to the official website of DY Patil Online and click on
-                                “Admissions” and then fill in your basic details for mobile number and email
-                                verification.</p>
+                                <ng-container *ngFor="let step of process?.stepArray;let stepIndex=index">
 
-                            <p><strong>Step 2</strong> Fill in all your basic personal information followed by
+                             
+                            <p><strong>Step {{stepIndex+1}}</strong> {{step?.step}}</p>
+   </ng-container>
+                            <!-- <p><strong>Step 2</strong> Fill in all your basic personal information followed by
                                 educational and professional information.</p>
 
                             <p><strong>Step 3</strong> Upload all the required documents along with your passport-size
@@ -1771,9 +1475,9 @@
                             <p><strong>Step 4</strong> Pay the fee online and then submit the form.</p>
 
                             <p><strong>Step 5</strong> Once all the documents are verified, your admission confirmation
-                                will be sent to you via email or SMS along with your student login credentials.</p>
+                                will be sent to you via email or SMS along with your student login credentials.</p> -->
                         </div>
-                        <div class="admission_warning_block">
+                        <!-- <div class="admission_warning_block">
                             <p>According to the latest UGC guidelines, all candidates must create their ABC ID and DEB
                                 ID to get admission.<a
                                     href="https://collegevidya.com/blog/what-is-abc-academic-bank-of-credits-id-step-by-step-guide/"
@@ -1814,9 +1518,11 @@
                                 Universities &amp; Colleges. <a
                                     href="https://d1aeya7jd2fyco.cloudfront.net/uploads/2024/05/01/ugc-public-notice-of-misleading-abbreviation.pdf"
                                     target="_blank"><span style="color:#0033ff;">Read the UGC Letter</span></a>.</p>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="mb-4">
+                    </ng-container>
+                
+                    <!-- <div class="mb-4">
                         <h3 id="exam_tab" class="tabs_title">DY Patil University Online Examination
                             Pattern</h3>
                         <div class="custom_list">
@@ -1826,8 +1532,8 @@
                                 Examination that will contribute 70% of marks in the final evaluation.</p>
                         </div><button type="button" style="padding:13px 10px 13px 20px;border-radius:50px"
                             class="bgprimary fs-14 text-center btn btn-primary">View Full Examination Pattern</button>
-                    </div>
-                    <div class="mb-4">
+                    </div> -->
+                    <!-- <div class="mb-4">
                         <h3 id="placement_tab" class="tabs_title">DY Patil University Online Placement
                             Partners</h3>
                         <div class="Placement_placement_wrap__pgDF8 custom_list">
@@ -1976,24 +1682,24 @@
                                 <p class="fs-12 m-0 text-center mt-1">Dell</p>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="mb-4">
                         <div>
-                            <h3 id="faculty_tab" class="tabs_title">Meet your Faculty</h3>
+                            <h3 *ngIf="faculty_list?.length" id="faculty_tab" class="tabs_title">Meet Faculty</h3>
                             <div class="faculty_container">
-                                <div class="faculty_block card">
+                                <div *ngFor="let faculty of faculty_list" class="faculty_block card">
                                     <div class="image_block">
                                         <img
-                                            src="https://d1aeya7jd2fyco.cloudfront.net/faculty/Dr._Safia_Farooqui.webp">
+                                            [src]="faculty?.logoUrl">
                                     </div>
                                     <div class="details">
-                                        <h5>Dr. Safia Farooqui</h5>
-                                        <b>Assistant Professor</b>
-                                        <p>Dean, Faculty of Management Studies</p>
-                                        <a>View More...</a>
+                                        <h5>{{faculty?.name}}</h5>
+                                        <b>{{faculty?.post_of_employee}}</b>
+                                        <p>{{faculty?.stream}}</p>
+                                        <!-- <a>View More...</a> -->
                                     </div>
                                 </div>
-                                <div class="faculty_block card">
+                                <!-- <div class="faculty_block card">
                                     <div class="image_block">
                                         <img src="https://d1aeya7jd2fyco.cloudfront.net/faculty/Mr._B._V._Marathe.webp">
                                     </div>
@@ -2026,13 +1732,13 @@
                                         <p>Dean, Faculty of Management Studies</p>
                                         <a>View More...</a>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>
-                    <div class="mb-4">
+                    <div *ngIf="faq_university?.length" class="mb-4">
                         <h3 id="faqs_tab" class="tabs_title">Frequently Asked Questions?</h3>
-                        <div class="accordion-item" *ngFor="let item of faqList; let i = index">
+                        <div class="accordion-item" *ngFor="let item of faq_university; let i = index">
                             <h2 class="accordion-header">
                                 <button class="accordion-button" [class.collapsed]="!item.open" (click)="toggle(i)">
                                     <span class="star">⭐</span> <span class="text">{{ item.question }}</span>
@@ -2061,7 +1767,7 @@
                                 </div>
                             </div> -->
                     </div>
-                    <div class="mb-4">
+                    <!-- <div class="mb-4">
                         <h3 id="testimonials_tab" class="tabs_title">DY Patil University Online Reviews</h3>
                         <div class="rating_main_container card">
                             <div class="d-flex align-items-start position-relative">
@@ -2092,7 +1798,7 @@
                                                     style="position: relative; overflow: hidden; cursor: default; display: block; float: left; color: rgb(250, 165, 29); font-size: 15px;">★</span><span
                                                     class="" data-index="4" data-forhalf="★"
                                                     style="position: relative; overflow: hidden; cursor: default; display: block; float: left; color: rgb(221, 221, 221); font-size: 15px;">★</span>
-                                            </div><span class="fs-12 ms-2">(<!-- -->738<!-- -->)</span>
+                                            </div><span class="fs-12 ms-2"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -2107,7 +1813,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="review_progress_percent">78<!-- -->%</div>
+                                    <div class="review_progress_percent"></div>
                                 </div>
                                 <div class="start_block">
                                     <div class="review_left_text">4 star</div>
@@ -2119,7 +1825,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="review_progress_percent">21<!-- -->%</div>
+                                    <div class="review_progress_percent"></div>
                                 </div>
                                 <div class="start_block">
                                     <div class="review_left_text">3 star</div>
@@ -2131,7 +1837,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="review_progress_percent">1<!-- -->%</div>
+                                    <div class="review_progress_percent"></div>
                                 </div>
                                 <div class="start_block">
                                     <div class="review_left_text">2 star</div>
@@ -2141,7 +1847,7 @@
                                                 aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                                         </div>
                                     </div>
-                                    <div class="review_progress_percent">0<!-- -->%</div>
+                                    <div class="review_progress_percent"></div>
                                 </div>
                                 <div class="start_block">
                                     <div class="review_left_text">1 star</div>
@@ -2153,28 +1859,22 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="review_progress_percent">1<!-- -->%</div>
+                                    <div class="review_progress_percent"></div>
                                 </div>
                             </div>
                             <details class="mt-4">
                                 <summary class="fs-14 primary-color">HowS are ratings calculated?</summary>
-                                <p class="fs-13 mt-3">To calculate the overall star rating and percentage breakdown by
-                                    star,
-                                    we don't use a simple average. Instead, our system considers things like how recent
-                                    a
-                                    review is and if the reviewer chose this<!-- --> <!-- -->University<!-- --> on
-                                    College
-                                    Vidya. It also analyses reviews to verify trustworthiness.</p>
+                                <p class="fs-13 mt-3"></p>
                             </details>
                         </div>
-                        <!-- review-form-->
+
                         <div class="review-form-container">
                             <h3 class="form-title">Write Your Review</h3>
                             <p class="form-subtitle">Share your honest experience with DY Patil University Pune</p>
 
                             <form [formGroup]="reviewForm" (ngSubmit)="submitReview()" class="review-form">
 
-                                <!-- Overall Rating -->
+                           
                                 <div class="form-group">
                                     <label class="form-label">Overall Rating *</label>
                                     <div class="star-rating">
@@ -2189,7 +1889,6 @@
                                     <input type="hidden" formControlName="rating">
                                 </div>
 
-                                <!-- Review Title -->
                                 <div class="form-group">
                                     <label class="form-label">Review Title *</label>
                                     <input type="text" class="form-control" formControlName="title"
@@ -2197,14 +1896,14 @@
                                     <div class="form-hint">Summarize your experience in few words</div>
                                 </div>
 
-                                <!-- Course Name -->
+                           
                                 <div class="form-group">
                                     <label class="form-label">Course Name *</label>
                                     <input type="text" class="form-control" formControlName="course"
                                         placeholder="e.g., MCA in general, Online BCA, MBA Online" maxlength="100">
                                 </div>
 
-                                <!-- Review Content -->
+                          
                                 <div class="form-group mb-0">
                                     <label class="form-label">Your Review *</label>
                                     <textarea class="form-control" formControlName="content" rows="4" placeholder="Share details about:
@@ -2218,7 +1917,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Verification Checkbox -->
+                          
                                 <div class="verification">
                                     <div class="form-check p-0">
                                         <input type="checkbox" class="form-check-input" id="verifyStudent"
@@ -2229,7 +1928,7 @@
                                     </div>
                                 </div>
 
-                                <!-- Submit Button -->
+                         
                                 <div class="form-actions">
                                     <button type="submit" class="btn-submit"
                                         [disabled]="reviewForm.invalid || isSubmitting">
@@ -2245,7 +1944,7 @@
                                     </button>
                                 </div>
 
-                                <!-- Review Preview -->
+                         
                                 <div *ngIf="showPreview" class="review-preview">
                                     <h4>Preview:</h4>
                                     <div class="preview-card">
@@ -2348,7 +2047,7 @@
                                     </path>
                                 </svg>View All Reviews</p>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -2356,7 +2055,7 @@
 </section>
 <section class="bottom_other_section">
     <div class="container">
-        <div class="section-head-gradient">
+        <!-- <div class="section-head-gradient">
             <span class="label">Summary</span>
             <h2 class="main-title">DY Patil Vidyapeeth Navi Mumbai Online</h2>
         </div>
@@ -2396,7 +2095,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="talk_section">
             <div class="cta-box">

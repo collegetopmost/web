@@ -160,6 +160,7 @@ export class HomeComponent {
         console.log('getUniversityList', res?.data);
 
         this.universityList = res?.data;
+        this.universityList=this.sortBySrNo( this.universityList)
         
       },
       (error: any) => {},
