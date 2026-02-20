@@ -99,9 +99,9 @@
                     <div class="course-card">
                         <span *ngIf="course?.courseDetails?.showDurationOnWeb==0" class="badge">{{course?.courseDetails?.markheading}}</span>
                         <span  *ngIf="course?.courseDetails?.showDurationOnWeb==1" class="badge neutral">{{course?.courseDetails?.duration}}</span>
-                        <img [src]="course?.courseDetails?.logoUrl" alt="icon" />
-                        <h4>{{course?.courseDetails?.name}}</h4>
-                        <button>Apply Now</button>
+                        <img (click)="openFaq(course?.courseDetails)" [src]="course?.courseDetails?.logoUrl" alt="icon" />
+                        <h4 (click)="openFaq(course?.courseDetails)">{{course?.courseDetails?.name}}</h4>
+                        <button (click)="openRegistration()">Apply Now</button>
                     </div>
 </ng-container>
                     <!-- <div class="course-card">
@@ -243,7 +243,18 @@
                                 </p>
                             <p class="exp">{{ mentor.years_experience }} experience</p>
 
-                            <button class="consult-btn">Consult Now</button>
+                            <!-- <button class="consult-btn">Consult Now</button> -->
+                             <div class="action-row">
+  <button (click)="openConsultDialog(mentor)" class="consult-btn">Consult Now</button>
+
+  <button class="like-btn"
+          [class.liked]="getLikedStatus(mentor?.id)"
+          (click)="toggleLike(mentor)">
+    <mat-icon>thumb_up</mat-icon>
+    <span class="like-count">{{ mentor?.likesCount||0 }}</span>
+  </button>
+</div>
+
                         </div>
                     </div>
 

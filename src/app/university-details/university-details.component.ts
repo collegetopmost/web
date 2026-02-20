@@ -147,7 +147,10 @@ export class UniversityDetailsComponent {
               process.stepArray,
             );
               })
-                   if (this.universityDetails.faculty_list?.length) {
+              console.log("this.processDetails",this.processDetails);
+              
+          }
+                     if (this.universityDetails.faculty_list?.length) {
             this.faculty_list = this.sortBySrNo(
               this.universityDetails.faculty_list,
             );
@@ -160,12 +163,6 @@ export class UniversityDetailsComponent {
                 faq.open=false
                })
           }
-
-              
-              console.log("this.processDetails",this.processDetails);
-              
-          }
-          
         },
         (error: any) => {},
       );

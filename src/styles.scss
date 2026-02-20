@@ -161,5 +161,15 @@ html {
 .logowithmenu_bar.scrolled {
     position: fixed !important;
 }
-
+.faq-dialog-panel .mat-dialog-container {
+  padding: 0;
+  border-radius: 12px;
+}
+.consult-dialog-container .mat-mdc-dialog-container {
+  padding: 0 !important;
+  border-radius: 16px !important;
+  max-height: 95vh !important;
+  display: flex;
+  flex-direction: column;
+}
 @import 'assets/scss/media.scss';

@@ -17,8 +17,11 @@ export class ApiService {
     // this.rootUrl = 'http://localhost/backend/RkApi/';
   }
   //frontendUrl="https://tractorfactory.in/#"
+ frontendUrl="http://localhost:4500"
 
-  rootUrl = 'http://localhost/collegetopmost/collegetopmost/CollegeTopMostWebConnect/';
+  
+//frontendUrl="https://collegetopmost.com/beta2222"
+ rootUrl = 'http://localhost/collegetopmost/collegetopmost/CollegeTopMostWebConnect/';
 //rootUrl= "https://collegetopmost.com/adminad/backend/collegetopmost/CollegeTopMostWebConnect/"
 
   postapi(x: any, object: any): any {

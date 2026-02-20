@@ -706,6 +706,74 @@
                     }
                 }
             }
+            .action-row {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+/* LIKE BUTTON */
+.like-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 30px;
+  border: 2px solid #ffffff30;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  mat-icon {
+    font-size: 20px;
+    transition: 0.3s ease;
+  }
+
+  .like-count {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  &:hover {
+    background: rgba(255,255,255,0.1);
+  }
+
+  /* Liked state */
+  &.liked {
+    background: var(--primary-gradient);
+    border-color: transparent;
+    animation: pop 0.3s ease;
+
+    mat-icon {
+      color: #fff;
+      transform: scale(1.2);
+    }
+  }
+}
+
+/* Animation */
+@keyframes pop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.25); }
+  100% { transform: scale(1); }
+}
+@media (max-width: 576px) {
+  .action-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .consult-btn,
+  .like-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
         }
     }
 

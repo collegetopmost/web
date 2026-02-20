@@ -5,7 +5,10 @@ import { MatIcon } from '@angular/material/icon';
 import { Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { ShareService } from '../share.service';
-
+import { MatDialog } from '@angular/material/dialog';
+import { PopupSignupComponent } from '../common/popup-signup/popup-signup.component';
+import { CourseFaqComponent } from '../common/course-faq/course-faq.component';
+import { AskMentorComponent } from '../common/ask-mentor/ask-mentor.component';
 @Component({
   selector: 'app-home',
   imports: [CommonModule, MatIcon],
@@ -19,6 +22,7 @@ export class HomeComponent {
     private router: Router,
     private api: ApiService,
     private share: ShareService,
+    private dialog:MatDialog
   ) {
     this.getListCourses();
     this.getUniversityList()
@@ -57,6 +61,9 @@ export class HomeComponent {
     
 
         this.expertsMentor = res?.data?.filter((f:any)=>f.typeOfExperts=='MENTOR');
+        this.expertsMentor?.forEach((f:any)=>{
+          f.liked=this.getLikedStatus(f)
+        })
         this.expertsOur = res?.data?.filter((f:any)=>f.typeOfExperts=='OUR_EXPERTS');
         this.expertsMentor=    this.sortBySrNo(this.expertsMentor)
         this.expertsOur=   this.sortBySrNo(this.expertsOur)
@@ -151,6 +158,105 @@ export class HomeComponent {
       (error: any) => {},
     );
   }
+  openFaq(course:any) {
+  this.dialog.open(CourseFaqComponent, {
+    width: '600px',
+    maxWidth: '95vw',
+    panelClass: 'faq-dialog-panel',
+          data: { course: course },
+  });
+}
+countMentorLike(like:any,mentor:any){
+ let   obj={
+      like:like,
+      mentor_id:mentor.id,
+      temp_id:this.share.getTempId()
+    }
+    this.api.postapi('countMentorLikes',obj).subscribe(
+      (res: any) => {
+   this.getMentorLikes(mentor?.id)
+      },
+      (error: any) => {},
+    );
+}
+
+getMentorLikes(mentor_id:any){
+ let   obj={
+       mentor_id:mentor_id,
+    }
+    this.api.postapi('getLikesBymentorId',obj).subscribe(
+      (res: any) => {
+   let findMentor=this.expertsMentor?.findIndex((f:any)=>f.id==mentor_id)
+   if(findMentor>-1){
+    this.expertsMentor[findMentor].likesCount=res?.data
+   }
+      },
+      (error: any) => {},
+    );
+}
+toggleLike(mentor: any) {
+  mentor.liked = !mentor.liked;
+  this.setLikeLocalStorage(mentor.liked ,mentor?.id)
+this.countMentorLike(mentor.liked,mentor)
+  if (!mentor.likes) {
+    mentor.likes = 0;
+  }
+
+  mentor.liked ? mentor.likes++ : mentor.likes--;
+}
+getLikedStatus(mentor_id:any){
+  const mentorLikeData = localStorage.getItem("MENTOR_LIKE");
+  if(mentorLikeData){
+    let mentorLikeArray= JSON.parse(mentorLikeData)
+  let find=mentorLikeArray.find((f:any)=>f.mentor_id==mentor_id)
+  if(find){
+    return true
+  }else{
+    return false
+  }
+  }else {
+    return false
+  }
+}
+setLikeLocalStorage(like:any,mentor_id:any){
+  const mentorLikeData = localStorage.getItem("MENTOR_LIKE");
+  if(mentorLikeData){
+ let mentorLikeArray= JSON.parse(mentorLikeData)
+if(like){
+   let find=mentorLikeArray.find((f:any)=>f.mentor_id==mentor_id)
+   if(!find){
+mentorLikeArray.push({mentor_id:mentor_id,like:true})
+    localStorage.setItem("MENTOR_LIKE",JSON.stringify(mentorLikeArray))
+   }
+}else{
+  let find=mentorLikeArray.findIndex((f:any)=>f.mentor_id==mentor_id)
+ mentorLikeArray.splice(find,1)
+  localStorage.setItem("MENTOR_LIKE",JSON.stringify(mentorLikeArray))
+}
+  }
+else{
+  let mentorLikeArray=[]
+    mentorLikeArray.push({mentor_id:mentor_id,like:true})
+    localStorage.setItem("MENTOR_LIKE",JSON.stringify(mentorLikeArray))
+}
+}
+openConsultDialog(mentor: any) {
+  this.dialog.open(AskMentorComponent, {
+    width: '500px',
+    maxWidth: '95vw',
+    maxHeight: '95vh',
+    height: 'auto',
+    panelClass: 'consult-dialog-container',
+    autoFocus: false,
+    data: mentor
+  });
+}
+    openRegistration() {
+   
+      this.dialog.open(PopupSignupComponent, {
+        width: '500px'
+      });
+    }
   universityList:any=[]
     getUniversityList() {
     this.courses = [];
@@ -244,8 +350,16 @@ this.selectedCourses=cat?.coursesInCat
       button: 'College Top Most Job Portal',
     },
   ];
+  
   openUniversity(name:any) {
-    this.router.navigate(['university-details',name]);
+        const urls = this.router.serializeUrl(
+      this.router.createUrlTree(['/university-details'])
+    );
+    console.log('urls', urls);
+
+    let url = this.api.frontendUrl + '/university-details/' + name;
+        window.open(url, '_blank');
+   // this.router.navigate(['university-details',name]);
   }
   @ViewChild('sliderRef') sliderExpart!: ElementRef;
 

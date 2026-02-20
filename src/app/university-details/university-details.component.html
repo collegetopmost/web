@@ -43,12 +43,17 @@
                     <a (click)="openRagistration()" class="talk-link">Let’s Talk →</a>
                 </div>
             </div>
-            <div *ngIf="universityDetails?.youtubeSanitizeLink" class="hero-right">
+            <div *ngIf="universityDetails?.youtubeSanitizeLink && universityDetails?.showImageAsBanner==0" class="hero-right">
                 <iframe class="ifame_class" [src]="universityDetails?.youtubeSanitizeLink" title="YouTube video player"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowfullscreen>
                 </iframe>
+            <!-- <img class="img" src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="icon" /> -->
+            </div>
+                 <div *ngIf="universityDetails?.showImageAsBanner==1" class="hero-right">
+           
+            <img class="img" [src]="universityDetails?.bannerImageUrl" alt="icon" />
             </div>
         </div>
     </div>
@@ -70,15 +75,28 @@
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
                     </li>
+              
+
                     <li *ngIf="boardsDetails?.length"  class="sidebar_li" data-target="approvals_tab">
                         <a class="d-flex justify-content-between">
-                            <span>Approvals</span>
+                            <span>Boards</span>
+                            <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
+                        </a>
+                    </li>
+   <li *ngIf="accreditedDetail?.length"  class="sidebar_li" data-target="approvals_tab">
+                        <a class="d-flex justify-content-between">
+                            <span>Accredited</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
                     </li>
 
-                
-
+                       <li *ngIf="processDetails?.length"  class="sidebar_li" data-target="approvals_tab">
+                        <a class="d-flex justify-content-between">
+                            <span>Admission Proces</span>
+                            <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
+                        </a>
+                    </li>
+                 
                     <!-- <li class="sidebar_li" data-target="jobs_tab">
                         <a class="d-flex justify-content-between">
                             <span>Jobs & Internships</span>
@@ -123,7 +141,7 @@
 
                     <li *ngIf="faculty_list?.length" class="sidebar_li" data-target="faculty_tab">
                         <a class="d-flex justify-content-between">
-                            <span>Faculty</span>
+                            <span>Memeber's</span>
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
                     </li>
@@ -195,7 +213,7 @@
                                 <table class="about_table">
                                     <thead>
                                         <tr>
-                                            <th colspan="2"><strong>Streams In University</strong>
+                                            <th colspan="2"><strong>Faculty In University</strong>
                                             </th>
                                         </tr>
                                     </thead>
@@ -247,7 +265,7 @@
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
                                         </svg> </p>
-                                    <p>T{{tag?.description}}</p>
+                                    <p>{{tag?.description}}</p>
                                 </div>
                             </div>
                         
@@ -1685,7 +1703,7 @@
                     </div> -->
                     <div class="mb-4">
                         <div>
-                            <h3 *ngIf="faculty_list?.length" id="faculty_tab" class="tabs_title">Meet Faculty</h3>
+                            <h3 *ngIf="faculty_list?.length" id="faculty_tab" class="tabs_title">Members</h3>
                             <div class="faculty_container">
                                 <div *ngFor="let faculty of faculty_list" class="faculty_block card">
                                     <div class="image_block">

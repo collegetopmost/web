@@ -1,0 +1,54 @@
+<div class="faq-container">
+
+  <!-- Header -->
+  <div class="faq-header">
+    <h2>{{course?.name}} FAQ</h2>
+    <button mat-icon-button (click)="closeDialog()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- FAQ Content -->
+  <div class="faq-body">
+
+    <mat-accordion>
+
+      <mat-expansion-panel *ngFor="let faq of faqList">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+          <b class="font-family-theme">{{faq?.question}}</b>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p class="font-family-theme">{{faq?.answer}}</p>
+      </mat-expansion-panel>
+
+      <!-- <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Is placement support available?
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>Yes, we provide 100% placement assistance.</p>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Is this beginner friendly?
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>Yes, it starts from basics to advanced level.</p>
+      </mat-expansion-panel> -->
+
+    </mat-accordion>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="faq-footer">
+    <button mat-raised-button color="primary" class="apply-btn">
+      Apply Now
+    </button>
+  </div>
+
+</div>

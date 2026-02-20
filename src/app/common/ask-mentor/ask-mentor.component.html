@@ -1,0 +1,73 @@
+<div class="dialog-wrapper">
+
+  <!-- HEADER -->
+  <div class="dialog-header">
+    <h2>Consult with {{ data?.name }}</h2>
+    <button mat-icon-button (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <!-- FORM -->
+   <ng-container *ngIf="!formSubmitted">
+ <form  [formGroup]="form">
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Your Name</mat-label>
+      <input matInput formControlName="name" name="name"  required />
+            <mat-error
+  *ngIf="
+    form.get('name')?.invalid &&
+    (form.get('name')?.touched || form.get('name')?.dirty)
+  "
+>
+  <span *ngIf="form.get('name')?.hasError('required')">
+    Name is required
+  </span>
+  </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Mobile Number</mat-label>
+      <input matInput formControlName="contactNo" type="tel" name="mobile"  required />
+       <mat-error
+  *ngIf="
+    form.get('contactNo')?.invalid &&
+    (form.get('contactNo')?.touched || form.get('contactNo')?.dirty)
+  "
+>
+  <span *ngIf="form.get('contactNo')?.hasError('required')">
+    Mobile number is required
+  </span>
+
+  <span *ngIf="form.get('contactNo')?.hasError('pattern')">
+    Enter a valid 10-digit mobile number
+  </span>
+</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+      <mat-label>Your Question</mat-label>
+      <textarea matInput rows="4" name="question"  formControlName="question" required></textarea>
+    </mat-form-field>
+
+    <button type="submit" (click)="submitForm()" class="submit-btn">
+      Ask Mentor
+    </button>
+
+  </form>
+</ng-container>
+  <ng-container *ngIf="formSubmitted">
+    <div class="thank-you-container">
+  <div class="thank-you-icon">
+    <mat-icon>check_circle</mat-icon>
+  </div>
+
+  <h2>Thank You!</h2>
+  <p>
+    Your question has been submitted successfully.<br />
+    Our team will contact you soon.
+  </p>
+</div>
+  </ng-container>
+</div>

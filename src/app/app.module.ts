@@ -12,12 +12,21 @@ import { UniversityDetailsComponent } from './university-details/university-deta
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { CompareUniversityComponent } from './compare-university/compare-university.component';
-import { provideHttpClient,withInterceptorsFromDi } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { PopupSignupComponent } from './common/popup-signup/popup-signup.component';
 import { SelectCityComponent } from './common/popup-signup/select-city/select-city.component';
 import { FormsModule } from '@angular/forms';
 import { ToastComponent } from './toast/toast.component';
-
+import { CourseFaqComponent } from './common/course-faq/course-faq.component';
+import { AskMentorComponent } from './common/ask-mentor/ask-mentor.component';
+import {
+  HashLocationStrategy,
+  LocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -36,18 +45,19 @@ import { ToastComponent } from './toast/toast.component';
     MatIconModule,
     NgbModule,
     ToastComponent,
+    CourseFaqComponent,
+    AskMentorComponent,
     //  SnackbarModule.forRoot(),
     RouterModule.forRoot(routes, {
-      scrollPositionRestoration: 'top',   
-      anchorScrolling: 'enabled'
-    })
+      scrollPositionRestoration: 'top',
+      anchorScrolling: 'enabled',
+    }),
   ],
-  exports: [
-    MatIconModule
+  exports: [MatIconModule],
+  providers: [
+    provideHttpClient(withInterceptorsFromDi()),
+    { provide: LocationStrategy, useClass: PathLocationStrategy },
   ],
-    providers: [
-    provideHttpClient(withInterceptorsFromDi())
-  ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
