@@ -140,6 +140,7 @@ export class HomeComponent {
         this.course_cateogry=this.course_cateogry.reverse()
         this.course_cateogry?.forEach((element: any) => {
           if (element?.coursesInCat?.length) {
+           element.coursesInCat= this.sortBySrNo(element?.coursesInCat)
             element?.coursesInCat?.forEach((bond: any) => {
               let course = this.courses.find(
                 (cou: any) => cou.id == bond.course_id,
@@ -283,12 +284,22 @@ this.selectedCourses=cat?.coursesInCat
     {
       title: 'Those who can see into your eyes never lie',
       subtitle: 'Say Hi 👋 to Video Counselling',
-      image: 'assets/images/banner_0.png',
+      image: 'assets/images/banner_1_1.jpeg',
     },
     {
       title: 'Your Vision Matters',
       subtitle: 'Book Online Appointment Easily',
-      image: 'assets/images/banner_1.png',
+      image: 'assets/images/banner_2_2.jpeg',
+    },
+      {
+      title: 'Those who can see into your eyes never lie',
+      subtitle: 'Say Hi 👋 to Video Counselling',
+      image: 'assets/images/banner_3_3.jpeg',
+    },
+    {
+      title: 'Your Vision Matters',
+      subtitle: 'Book Online Appointment Easily',
+      image: 'assets/images/banner_4_4.jpeg',
     },
   ];
   @ViewChild('sliderRef') slider!: ElementRef;

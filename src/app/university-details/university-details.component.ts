@@ -103,12 +103,12 @@ export class UniversityDetailsComponent {
               this.universityDetails.boardsDetail,
             );
           }
-              if (this.universityDetails.accreditedDetail?.length) {
+          if (this.universityDetails.accreditedDetail?.length) {
             this.accreditedDetail = this.sortBySrNo(
               this.universityDetails.accreditedDetail,
             );
           }
-      
+
           if (this.universityDetails.aboutusDetail?.length) {
             this.aboutusDetails = this.universityDetails.aboutusDetail;
           }
@@ -132,36 +132,58 @@ export class UniversityDetailsComponent {
             this.topicDetails = this.sortBySrNo(
               this.universityDetails.topicDetails,
             );
-              this.topicDetails?.forEach((topic:any)=>{
-               topic.explainArray = this.sortBySrNo(
-              topic.explainArray,
-            );
-              })
+            this.topicDetails?.forEach((topic: any) => {
+              topic.explainArray = this.sortBySrNo(topic.explainArray);
+            });
+            this.topicDetails?.forEach((topic: any) => {
+              topic.imageArray = this.sortBySrNo(topic.imageArray);
+            });
+            this.topicDetails?.forEach((topic: any) => {
+              topic.flowArray = [];
+              if (
+                !topic?.contentOrderFirst ||
+                topic?.contentOrderFirst == 'EXPLAIN'
+              ) {
+                if (topic?.explainArray?.length) {
+                  topic.flowArray.push({array:topic?.explainArray,type:"EXPLAIN"});
+                }
+                if (topic?.imageArray?.length) {
+                  topic.flowArray.push({array:topic?.imageArray,type:"IMAGES"});
+                }
+              } else if (topic?.contentOrderFirst == 'IMAGES') {
+                if (topic?.imageArray?.length) {
+              topic.flowArray.push({array:topic?.imageArray,type:"IMAGES"});
+                }
+                if (topic?.explainArray?.length) {
+                   topic.flowArray.push({array:topic?.explainArray,type:"EXPLAIN"});
+                }
+              }
+   
+          
+            });
+                   console.log("  this.topicDetails?",  this.topicDetails);
           }
-            if (this.universityDetails.processDetails?.length) {
+          if (this.universityDetails.processDetails?.length) {
             this.processDetails = this.sortBySrNo(
               this.universityDetails.processDetails,
             );
-              this.processDetails?.forEach((process:any)=>{
-               process.stepArray = this.sortBySrNo(
-              process.stepArray,
-            );
-              })
-              console.log("this.processDetails",this.processDetails);
-              
+            this.processDetails?.forEach((process: any) => {
+              process.stepArray = this.sortBySrNo(process.stepArray);
+            });
+            console.log('this.processDetails', this.processDetails);
           }
-                     if (this.universityDetails.faculty_list?.length) {
+          if (this.universityDetails.faculty_list?.length) {
             this.faculty_list = this.sortBySrNo(
               this.universityDetails.faculty_list,
             );
           }
-                   if (this.universityDetails.faq_university?.length) {
+          if (this.universityDetails.faq_university?.length) {
             this.faq_university = this.sortBySrNo(
               this.universityDetails.faq_university,
             );
-               this.faq_university?.forEach((faq:any)=>{
-                faq.open=false
-               })
+            this.faq_university?.forEach((faq: any) => {
+              faq.open = false;
+            });
           }
         },
         (error: any) => {},

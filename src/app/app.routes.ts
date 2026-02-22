@@ -1,4 +1,11 @@
-import { Routes } from '@angular/router';
+
+import { Component, NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import {
+  HashLocationStrategy,
+  LocationStrategy,
+  PathLocationStrategy,
+} from '@angular/common';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { UniversityDetailsComponent } from './university-details/university-details.component';
@@ -12,3 +19,9 @@ export const routes: Routes = [
     { path: 'compare-university', component: CompareUniversityComponent },
     { path: 'about-us', component: AboutUsComponent },
 ];
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+    providers: [{ provide: LocationStrategy, useClass: PathLocationStrategy }]
+})
+export class AppRoutingModule { }

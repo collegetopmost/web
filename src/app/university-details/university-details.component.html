@@ -286,6 +286,7 @@
                                                 <td class="py-2 px-4 fw-bold">Course</td>
                                                 <td class="py-2 px-4 fw-bold">Full Fees</td>
                                                 <td class="py-2 px-4 fw-bold">Duration</td>
+                                                <td class="py-2 px-4 fw-bold"></td>
                                             </tr>
                                             <tr *ngFor="let course of courseDetails">
                                                 <td class="py-2 px-4">{{course?.courseName}}
@@ -293,6 +294,7 @@
                                                 <td class="py-2 px-4"><span
                                                         style="font-family:monospace">₹</span>{{course?.feesStructure}}</td>
                                                 <td class="py-2 px-4">{{course?.duration}}</td>
+                                                <td>      <button (click)="openRagistration()">Get Details</button></td>
                                             </tr>
                                        
                                         </tbody>
@@ -301,11 +303,26 @@
                             </div>
                         </div>
                         <ng-container *ngFor="let topic of topicDetails">
-     <h3 class="tabs_sub_title mt-3">{{topic?.title}}</h3>
-                        <ul class="UniversityFacts_list__MlMxd">
-                            <li *ngFor="let explain of topic?.explainArray" class="mb-3">{{explain?.explain}}</li>
-                        
-                        </ul>
+                            <ng-container *ngFor="let flow of topic?.flowArray;let flowInd=index">
+                                  <h3 *ngIf="flowInd==0" class="tabs_sub_title mt-3">{{topic?.title}}</h3>
+ <ng-container *ngIf="flow?.type=='EXPLAIN'" >
+
+   
+     <ul class="UniversityFacts_list__MlMxd">
+     <li *ngFor="let explain of flow?.array" class="mb-3">{{explain?.explain}}</li>
+    </ul>
+ </ng-container>
+  <ng-container *ngIf="flow?.type=='IMAGES'" >
+    <div class="image-grid">
+      <div class="image-card" *ngFor="let img of flow?.array">
+        <img [src]="img?.logoUrl" alt="gallery image" />
+     
+      </div>
+    </div>
+ </ng-container>
+                          
+
+                          </ng-container>
                         </ng-container>
                         <!-- <h3 class="tabs_sub_title mt-3">DY Patil University Online Facts</h3>
                         <ul class="UniversityFacts_list__MlMxd">
