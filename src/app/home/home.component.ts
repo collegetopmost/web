@@ -24,6 +24,7 @@ export class HomeComponent {
     private share: ShareService,
     private dialog:MatDialog
   ) {
+    this.getListBanner()
     this.getListCourses();
     this.getUniversityList()
     this.getListExpert()
@@ -42,6 +43,32 @@ export class HomeComponent {
 
         this.courses = res?.data;
         this.getListSub_Category();
+      },
+      (error: any) => {},
+    );
+  }
+  banner:any=[]
+  getListBanner(){
+        this.banner = [];
+
+    this.api.getapi('getListBanner').subscribe(
+      (res: any) => {
+   
+
+        this.banner = res?.data;
+        this.banner=    this.sortBySrNo(this.banner)
+           setInterval(() => {
+      this.currentIndex = (this.currentIndex + 1) % this.banner.length;
+    }, 3500);
+    let last = -1;
+    setInterval(() => {
+      let next;
+      do {
+        next = Math.floor(Math.random() * this.testimonialUsers.length);
+      } while (next === last);
+      this.currentSpotlight = next;
+      last = next;
+    }, 1800);
       },
       (error: any) => {},
     );
@@ -280,28 +307,28 @@ openConsultDialog(mentor: any) {
     this.selectedCategory=cat
 this.selectedCourses=cat?.coursesInCat
   }
-  banners = [
-    {
-      title: 'Those who can see into your eyes never lie',
-      subtitle: 'Say Hi 👋 to Video Counselling',
-      image: 'assets/images/banner_1_1.jpeg',
-    },
-    {
-      title: 'Your Vision Matters',
-      subtitle: 'Book Online Appointment Easily',
-      image: 'assets/images/banner_2_2.jpeg',
-    },
-      {
-      title: 'Those who can see into your eyes never lie',
-      subtitle: 'Say Hi 👋 to Video Counselling',
-      image: 'assets/images/banner_3_3.jpeg',
-    },
-    {
-      title: 'Your Vision Matters',
-      subtitle: 'Book Online Appointment Easily',
-      image: 'assets/images/banner_4_4.jpeg',
-    },
-  ];
+  // banners = [
+  //   {
+  //     title: 'Those who can see into your eyes never lie',
+  //     subtitle: 'Say Hi 👋 to Video Counselling',
+  //     image: 'assets/images/banner_1_1.jpeg',
+  //   },
+  //   {
+  //     title: 'Your Vision Matters',
+  //     subtitle: 'Book Online Appointment Easily',
+  //     image: 'assets/images/banner_2_2.jpeg',
+  //   },
+  //     {
+  //     title: 'Those who can see into your eyes never lie',
+  //     subtitle: 'Say Hi 👋 to Video Counselling',
+  //     image: 'assets/images/banner_3_3.jpeg',
+  //   },
+  //   {
+  //     title: 'Your Vision Matters',
+  //     subtitle: 'Book Online Appointment Easily',
+  //     image: 'assets/images/banner_4_4.jpeg',
+  //   },
+  // ];
   @ViewChild('sliderRef') slider!: ElementRef;
 
   scrollLeft() {
@@ -945,17 +972,6 @@ this.selectedCourses=cat?.coursesInCat
   ];
 
   ngOnInit(): void {
-    setInterval(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.banners.length;
-    }, 3500);
-    let last = -1;
-    setInterval(() => {
-      let next;
-      do {
-        next = Math.floor(Math.random() * this.testimonialUsers.length);
-      } while (next === last);
-      this.currentSpotlight = next;
-      last = next;
-    }, 1800);
+ 
   }
 }

@@ -23,45 +23,30 @@
                 <div class="selector-header">
                     <div class="selector-number">1</div>
                     <h3>University 1</h3>
-                    <button class="remove-btn" *ngIf="selectedUniversities[0]" (click)="removeUniversity(0)">
+                    <button class="remove-btn" (click)="removeUniversity(0)">
                         <span>×</span>
                     </button>
                 </div>
 
-                <div class="search-container" *ngIf="!selectedUniversities[0]">
-                    <div class="search-box">
-                        <input type="text" placeholder="Search university name..." class="search-input"
-                            [(ngModel)]="searchQuery1" (keyup)="searchUniversities(1)" />
-                        <span class="search-icon">🔍</span>
-                    </div>
+                <div class="search-container" >
+                       <div class="search-box-new" (click)="searchInstitute(3,5)">
+  <div class="search-input">
+    Search Institute
+  </div>
+  <span class="search-icon">🔍</span>
+</div>
 
-                    <div class="search-results" *ngIf="searchResults1.length > 0">
-                        <div class="result-item" *ngFor="let uni of searchResults1" (click)="selectUniversity(uni, 0)">
-                            <div class="result-logo">{{uni.name.charAt(0)}}</div>
-                            <div class="result-info">
-                                <div class="result-name">{{uni.name}}</div>
-                                <div class="result-location">{{uni.location}}</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="selected-university" *ngIf="selectedUniversities[0]">
+                <div class="selected-university" >
                     <div class="selected-card">
                         <div class="uni-logo">
                             <div class="logo-placeholder">{{selectedUniversities[0].name.charAt(0)}}</div>
                         </div>
                         <div class="uni-details">
-                            <h4 class="uni-name">{{selectedUniversities[0].name}}</h4>
-                            <p class="uni-location">{{selectedUniversities[0].location}}</p>
-                            <div class="uni-rating">
-                                <div class="stars">
-                                    <span *ngFor="let star of getStarArray(selectedUniversities[0].rating)">
-                                        {{star}}
-                                    </span>
-                                </div>
-                                <span class="rating-value">{{selectedUniversities[0].rating}}/5</span>
-                            </div>
+                            <h4 class="uni-name">Indian Instituteee of Technology Delhi</h4>
+                            <p class="uni-location">Delhi, India</p>
+                 
                         </div>
                     </div>
                 </div>
@@ -77,40 +62,32 @@
                     </button>
                 </div>
 
-                <div class="search-container" *ngIf="!selectedUniversities[1]">
-                    <div class="search-box">
-                        <input type="text" placeholder="Search university name..." class="search-input"
-                            [(ngModel)]="searchQuery2" (keyup)="searchUniversities(2)" />
-                        <span class="search-icon">🔍</span>
-                    </div>
+                <div class="search-container" >
+                       <div class="search-box-new" (click)="searchInstitute(3,5)">
+  <div class="search-input">
+    Search Institute
+  </div>
+  <span class="search-icon">🔍</span>
+</div>
 
-                    <div class="search-results" *ngIf="searchResults2.length > 0">
-                        <div class="result-item" *ngFor="let uni of searchResults2" (click)="selectUniversity(uni, 1)">
-                            <div class="result-logo">{{uni.name.charAt(0)}}</div>
-                            <div class="result-info">
-                                <div class="result-name">{{uni.name}}</div>
-                                <div class="result-location">{{uni.location}}</div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
-                <div class="selected-university" *ngIf="selectedUniversities[1]">
+                <div class="selected-university" >
                     <div class="selected-card">
                         <div class="uni-logo">
                             <div class="logo-placeholder">{{selectedUniversities[1].name.charAt(0)}}</div>
                         </div>
                         <div class="uni-details">
-                            <h4 class="uni-name">{{selectedUniversities[1].name}}</h4>
-                            <p class="uni-location">{{selectedUniversities[1].location}}</p>
-                            <div class="uni-rating">
+                            <h4 class="uni-name">University of Mumbai</h4>
+                            <p class="uni-location">Mumbai, India</p>
+                            <!-- <div class="uni-rating">
                                 <div class="stars">
                                     <span *ngFor="let star of getStarArray(selectedUniversities[1].rating)">
                                         {{star}}
                                     </span>
                                 </div>
                                 <span class="rating-value">{{selectedUniversities[1].rating}}/5</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -121,19 +98,30 @@
                 <div class="selector-header">
                     <div class="selector-number">3</div>
                     <h3>University 3</h3>
-                    <button class="remove-btn" *ngIf="selectedUniversities[2]" (click)="removeUniversity(2)">
+                    <button class="remove-btn"  (click)="removeUniversity(2)">
                         <span>×</span>
                     </button>
                 </div>
 
                 <div class="search-container" *ngIf="!selectedUniversities[2]">
-                    <div class="search-box">
-                        <input type="text" placeholder="Search university name..." class="search-input"
+                    <!-- <div class="search-box">
+                        <input type="text" placeholder="Search state " class="search-input"
                             [(ngModel)]="searchQuery3" (keyup)="searchUniversities(3)" />
                         <span class="search-icon">🔍</span>
-                    </div>
-
-                    <div class="search-results" *ngIf="searchResults3.length > 0">
+                    </div> -->
+           
+          <div class="search-box-new" (click)="searchInstitute(3,5)">
+  <div class="search-input">
+    Search Institute
+  </div>
+  <span class="search-icon">🔍</span>
+</div>
+       <!-- <div class="search-box">
+                        <input type="text" placeholder="Search institute name..." class="search-input"
+                            [(ngModel)]="searchQuery3" (keyup)="searchUniversities(3)" />
+                        <span class="search-icon">🔍</span>
+                    </div> -->
+                    <!-- <div class="search-results" *ngIf="searchResults3.length > 0">
                         <div class="result-item" *ngFor="let uni of searchResults3" (click)="selectUniversity(uni, 2)">
                             <div class="result-logo">{{uni.name.charAt(0)}}</div>
                             <div class="result-info">
@@ -141,25 +129,29 @@
                                 <div class="result-location">{{uni.location}}</div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
-                <div class="selected-university" *ngIf="selectedUniversities[2]">
+                <div class="selected-university" >
                     <div class="selected-card">
-                        <div class="uni-logo">
-                            <div class="logo-placeholder">{{selectedUniversities[2].name.charAt(0)}}</div>
-                        </div>
+                        <!-- <div class="uni-logo">
+                            <div style="width: 50px!important;height: 50px !important" class="logo-placeholder"><img  src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Expert" /></div>
+                        </div> -->
+                       <div class="logo-box">
+    <img src="https://collegetopmost.com/adminad/backend/collegetopmost/public/university/60751771180265.png" alt="Logo" class="logo-img">
+
+</div>
                         <div class="uni-details">
-                            <h4 class="uni-name">{{selectedUniversities[2].name}}</h4>
-                            <p class="uni-location">{{selectedUniversities[2].location}}</p>
-                            <div class="uni-rating">
+                            <h4 class="uni-name">University of Mumbai</h4>
+                            <p class="uni-location">Mumbai, India</p>
+                            <!-- <div class="uni-rating">
                                 <div class="stars">
                                     <span *ngFor="let star of getStarArray(selectedUniversities[2].rating)">
                                         {{star}}
                                     </span>
                                 </div>
                                 <span class="rating-value">{{selectedUniversities[2].rating}}/5</span>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -224,12 +216,12 @@
                         <div class="uni-column-header" [class.top-pick]="i === topUniversityIndex">
                             <div class="uni-header-content">
                                 <div class="uni-logo-small">
-                                    <div class="logo-small">{{uni.name.charAt(0)}}</div>
+                                    <div class="logo-small">{{uni?.name?.charAt(0)}}</div>
                                 </div>
-                                <h4 class="uni-name">{{uni.name}}</h4>                               
+                                <h4 class="uni-name">{{uni?.name}}</h4>                               
                                 <div class="uni-rating-small">
                                     <span class="stars-small">★★★★★</span>
-                                    <span class="rating-small">{{uni.rating}}/5</span>
+                                    <span class="rating-small">{{uni?.rating}}/5</span>
                                 </div>
                                  <div class="uni-rank" *ngIf="i === topUniversityIndex">
                                     <span class="rank-badge">🏆 Top Pick</span>

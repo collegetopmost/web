@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopupSignupComponent } from '../popup-signup/popup-signup.component';
 import { Router } from '@angular/router';
 import { CdkAutofill } from "@angular/cdk/text-field";
-
+import { SearchUniversityComponent } from '../search-university/search-university.component';
 @Component({
   selector: 'app-header',
   imports: [MatIconModule, CdkAutofill],
@@ -22,6 +22,17 @@ export class HeaderComponent {
   }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+  searchInstitute(key:any,type:any){
+    this.dialog.open(SearchUniversityComponent, {
+      width: '500px',
+      maxWidth: '95vw',
+      maxHeight: '95vh',
+      height: 'auto',
+      panelClass: 'consult-dialog-container',
+      autoFocus: false,
+      data: null
+    });
   }
 
   openUniversity() {

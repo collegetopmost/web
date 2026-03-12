@@ -127,6 +127,12 @@ export class UniversityDetailsComponent {
               this.universityDetails.courseDetails,
             );
           }
+           if (this.universityDetails.placementDetails?.length) {
+            this.placementDetails = this.sortBySrNo(
+              this.universityDetails.placementDetails,
+            );
+          }
+          
 
           if (this.universityDetails.topicDetails?.length) {
             this.topicDetails = this.sortBySrNo(
@@ -189,8 +195,39 @@ export class UniversityDetailsComponent {
         (error: any) => {},
       );
   }
+brochureImages = [
+  'assets/images/mku-uni-new1.jpeg',
+
+  'assets/images/mku-uni-new2.jpeg',
+  'https://images.unsplash.com/photo-1607013407627-6ee814329547?q=80&w=1200',
+  'https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=1200'
+];
+isBlur = true;
+
+unlock() {
+  this.isBlur = false;
+}
+  currentPage = 0;
+
+nextPage() {
+  if (this.currentPage < this.brochureImages.length - 1) {
+
+    
+    this.currentPage++;
+        console.log("this.currentPage",this.currentPage);
+  }
+}
+  prevPage() {
+    if (this.currentPage > 0) {
+          console.log("this.currentPage",this.currentPage);
+      this.currentPage--;
+          console.log("this.currentPage",this.currentPage);
+    }
+  }
+
   aboutusDetails: any = [];
   streamDetail: any = [];
+  placementDetails: any = [];
   processDetails: any = [];
   faq_university: any = [];
   accreditedDetail: any = [];

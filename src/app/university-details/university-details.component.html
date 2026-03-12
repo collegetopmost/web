@@ -96,6 +96,12 @@
                             <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
                         </a>
                     </li>
+                       <li *ngIf="placementDetails?.length"  class="sidebar_li" data-target="approvals_tab">
+                        <a class="d-flex justify-content-between">
+                            <span>Placement's</span>
+                            <span><mat-icon class="arrow_icon">chevron_right</mat-icon></span>
+                        </a>
+                    </li>
                  
                     <!-- <li class="sidebar_li" data-target="jobs_tab">
                         <a class="d-flex justify-content-between">
@@ -324,6 +330,32 @@
 
                           </ng-container>
                         </ng-container>
+
+  <div class="brochure-header">
+    <h2>Brochure</h2>
+    <button *ngIf="isBlur" (click)="unlock()">Unlock</button>
+  </div>
+                   <section class="brochure-section">
+                 
+
+
+  <div class="brochure-container">
+    
+    <button class="nav-btn left" (click)="prevPage()">&#10094;</button>
+
+    <div class="book" id="book" [class.blur-active]="isBlur">
+     <div class="page"
+     *ngFor="let img of brochureImages; let i = index"
+     [style.backgroundImage]="'url(' + img + ')'"
+     [class.flipped]="i < currentPage"
+     [style.zIndex]="brochureImages.length - i">
+</div>
+    </div>
+
+    <button class="nav-btn right" (click)="nextPage()">&#10095;</button>
+
+  </div>
+</section>     
                         <!-- <h3 class="tabs_sub_title mt-3">DY Patil University Online Facts</h3>
                         <ul class="UniversityFacts_list__MlMxd">
                             <li class="mb-3">The university has all the accreditations and recognitions for providing
@@ -1568,10 +1600,9 @@
                         </div><button type="button" style="padding:13px 10px 13px 20px;border-radius:50px"
                             class="bgprimary fs-14 text-center btn btn-primary">View Full Examination Pattern</button>
                     </div> -->
-                    <!-- <div class="mb-4">
-                        <h3 id="placement_tab" class="tabs_title">DY Patil University Online Placement
-                            Partners</h3>
-                        <div class="Placement_placement_wrap__pgDF8 custom_list">
+                    <div *ngIf="placementDetails?.length" class="mb-4">
+                        <h3 id="placement_tab" class="tabs_title">Our Placement Partners</h3>
+                        <!-- <div class="Placement_placement_wrap__pgDF8 custom_list">
                             <p>Our students get to work with</p>
 
                             <ul>
@@ -1579,10 +1610,10 @@
                                 <li>Top Industry Experts</li>
                                 <li>Global Markets</li>
                             </ul>
-                        </div>
-                        <p class="d-inline-block px-4 py-2 rounded fw-bold">Our
-                            students work at</p>
-                        <ul class="list-unstyled d-flex flex-wrap promotion_block card">
+                        </div> -->
+                        <!-- <p class="d-inline-block px-4 py-2 rounded fw-bold">Our
+                            students work at</p> -->
+                        <!-- <ul class="list-unstyled d-flex flex-wrap promotion_block card">
                             <li class="px-4 py-3 rounded">
                                 <p class="m-0 primary-color h2 fw-bold">50%</p>
                                 <p>Average Salary Hike</p>
@@ -1595,129 +1626,18 @@
                                 <p class="m-0 primary-color h2 fw-bold">3X</p>
                                 <p>Increase in Interview Opportunities</p>
                             </li>
-                        </ul>
+                        </ul> -->
                         <ul class="list-unstyled d-flex flex-wrap gap-3 mt-4 align-items-center main_company_block">
-                            <li
+                            <li *ngFor="let company of placementDetails"
                                 class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/airtel.webp"
-                                    class="w-100" height="55" alt="Airtel" loading="lazy"
+                                <img [src]="company?.logoUrl"
+                                    class="w-100" height="55" alt="{{company?.companyName}}" loading="lazy"
                                     style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Airtel</p>
+                                <p class="fs-12 m-0 text-center mt-1">{{company?.companyName}}</p>
                             </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/apollo.webp"
-                                    class="w-100" height="55" alt="Apollo" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Apollo</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/bsnl.webp"
-                                    class="w-100" height="55" alt="Bsnl" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Bsnl</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/capgemini.webp"
-                                    class="w-100" height="55" alt="Capgemini" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Capgemini</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/cognizant.webp"
-                                    class="w-100" height="55" alt="Cognizant" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Cognizant</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/ey.webp"
-                                    class="w-100" height="55" alt="Ey" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Ey</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/lt.webp"
-                                    class="w-100" height="55" alt="L&amp;T" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">L&amp;T</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/microsoft.webp"
-                                    class="w-100" height="55" alt="Microsoft" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Microsoft</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/nestle.webp"
-                                    class="w-100" height="55" alt="Nestle" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Nestle</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/paytm.webp"
-                                    class="w-100" height="55" alt="Paytm" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Paytm</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/pwc.webp"
-                                    class="w-100" height="55" alt="PWC" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">PWC</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/randstad.webp"
-                                    class="w-100" height="55" alt="Randstad" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Randstad</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/sutherland.webp"
-                                    class="w-100" height="55" alt="Sutherland" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Sutherland</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/tata-motors.webp"
-                                    class="w-100" height="55" alt="Tata Motors" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Tata Motors</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/genpact.webp"
-                                    class="w-100" height="55" alt="Genpact" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Genpact</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/hsbc.webp"
-                                    class="w-100" height="55" alt="HSBC" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">HSBC</p>
-                            </li>
-                            <li
-                                class="mb-2 border rounded p-2 d-flex justify-content-center align-items-center flex-column">
-                                <img src="https://d1aeya7jd2fyco.cloudfront.net/placement_partners/Dell.webp"
-                                    class="w-100" height="55" alt="Dell" loading="lazy"
-                                    style="max-width:80px;object-fit:contain;width:max-content">
-                                <p class="fs-12 m-0 text-center mt-1">Dell</p>
-                            </li>
+                    
                         </ul>
-                    </div> -->
+                    </div>
                     <div class="mb-4">
                         <div>
                             <h3 *ngIf="faculty_list?.length" id="faculty_tab" class="tabs_title">Members</h3>

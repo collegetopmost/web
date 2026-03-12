@@ -1,0 +1,226 @@
+/* popup container */
+
+.dialog-container{
+    width:460px;
+    max-height:65vh;
+    display:flex;
+    flex-direction:column;
+}
+
+/* header */
+
+.dialog-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:14px 18px;
+
+    background:var(--primary-gradient);
+    color:white;
+
+    border-radius:10px 10px 0 0;
+
+    flex-shrink:0;
+}
+
+/* content */
+
+.dialog-content{
+
+    padding:18px;
+
+    flex:1;
+
+    overflow-y:auto;
+    overflow-x:hidden;
+
+    box-sizing:border-box;
+}
+
+/* search */
+
+.search-section{
+    display:flex;
+    justify-content:center;
+}
+
+.search-section input{
+
+    width:85%;
+    padding:12px 14px;
+
+    border-radius:30px;
+    border:none;
+
+    background:#f3f3f3;
+
+    outline:none;
+
+    font-size:14px;
+
+    transition:.3s;
+}
+
+.search-section input:focus{
+
+    background:white;
+    box-shadow:0 0 0 2px var(--primary-color);
+}
+
+/* trending title */
+
+.trending-title{
+
+    margin-top:20px;
+    font-weight:700;
+    font-size:16px;
+    text-align:center;
+
+    animation:flashGlow 1.2s infinite alternate;
+}
+
+/* glow animation */
+
+@keyframes flashGlow{
+
+    from{
+        color:var(--primary-color);
+        text-shadow:0 0 4px rgba(255,80,0,.3);
+    }
+
+    to{
+        color:var(--secondary-color);
+        text-shadow:0 0 12px rgba(255,152,0,.8);
+    }
+
+}
+
+/* list */
+
+.trending-list{
+
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+
+    gap:14px;
+    margin-top:16px;
+}
+
+/* institute card */
+
+.institute-card{
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,0.75);
+    backdrop-filter:blur(8px);
+
+    border:1px solid #eee;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+/* hover card */
+
+.institute-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 6px 16px rgba(0,0,0,.15);
+}
+
+/* logo */
+
+.institute-card img{
+
+    width:40px;
+    height:40px;
+
+    object-fit:contain;
+}
+
+/* name container */
+
+.name-box{
+
+    display:flex;
+    align-items:center;
+}
+
+/* 3D institute name */
+
+.institute-name{
+
+    font-weight:700;
+    font-size:14px;
+
+    background:var(--primary-gradient);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+    display:inline-block;
+
+    /* light 3D effect */
+    text-shadow:
+        1px 1px 0 rgba(0,0,0,0.12),
+        2px 2px 3px rgba(0,0,0,0.18);
+
+    transition:all .25s ease;
+}
+
+/* hover pop effect */
+
+.institute-card:hover .institute-name{
+
+    transform:translateY(-1px) scale(1.05);
+
+    text-shadow:
+        1px 1px 0 rgba(0,0,0,0.15),
+        3px 3px 6px rgba(0,0,0,0.25);
+}
+/* mobile */
+
+@media(max-width:600px){
+
+.dialog-container{
+    width:95vw;
+}
+
+.search-section input{
+    width:100%;
+}
+
+.trending-list{
+    grid-template-columns:1fr;
+}
+
+}
+
+/* tablet */
+
+@media(min-width:601px) and (max-width:1024px){
+
+.trending-list{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* desktop */
+
+@media(min-width:1025px){
+
+.trending-list{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}

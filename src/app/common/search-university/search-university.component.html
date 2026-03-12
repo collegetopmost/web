@@ -1,0 +1,52 @@
+<div class="dialog-container">
+
+  <div class="dialog-header">
+    <h2 class="dialog-title">Search Institute</h2>
+
+    <button mat-icon-button class="close-btn" (click)="close()">
+      ✕
+    </button>
+  </div>
+
+  <div mat-dialog-content class="dialog-content">
+
+    <!-- Search -->
+    <div class="search-section">
+      <input
+        type="text"
+        placeholder="🔍 Search institute..."
+        [(ngModel)]="searchText"
+        (input)="searchInstitute()"
+      />
+    </div>
+
+    <!-- Trending Title -->
+    <div class="trending-title">
+      🔥 Trending Institutes
+    </div>
+
+    <!-- List -->
+    <div class="trending-list">
+
+      <div
+        *ngFor="let trand of trendingInstitutes"
+        class="institute-card"
+      >
+
+        <img [src]="trand?.logo" />
+
+        <div class="name-box">
+          <span class="institute-name">
+            {{ trand?.name }}
+          </span>
+
+    
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

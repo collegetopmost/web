@@ -1,9 +1,9 @@
 <div class="home_page_container">
     <section class="banner_section">
-        <div class="banner-slider">
+        <div *ngIf="banner?.length" class="banner-slider">
             <div class="slides" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
-                <ng-container *ngFor="let item of banners; index as i">
-                    <div class="slide" [ngStyle]="{'background-image': 'url(' + item.image + ')'}">
+                <ng-container *ngFor="let item of banner; index as i">
+                    <div class="slide" [ngStyle]="{'background-image': 'url(' + item.logoUrl + ')'}">
                         <!-- <img [src]="item.image" alt="banner" /> 
                         <div class="content">
                             <h1 class="title animate-text">{{ item.title }}</h1>
@@ -16,7 +16,7 @@
 
             <!-- Dots -->
             <div class="dots">
-                <span *ngFor="let _ of banners; index as i" [class.active]="i === currentIndex"
+                <span *ngFor="let _ of banner; index as i" [class.active]="i === currentIndex"
                     (click)="currentIndex = i">
                 </span>
             </div>

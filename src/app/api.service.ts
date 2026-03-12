@@ -14,10 +14,10 @@ export class ApiService {
     private router: Router,
 
   ) {
-    // this.rootUrl = 'http://localhost/backend/RkApi/';
+  
   }
-  //frontendUrl="https://tractorfactory.in/#"
- //frontendUrl="http://localhost:4500"
+
+ //frontendUrl="http://localhost:4200"
 
   
 frontendUrl="https://collegetopmost.com/beta2222"

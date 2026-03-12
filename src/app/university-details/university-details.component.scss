@@ -1456,4 +1456,176 @@
                     opacity: 0.9;
                 }
             }
+        /* ===============================
+   BROCHURE SECTION
+=================================*/
+.brochure-section {
+  width: 100%;
+  padding: 60px 20px;
+  background: linear-gradient(135deg, #f5f7fa, #e4ecf5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* ===============================
+   BROCHURE CONTAINER
+=================================*/
+.brochure-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;              /* Max Width Control */
+  aspect-ratio: 1 / 1.41;        /* A4 Ratio */
+  max-height: 564px;              /* Prevent overflow on small screens */
+  perspective: 2000px;
+}
+
+/* ===============================
+   BOOK WRAPPER
+=================================*/
+.book {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+}
+
+/* ===============================
+   PAGE STYLING
+=================================*/
+.page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+ // background-size: contain;       /* 🔥 Full area cover */
+  background-size: cover;       /* 🔥 Full area cover */
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #fff;
+  transform-origin: left;
+  transition: transform 0.9s cubic-bezier(.77,0,.18,1);
+  backface-visibility: hidden;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+/* Flipped State */
+.page.flipped {
+  transform: rotateY(-180deg);
+}
+
+/* ===============================
+   NAVIGATION BUTTONS
+=================================*/
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  background: #002147;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background: #004080;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.nav-btn.left {
+  left: -70px;
+}
+
+.nav-btn.right {
+  right: -70px;
+}
+
+/* ===============================
+   RESPONSIVE DESIGN
+=================================*/
+
+/* Tablets */
+@media (max-width: 992px) {
+  .brochure-container {
+    max-width: 550px;
+  }
+
+  .nav-btn.left {
+    left: -50px;
+  }
+
+  .nav-btn.right {
+    right: -50px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .brochure-section {
+    padding: 40px 10px;
+  }
+
+  .brochure-container {
+    max-width: 95%;
+    aspect-ratio: 1 / 1.41;
+  }
+
+  .nav-btn {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+  }
+
+  .nav-btn.left {
+    left: -25px;
+  }
+
+  .nav-btn.right {
+    right: -25px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+
+  .brochure-container {
+    max-width: 100%;
+  }
+.page{
+    background-size: cover;
+}
+  .nav-btn.left {
+    left: 5px;
+  }
+
+  .nav-btn.right {
+    right: 5px;
+  }
+}
+.book.blur-active {
+  filter: blur(8px);
+}
+.brochure-header {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.brochure-header h2 {
+  margin: 0 0 10px 0;
+}
+
+.brochure-header button {
+  padding: 6px 18px;
+}
 @import '../../assets/scss/media.scss';

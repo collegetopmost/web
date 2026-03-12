@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { MatDialog } from '@angular/material/dialog';
+import { SearchUniversityComponent } from '../common/search-university/search-university.component';
 @Component({
   selector: 'app-compare-university',
   imports: [CommonModule, FormsModule],
@@ -199,7 +200,8 @@ export class CompareUniversityComponent implements OnInit {
     setTimeout(() => {
       this.selectUniversity(this.sampleUniversities[0], 0);
       this.selectUniversity(this.sampleUniversities[1], 1);
-    }, 500);
+      this.selectUniversity(this.sampleUniversities[1], 2);
+    }, 0);
   }
 
   get selectedCount(): number {
@@ -219,27 +221,37 @@ export class CompareUniversityComponent implements OnInit {
 
     return stars;
   }
-
+searchInstitute(key:any,type:any){
+  this.dialog.open(SearchUniversityComponent, {
+    width: '460px',
+    maxWidth: '95vw',
+    maxHeight: '95vh',
+    height: 'auto',
+    panelClass: 'consult-dialog-container',
+    autoFocus: false,
+    data: null
+  });
+}
   searchUniversities(searchBox: number) {
-    const query = searchBox === 1 ? this.searchQuery1 :
-      searchBox === 2 ? this.searchQuery2 :
-        this.searchQuery3;
+    // const query = searchBox === 1 ? this.searchQuery1 :
+    //   searchBox === 2 ? this.searchQuery2 :
+    //     this.searchQuery3;
 
-    if (!query || query.length < 2) {
-      if (searchBox === 1) this.searchResults1 = [];
-      else if (searchBox === 2) this.searchResults2 = [];
-      else this.searchResults3 = [];
-      return;
-    }
+    // if (!query || query.length < 2) {
+    //   if (searchBox === 1) this.searchResults1 = [];
+    //   else if (searchBox === 2) this.searchResults2 = [];
+    //   else this.searchResults3 = [];
+    //   return;
+    // }
 
-    const results = this.sampleUniversities.filter(uni =>
-      uni.name.toLowerCase().includes(query.toLowerCase()) ||
-      uni.location.toLowerCase().includes(query.toLowerCase())
-    );
+    // const results = this.sampleUniversities.filter(uni =>
+    //   uni.name.toLowerCase().includes(query.toLowerCase()) ||
+    //   uni.location.toLowerCase().includes(query.toLowerCase())
+    // );
 
-    if (searchBox === 1) this.searchResults1 = results;
-    else if (searchBox === 2) this.searchResults2 = results;
-    else this.searchResults3 = results;
+    // if (searchBox === 1) this.searchResults1 = results;
+    // else if (searchBox === 2) this.searchResults2 = results;
+    // else this.searchResults3 = results;
   }
 
   selectUniversity(university: any, index: number) {
@@ -268,6 +280,7 @@ export class CompareUniversityComponent implements OnInit {
     this.showComparison = this.selectedCount >= 2;
   }
 
+  constructor(private dialog:MatDialog) {}
   addUniversity() {
     // Find first empty slot
     const emptyIndex = this.selectedUniversities.findIndex(uni => uni === null);
