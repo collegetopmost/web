@@ -21,6 +21,7 @@
     </div>
 
     <!-- Trending Title -->
+     <ng-container *ngIf="searchText==''||searchText==null||searchText==undefined">
     <div class="trending-title">
       🔥 Trending Institutes
     </div>
@@ -29,11 +30,12 @@
     <div class="trending-list">
 
       <div
-        *ngFor="let trand of trendingInstitutes"
+            (click)="selectUniversity(trand)"
+        *ngFor="let trand of trendingUniversity"
         class="institute-card"
       >
 
-        <img [src]="trand?.logo" />
+        <img [src]="trand?.logoUrl" />
 
         <div class="name-box">
           <span class="institute-name">
@@ -46,6 +48,36 @@
       </div>
 
     </div>
+     </ng-container>
+     <ng-container *ngIf="searchText!=''&&searchText!=null&&searchText!=undefined">
+       <div class="trending-title">
+     Search Institutes
+    </div>
+
+    <!-- List -->
+    <div class="trending-list">
+
+      <div
+      (click)="selectUniversity(item)"
+        *ngFor="let item of filteredList()"
+        class="institute-card"
+      >
+
+        <img [src]="item?.logoUrl" />
+
+        <div class="name-box">
+          <span class="institute-name">
+            {{ item?.name }}
+          </span>
+
+    
+        </div>
+
+      </div>
+
+    </div>
+     </ng-container>
+
 
   </div>
 

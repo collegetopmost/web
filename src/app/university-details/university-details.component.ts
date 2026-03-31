@@ -131,6 +131,11 @@ export class UniversityDetailsComponent {
             this.placementDetails = this.sortBySrNo(
               this.universityDetails.placementDetails,
             );
+            this.placementDetails?.forEach((place:any)=>{
+              place.count=0
+              let interval:any
+              this.startCounter(place,interval)
+            })
           }
           
 
@@ -217,6 +222,57 @@ nextPage() {
         console.log("this.currentPage",this.currentPage);
   }
 }
+
+  target = 600;
+  displayCount = 0;
+ animateCount() {
+    const increment = 5;
+    const speed = 10;
+
+    const interval = setInterval(() => {
+      if (this.displayCount < this.target) {
+        this.displayCount += increment;
+      } else {
+        this.displayCount = this.target;
+        clearInterval(interval);
+      }
+    }, speed);
+  }
+  
+startCounter(	place:any,interval:any) {
+  const speed = 20;
+let placementRecord=Number(place?.placementRecord)
+  interval = setInterval(() => {
+    const target = Number(placementRecord) || 0;
+
+    if (place.count < target) {
+
+      // 🔢 Smooth increment (dynamic step)
+      place.count += Math.ceil(target / 100);
+
+      // prevent overshoot
+      if (place.count > target) {
+       place.count = target;
+      }
+
+    } else {
+      // ⏸ Pause before restart
+      clearInterval(interval);
+
+      setTimeout(() => {
+       place.count= 0;
+        this.startCounter(place,interval); // 🔁 restart again
+      }, 1500);
+    }
+
+  }, speed);
+}
+
+  ngOnDestroy(): void {
+    // if (this.interval) {
+    //   clearInterval(this.interval);
+    // }
+  }
   prevPage() {
     if (this.currentPage > 0) {
           console.log("this.currentPage",this.currentPage);
@@ -320,6 +376,8 @@ nextPage() {
     });
     this.getUniversityDetails();
     this.getListExpert();
+   // this.animateCount()
+     //  this.startCounter();
     console.log('universityName', this.universityName);
   }
 

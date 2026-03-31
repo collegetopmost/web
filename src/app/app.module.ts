@@ -12,6 +12,7 @@ import { UniversityDetailsComponent } from './university-details/university-deta
 import { HeaderComponent } from './common/header/header.component';
 import { FooterComponent } from './common/footer/footer.component';
 import { CompareUniversityComponent } from './compare-university/compare-university.component';
+
 import {
   provideHttpClient,
   withInterceptorsFromDi,
@@ -27,6 +28,8 @@ import {
   LocationStrategy,
   PathLocationStrategy,
 } from '@angular/common';
+import { LoaderComponent } from './loader/loader.component';
+import { ShowMorePopupComponent } from './compare-university/show-more-popup/show-more-popup.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -34,6 +37,7 @@ import {
     FormsModule,
     UniversityDetailsComponent,
     CompareUniversityComponent,
+   
     HeaderComponent,
     PopupSignupComponent,
     SelectCityComponent,
@@ -47,6 +51,9 @@ import {
     ToastComponent,
     CourseFaqComponent,
     AskMentorComponent,
+    LoaderComponent,
+    ShowMorePopupComponent,
+    
     //  SnackbarModule.forRoot(),
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'top',

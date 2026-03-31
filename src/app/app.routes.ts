@@ -17,6 +17,7 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: 'university-details/:name', component: UniversityDetailsComponent },
     { path: 'compare-university', component: CompareUniversityComponent },
+  
     { path: 'about-us', component: AboutUsComponent },
 ];
 @NgModule({

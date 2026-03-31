@@ -1,0 +1,82 @@
+.dialog-container {
+  text-align: center;
+  padding: 24px;
+  border-radius: 16px;
+  background: var(--mat-sys-surface, #fff);
+  max-width: 100%;
+}
+
+/* Icon circle */
+.icon-wrapper {
+  width: 70px;
+  height: 70px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:var(--primary-gradient); // uses primary vibe
+  animation: pop 0.3s ease;
+}
+
+.icon-wrapper mat-icon {
+  font-size: 36px;
+  height: 36px;
+  width: 36px;
+}
+
+/* Title */
+.title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+/* Message */
+.message {
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* Button */
+.actions button {
+  min-width: 120px;
+  border-radius: 25px;
+  padding: 6px 20px;
+  background: var(--primary-gradient);;
+}
+
+/* Animation */
+@keyframes pop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* 📱 Responsive */
+@media (max-width: 600px) {
+  .dialog-container {
+    padding: 16px;
+  }
+
+  .title {
+    font-size: 18px;
+  }
+
+  .message {
+    font-size: 14px;
+  }
+
+  .icon-wrapper {
+    width: 55px;
+    height: 55px;
+  }
+}

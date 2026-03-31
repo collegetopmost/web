@@ -1,0 +1,37 @@
+<div class="dialog-container">
+
+  <!-- HEADER -->
+  <div class="dialog-header">
+    <h2>More {{title}}</h2>
+
+    <!-- Close Button -->
+    <button class="close-btn" (click)="closeDialog()">✕</button>
+  </div>
+
+  <!-- BODY (SCROLLABLE) -->
+  <div class="dialog-body">
+    <div class="card-grid">
+
+      <div class="item-card" *ngFor="let item of items">
+
+        <!-- LOGO -->
+        <div class="logo-box">
+          <img *ngIf="item?.logo" [src]="item.logo" class="logo-img-tag" />
+
+          <!-- fallback -->
+          <div *ngIf="!item?.logo" class="logo-placeholder">
+            {{ item?.name ? item.name[0] : item[0] }}
+          </div>
+        </div>
+
+        <!-- NAME -->
+        <div class="item-name">
+          {{ item?.name || item }}
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

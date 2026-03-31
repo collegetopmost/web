@@ -8,9 +8,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { CommonModule } from '@angular/common';
-
 @Component({
-  selector: 'app-search-university',
+  selector: 'app-show-more-popup',
    standalone: true, 
   imports: [
     CommonModule,
@@ -22,24 +21,25 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     FormsModule,
   ],
-  templateUrl: './search-university.component.html',
-  styleUrls: ['./search-university.component.scss']
+  templateUrl: './show-more-popup.component.html',
+  styleUrl: './show-more-popup.component.scss'
 })
-export class SearchUniversityComponent implements OnInit  {
+export class ShowMorePopupComponent {
   searchText :any= '';
 
   list: any = [];
   title: any;
   constructor(
-    private dialogRef: MatDialogRef<SearchUniversityComponent>,
+    private dialogRef: MatDialogRef<ShowMorePopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) {
     this.initaite()
- this.list=this.data?.list
- this.trendingUniversity=this.data?.trendingUniversity
+ this.items=this.data?.value
+ this.title=this.data?.title
   }
-  trendingUniversity:any=[]
-
+closeDialog() {
+  this.dialogRef.close();
+}
   filteredList() {
     if(this.list?.length){
     return this.list?.filter((ele: any) =>
@@ -117,4 +117,6 @@ selectInstitute(inst:any){
 close(){
   this.dialogRef.close();
 }
+items:any=[]
+
 }

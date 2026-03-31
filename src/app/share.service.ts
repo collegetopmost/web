@@ -4,7 +4,7 @@ import * as uuid from "uuid";
   providedIn: 'root'
 })
 export class ShareService {
-
+loader=false
   constructor() { }
   getTempId(){
           if(!localStorage.getItem("TEMP_DEVICE_ID")){

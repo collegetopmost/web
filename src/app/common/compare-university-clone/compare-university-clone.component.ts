@@ -2,22 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { SearchUniversityComponent } from '../common/search-university/search-university.component';
-import { ApiService } from '../api.service';
-import { AlertDialogComponent } from '../common/alert-dialog/alert-dialog.component';
-import { ShareService } from '../share.service';
-import { LoaderService } from '../loader-serive/loader-serive.component';
-import { ShowMorePopupComponent } from './show-more-popup/show-more-popup.component';
-import { Router } from '@angular/router';
-import { PopupSignupComponent } from '../common/popup-signup/popup-signup.component';
+import { SearchUniversityComponent } from '../search-university/search-university.component';
+import { ApiService } from '../../api.service';
+import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
 @Component({
-  selector: 'app-compare-university',
-  imports: [CommonModule, FormsModule],
-  templateUrl: './compare-university.component.html',
-  styleUrl: './compare-university.component.scss'
+  selector: 'app-compare-university-clone',
+  imports: [],
+  templateUrl: './compare-university-clone.component.html',
+  styleUrl: './compare-university-clone.component.scss'
 })
-export class CompareUniversityComponent implements OnInit {
-  // Sample data for demonstration
+export class CompareUniversityCloneComponent {
+ // Sample data for demonstration
   sampleUniversities = [
     {
       id: 1,
@@ -217,106 +212,12 @@ export class CompareUniversityComponent implements OnInit {
   // Keep existing sampleUniversities array...
 
   ngOnInit() {
-    // // Initialize with sample data for demo
+    // Initialize with sample data for demo
     setTimeout(() => {
       this.selectUniversity(this.sampleUniversities[0], 0);
       this.selectUniversity(this.sampleUniversities[1], 1);
       this.selectUniversity(this.sampleUniversities[1], 2);
     }, 0);
-    this.getCompareHeaders()
-    this.getTrandinguniversity()
-  }
-  trendingUniversity:any=[]
-compareCategory:any=[]
-  getTrandinguniversity(){
-  
-
-    this.api.getapi('getTendingUniveristyList').subscribe(
-      (res: any) => {
-   
-    this.trendingUniversity=res?.data
-    this.trendingUniversity=this.sortBySrNo( this.trendingUniversity)
- //this.share.loader=false
-        
-      },
-      (error: any) => {
-         this.loaderS.hide()
-      },
-    );
-  }
-    openUniversity(name:any) {
-        const urls = this.router.serializeUrl(
-      this.router.createUrlTree(['/university-details'])
-    );
-    console.log('urls', urls);
-
-    let url = this.api.frontendUrl + '/university-details/' + name;
-        window.open(url, '_blank');
-   // this.router.navigate(['university-details',name]);
-  }
-  getCompareHeaders(){
-      this.loaderS.show()
-
-    this.api.getapi('getCompareHeaders').subscribe(
-      (res: any) => {
-        console.log('getCompareHeaders', res?.data);
-        this.loaderS.hide()
-   
-this.compareCategory=res?.data?.compareCategory
-
-        this.compareCategory=this.sortBySrNo( this.compareCategory)
-        this.compareCategory?.forEach((f:any)=>{
-               f.heads=this.sortBySrNo( f.heads)
-        })
-     let obj=      {
-    id: 0,
-    name: "Basic Information",
-    createdOn: "2026-02-24 20:07:20",
-    updatedOn: "2026-03-28 15:03:36",
-    isDeleted: "0",
-    isActive: "1",
-    actionByid: "1",
-    srNo: "1",
-    showOnUniversityDetails: "1",
-    heads: [
-         {
-            
-            "headName": "Establish Year"
-        },
-        {
-          
-            "headName": "City"
-        },
-        {
-         
-            "headName": "State"
-        },
-        {
-        
-            "headName": "Boards"
-        },
-        {
-            
-            "headName": "Accrecredits"
-        },
-          {
-            
-            "headName": "Courses"
-        },
-            {
-            
-            "headName": "Faculty"
-        }
-    ]
-}
-this.compareCategory.unshift(obj)
- //this.share.loader=false
-        
-      },
-      (error: any) => {
-         this.loaderS.hide()
-      },
-    );
   }
    sortBySrNo(arr:any) {
   return arr.sort((a:any, b:any) => a.srNo - b.srNo);
@@ -358,7 +259,7 @@ searchInstitute(uniNumber:any){
     height: 'auto',
     panelClass: 'consult-dialog-container',
     autoFocus: false,
-    data: {list:this.universityList,trendingUniversity:this.trendingUniversity}
+    data: {list:this.universityList}
   });
         dialogRef.afterClosed().subscribe((result) => {
         if (result) {
@@ -425,7 +326,7 @@ this.dialog.open(AlertDialogComponent, {
 
     // Auto-compare if at least 2 universities are selected
     if (this.selectedCount >= 2) {
-       setTimeout(() => this.compareUniversities(), 100);
+      setTimeout(() => this.compareUniversities(), 100);
     }
   }
 
@@ -433,14 +334,8 @@ this.dialog.open(AlertDialogComponent, {
     this.selectedUniversity[index].university = null;
 
   }
-    openRagistration() {
-  
-      this.dialog.open(PopupSignupComponent, {
-        width: '500px'
-      });
-    }
 
-  constructor(private dialog:MatDialog,private api:ApiService,public share:ShareService,private loaderS:LoaderService,private router:Router) {
+  constructor(private dialog:MatDialog,private api:ApiService) {
     this.getUniversityListName()
   }
   addUniversity() {
@@ -461,150 +356,28 @@ getLengthOfSelected(){
     // this.showComparison = false;
     // this.topUniversityIndex = -1;
   }
-universityData:any=[]
-universityHeadDetails:any=[]
+
   compareUniversities() {
-  this.loaderS.show()
-let idUni:any=[]
-this.selectedUniversity.forEach((element:any) => {
-  if(element?.university?.id){
-    idUni.push(element?.university?.id)
+    if (this.selectedCount < 2) {
+      alert('Please select at least 2 universities to compare');
+      return;
+    }
+
+    this.showComparison = true;
+
+    // Calculate top university based on rating and placement rate
+    let topScore = -1;
+    this.selectedUniversities.forEach((uni, index) => {
+      if (uni) {
+        const score = (uni.rating * 20) + uni.placementRate;
+        if (score > topScore) {
+          topScore = score;
+          this.topUniversityIndex = index;
+        }
+      }
+    });
   }
-  
-});
-let ids={ids:idUni}
-    this.api.postapi('getUniversityDetailById',ids).subscribe(
-      (res: any) => {
-        console.log('getUniversityDetailById', res?.data);
-        this.loaderS.hide()
-        this.showComparison=true
-        this.universityData=res?.data?.universityDetails
 
-       this.universityData?.forEach((uni:any) => {
-        let headWithValue:any=[]
-    this.addStaticHeads(uni,headWithValue)
-
-        let ind=0
-           this.compareCategory?.forEach((comCat:any) => {
-            if(ind>0){
-            comCat?.heads?.forEach((head:any)=>{
-let headObj={
-  head_id:head?.head_id,
-  value:null,
-  type:'TEXT'
-}
-let findInUniversity=uni?.heads?.find((f:any)=>f.head_id==head?.head_id)
-if(findInUniversity){
-  headObj.value=findInUniversity?.valueObject?.value||null
-}
-headWithValue.push(headObj)
-            })
-       headWithValue.push({
-  head_id:null,
-  value:null,
-    type:'TEXT'
-})     
-
-            }
-            ind++
-           });
-           
-
-           uni.headWithValue=headWithValue
-        });
- //this.share.loader=false
-        
-      },
-      (error: any) => {
-         this.loaderS.hide()
-      },
-    );
-
-  }
-  addStaticHeads(uni:any,headWithValue:any=[]){
-let establisyear=uni?.establishYear||null
-let headObj={
-  head_id:'STATIC',
-  value:establisyear,
-    type:'TEXT'
-}
-headWithValue.push(headObj)
-let headObjCity={
-  head_id:'STATIC',
-  value:uni?.cityName,
-    type:'TEXT'
-}
-headWithValue.push(headObjCity)
-
-let headObjState={
-  head_id:'STATIC',
-  value:uni?.stateName,
-    type:'TEXT'
-}
-headWithValue.push(headObjState)
-let boards:any=[]
-uni?.boards?.forEach((f:any)=>{
-boards.push({logo:f?.logoUrl,name:f?.boardName})
-})
-let headObjBoards={
-  head_id:'STATIC',
-  value:boards,
-    title:"Boards",
-    type:'ARRAY_IMAGE'
-}
-headWithValue.push(headObjBoards)
-let accredited:any=[]
-uni?.accredited?.forEach((f:any)=>{
-accredited.push({logo:f?.logoUrl,name:f?.accredidtedName})
-})
-let headObjAccre={
-  head_id:'STATIC',
-  value:accredited,
-      title:"Accredited",
-    type:'ARRAY_IMAGE'
-}
-headWithValue.push(headObjAccre)
-let courses:any=[]
-uni?.courses?.forEach((f:any)=>{
-courses.push({logo:f?.logoUrl,name:f?.courseName})
-})
-let headObjCourses={
-  head_id:'STATIC',
-  value:courses,
-  title:"Courses",
-    type:'ARRAY'
-}
-headWithValue.push(headObjCourses)
-
-let streams:any=[]
-uni?.streams?.forEach((f:any)=>{
-streams.push({logo:f?.logoUrl,name:f?.steamName})
-})
-let headObjFaculty={
-  head_id:'STATIC',
-  value:streams,
-  title:"Faculty",
-    type:'ARRAY'
-}
-headWithValue.push(headObjFaculty)
-
-let headObjBlank={
-  head_id:"BLANK",
-  value:null,
-    type:'TEXT'
-}
-headWithValue.push(headObjBlank)
-  }
-getSelectedUniversity(){
-  let array:any=[]
-  // this.selectedUniversity.forEach((element:any) => {
-  //   if(element?.university){
-  //     array.push(element?.university)
-  //   }
-  // });
-  return this.universityData
- // return array
-}
   getStars(rating: number): string {
     const fullStars = Math.floor(rating);
     const halfStar = rating % 1 >= 0.5 ? 1 : 0;
@@ -622,14 +395,4 @@ getSelectedUniversity(){
     alert('Share functionality would be implemented here');
     // Implement actual share functionality
   }
-  openMoreDialog(items: any[]) {
-  this.dialog.open(ShowMorePopupComponent, {
-  width: '90vw',
-  maxWidth: '700px',
-  height: '80vh',
-  maxHeight: '80vh',
-  panelClass: 'funky-dialog',
-    data: items
-  });
-}
 }

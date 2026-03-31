@@ -287,7 +287,7 @@ openConsultDialog(mentor: any) {
     }
   universityList:any=[]
     getUniversityList() {
-    this.courses = [];
+    this.universityList = [];
 
     this.api.getapi('getUniversityList').subscribe(
       (res: any) => {

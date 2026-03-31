@@ -805,7 +805,6 @@
                         }
 
                         .course-tags,
-   
                         .recruiter-tags {
                             display: flex;
                             flex-wrap: wrap;
@@ -813,7 +812,6 @@
                             justify-content: center;
 
                             .course-tag,
-   
                             .recruiter-tag {
                                 background: rgba(64, 62, 135, 0.1);
                                 color: var(--secondary-color);
@@ -1143,86 +1141,3 @@
 .icon {
     font-size: 1.1rem;
 }
-.logo-box {
-    text-align: center;
-}
-
-.logo-img {
-    max-width: 100px;
-    max-height: 100px;
-    width: auto;
-    height: auto;
-    display: block;
-    margin: 0 auto 6px;
-}
-.logo-img-tag {
-    max-width: 50px;
-    max-height: 50px;
-    width: 50px;
-    height: 50px;
-    display: block;
-    margin: 0 auto 6px;
-}  
-.funky-more-btn {
-  margin: 0px;
-  padding: 6px 14px;
-  border-radius: 20px;
-  border: none;
-
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 500;
-
-  /* Theme-based color (Angular Material primary) */
-  background: var(--primary-gradient);
-  color: #fff;
-
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.3s ease;
-}
-
-/* Hover bounce */
-.funky-more-btn:hover {
-  transform: scale(1.08);
-}
-
-/* Shine / reflection effect */
-.funky-more-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -75%;
-  width: 50%;
-  height: 100%;
-  background: rgba(255,255,255,0.4);
-  transform: skewX(-20deg);
-}
-
-/* Animate shine */
-.funky-more-btn:hover::before {
-  animation: shine 0.8s ease;
-}
-
-@keyframes shine {
-  100% {
-    left: 125%;
-  }
-}
-
-/* Expanded container animation */
-.more-container {
-  margin-top: 8px;
-  animation: fadeIn 0.4s ease-in-out;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-} 

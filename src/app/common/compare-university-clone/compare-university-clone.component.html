@@ -1,6 +1,5 @@
 <!-- compare-university.component.html -->
-      
-<div *ngIf="!share.loader" class="compare-universities-container">
+<div class="compare-universities-container">
     <!-- Header Section -->
     <div class="compare-header">
         <div class="header-content">
@@ -205,11 +204,11 @@
                         <p class="section-subtitle">Detailed analysis based on key educational metrics</p>
                     </div>
                     <div class="criteria-list">
-                        <div class="criteria-section" *ngFor="let section of compareCategory">
-                            <div class="section-title">{{section.name}}</div>
+                        <div class="criteria-section" *ngFor="let section of comparisonSections">
+                            <div class="section-title">{{section.title}}</div>
                             <div class="criteria-items">
-                                <div class="criteria-item" *ngFor="let item of section.heads">
-                                    {{item?.headName}}
+                                <div class="criteria-item" *ngFor="let item of section.items">
+                                    {{item}}
                                 </div>
                             </div>
                         </div>
@@ -217,80 +216,48 @@
                 </div>
 
                 <!-- University Columns -->
-                <div *ngIf="getSelectedUniversity()?.length>1" class="university-columns">
-                    <div class="university-column" *ngFor="let uni of getSelectedUniversity(); let topUniversityIndex = index"
-                        >
-                        <div class="uni-column-header" >
+                <div class="university-columns">
+                    <div class="university-column" *ngFor="let uni of selectedUniversities; let i = index"
+                        [class.top-pick]="i === topUniversityIndex">
+                        <div class="uni-column-header" [class.top-pick]="i === topUniversityIndex">
                             <div class="uni-header-content">
-                                    
-                                <div  class="logo-box">
-    <img [src]="uni?.logoUrl" alt="Logo" class="logo-img">
-
-</div>
+                                <div class="uni-logo-small">
+                                    <div class="logo-small">{{uni?.name?.charAt(0)}}</div>
+                                </div>
                                 <h4 class="uni-name">{{uni?.name}}</h4>                               
-                                <!-- <div class="uni-rating-small">
+                                <div class="uni-rating-small">
                                     <span class="stars-small">★★★★★</span>
                                     <span class="rating-small">{{uni?.rating}}/5</span>
-                                </div> -->
-                                 <!-- <div class="uni-rank" >
+                                </div>
+                                 <div class="uni-rank" *ngIf="i === topUniversityIndex">
                                     <span class="rank-badge">🏆 Top Pick</span>
-                                </div> -->
+                                </div>
                             </div>
                         </div>
 
                         <div class="uni-data">
                             <!-- Basic Info -->
-                            
                             <div class="data-section">
-                                
-                                <div *ngFor="let headsValue of uni.headWithValue" class="data-item">
-                                    <div *ngIf="headsValue.type=='TEXT'" class="data-value">{{headsValue?.value}}</div>
-                                      <div *ngIf="headsValue.type=='ARRAY'" class="course-tags">
-                                        <ng-container *ngFor="let cou of headsValue?.value; let couInd = index">
-     <span class="course-tag" *ngIf="couInd<3"        >{{cou?.name}}</span>
-                                        </ng-container>
-                                        <!-- <span class="course-tag" *ngIf="headsValue?.value?.length>3"        >More</span> -->
-                                  <button 
-                                   (click)="openMoreDialog(headsValue)"
-  *ngIf="headsValue?.value?.length > 3"
-  class="funky-more-btn"
- >
-  +{{ headsValue.value.length - 3 }} more
-</button>
-                                    </div>
-                                        <div *ngIf="headsValue.type=='ARRAY_IMAGE'" class="course-tags">
-                                         <ng-container *ngFor="let cou of headsValue?.value; let arrayImgInd = index" >
-                                           <ng-container *ngIf="arrayImgInd<3" >
-                                           <img   [src]="cou?.logo" alt="Logo" class="logo-img-tag">
-                                           </ng-container>
-                                                </ng-container>
-               <button  (click)="openMoreDialog(headsValue)"
-  *ngIf="headsValue?.value?.length > 3"
-  class="funky-more-btn"
- >
-  +{{ headsValue.value.length - 3 }} more
-</button>
-                                    </div>
+                                <div class="data-item">
+                                    <div class="data-value">{{uni.location}}</div>
                                 </div>
-                             
-                                <!-- <div class="data-item">
+                                <div class="data-item">
                                     <div class="data-value">{{uni.type}}</div>
                                 </div>
                                 <div class="data-item">
                                     <div class="data-value">{{uni.established}}</div>
-                                </div> -->
-                                <!-- <div class="data-item">
+                                </div>
+                                <div class="data-item">
                                     <div class="data-value">
                                         <span class="status-badge" [class.active]="uni.accredited === 'Yes'">
                                             {{uni.accredited}}
                                         </span>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
 
                             <!-- Rankings -->
-
-                            <!-- <div class="data-section">
+                            <div class="data-section">
                                 <div class="data-item">
                                     <div class="rating-display">
                                         <div class="stars">{{getStars(uni.rating)}}</div>
@@ -311,11 +278,10 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <!-- Fees -->
-
-                            <!-- <div class="data-section">
+                            <div class="data-section">
                                 <div class="data-item">
                                     <div class="data-value fee">₹{{uni.tuitionFees | number:'1.0-0'}}</div>
                                 </div>
@@ -332,12 +298,10 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <!-- Courses -->
-
-
-                            <!-- <div class="data-section courses-section">
+                            <div class="data-section courses-section">
                                 <div class="data-item">
                                     <div class="course-tags">
                                         <span class="course-tag"
@@ -356,11 +320,10 @@
                                             *ngFor="let course of uni.courses.arts">{{course}}</span>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <!-- Placements -->
-
-                            <!-- <div class="data-section">
+                            <div class="data-section">
                                 <div class="data-item">
                                     <div class="data-value package">₹{{uni.highestPackage}} LPA</div>
                                 </div>
@@ -373,11 +336,10 @@
                                             *ngFor="let recruiter of uni.topRecruiters">{{recruiter}}</span>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
 
                             <!-- Features -->
-
-                            <!-- <div class="data-section">
+                            <div class="data-section">
                                 <div class="data-item">
                                     <div class="data-value">{{uni.campusSize}} acres</div>
                                 </div>
@@ -398,20 +360,21 @@
                                         </span>
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
 
                         <div class="uni-actions">
-                            <button (click)="openRagistration()" class="action-btn apply-btn">Get Details</button>
-                            <!-- <button (click)="openUniversity(getSelectedUniversity()[topUniversityIndex]?.fullName)" class="action-btn details-btn">View Details</button> -->
-                            <button (click)="openUniversity(uni?.fullName)" class="action-btn details-btn">View Details</button>
+                            <button class="action-btn apply-btn">Apply Now</button>
+                            <button class="action-btn details-btn">View Details</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- <div *ngIf="getSelectedUniversity()?.length>1" class="recommendation-card" >
+        <!-- Recommendation Card *ngIf="topUniversityIndex !== -1"-->
+         <!-- {{selectedUniversities[topUniversityIndex] | json}} -->
+        <div class="recommendation-card" >
             <div class="rec-header">
                 <div class="rec-icon">🏆</div>
                 <div class="rec-title">
@@ -451,7 +414,7 @@
                     <button class="btn-outline">Compare with Others</button>
                 </div>
             </div>
-        </div> -->
+        </div>
     </div>
 
     <!-- Footer CTA -->

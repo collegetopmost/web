@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
+import { ShareService } from './share.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,10 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class AppComponent {
   title = 'college-Topmost';
+constructor(public share:ShareService){
 
+
+}
   @HostListener('window:scroll')
   onScroll() {
     const bar = document.getElementById('top_navigation_bar');

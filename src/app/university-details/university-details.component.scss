@@ -1628,4 +1628,39 @@
 .brochure-header button {
   padding: 6px 18px;
 }
+.placement-text {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 6px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.count {
+  font-size: 30px;
+  background: var(--primary-gradient); // change to theme color
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  animation: bounce 1.5s infinite;
+}
+
+.label {
+  display: block;
+  font-size: 12px;
+  color: #777;
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* Funky bounce */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
 @import '../../assets/scss/media.scss';
