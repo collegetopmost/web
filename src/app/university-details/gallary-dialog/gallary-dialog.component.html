@@ -1,0 +1,28 @@
+<div class="dialog-container">
+
+  <!-- CLOSE -->
+  <button class="close-btn" (click)="close()">✕</button>
+
+  <!-- IMAGE + SWIPE -->
+  <div 
+    class="image-wrapper"
+    (touchstart)="onTouchStart($event)"
+    (touchend)="onTouchEnd($event)"
+  >
+    <img [src]="images[currentIndex]" />
+  </div>
+
+  <!-- ARROWS (Desktop) -->
+  <button class="nav left" (click)="prev()">❮</button>
+  <button class="nav right" (click)="next()">❯</button>
+
+  <!-- DOTS -->
+  <div class="dots">
+    <span 
+      *ngFor="let img of images; let i = index"
+      [class.active]="i === currentIndex"
+      (click)="goTo(i)"
+    ></span>
+  </div>
+
+</div>

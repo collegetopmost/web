@@ -184,8 +184,33 @@
                                 </svg></span></a></li>
                 </ul> -->
             </div>
+      
             <div  class="p-0 col-12 col-lg-9 right_content_wrap col">
                 <div class="main_right_blcok">
+                    <div class="vp-container">
+  <div class="vp-card">
+
+    <!-- LEFT: Message -->
+    <div class="vp-message">
+      <h2 class="title">Message from Vice President</h2>
+      <p class="message-text">
+        "At our institution, we believe in innovation, dedication, and growth. 
+        Our mission is to empower students with knowledge and skills that shape the future. 
+        Together, let’s build a brighter tomorrow."
+      </p>
+    </div>
+
+    <!-- RIGHT: Profile -->
+    <div class="vp-profile">
+      <div class="image-wrapper">
+        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Abhisek Sharma" />
+      </div>
+      <h3 class="name">Abhisek Sharma</h3>
+      <p class="designation">Vice President</p>
+    </div>
+
+  </div>
+</div>
                     <h3 *ngIf="aboutusDetails?.length" class="tabs_title" id="about_tab">About {{universityDetails?.fullName}}
                     </h3>
                     <div class="tabs_block">
@@ -277,6 +302,19 @@
                         
                         </div>
                         <div>
+       <div class="gallery-container">
+  <h2 class="gallery-title">Photo Gallery</h2>
+
+  <div class="gallery-grid">
+    <div 
+      class="gallery-item"
+      *ngFor="let img of images; let i = index"
+      (click)="openGallery(i)"
+    >
+      <img [src]="img" alt="gallery" />
+    </div>
+  </div>
+</div>
                             <h3  *ngIf="courseDetails?.length" class="tabs_sub_title">Course Wise Updated Fees </h3>
                             <!-- <div class="d-flex align-items-center gap-2 flex-wrap">
                                 <p><a class="details_button primary">View Fees

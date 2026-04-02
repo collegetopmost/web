@@ -17,10 +17,10 @@ export class ApiService {
   
   }
 
- //frontendUrl="http://localhost:4200"
+ frontendUrl="http://localhost:4500"
 
   
-frontendUrl="https://collegetopmost.com/beta2222"
+//frontendUrl="https://collegetopmost.com/beta2222"
 // rootUrl = 'http://localhost/collegetopmost/collegetopmost/collegetopmost/CollegeTopMostWebConnect/';
 rootUrl= "https://collegetopmost.com/adminad/backend/collegetopmost/CollegeTopMostWebConnect/"
 

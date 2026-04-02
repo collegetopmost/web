@@ -17,6 +17,7 @@ import {
   SafeResourceUrl,
 } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
+import { GallaryDialogComponent } from './gallary-dialog/gallary-dialog.component';
 @Component({
   selector: 'app-university-details',
   imports: [CommonModule, MatIcon, ReactiveFormsModule],
@@ -238,7 +239,31 @@ nextPage() {
       }
     }, speed);
   }
-  
+    images = [
+    'https://collegetopmost.com/adminad/backend/collegetopmost/public/topic_image/46581772641223.png',
+    'https://collegetopmost.com/adminad/backend/collegetopmost/public/topic_image/83271772641245.png',
+    'https://collegetopmost.com/adminad/backend/collegetopmost/public/topic_image/68841772641720.png',
+    'https://collegetopmost.com/adminad/backend/collegetopmost/public/topic_image/38741772984251.png'
+  ];
+
+
+
+  openGallery(index: number) {
+      const isMobile = window.innerWidth < 768;
+    this.dialog.open(GallaryDialogComponent, {
+      data: {
+        images: this.images,
+        index: index
+      },
+       panelClass: 'gallery-dialog',
+    backdropClass: 'dark-backdrop',
+
+    width: isMobile ? '95vw' : '80vw',
+    height: isMobile ? '75vh' : '85vh',
+    maxWidth: '900px'
+    });
+  }
+
 startCounter(	place:any,interval:any) {
   const speed = 20;
 let placementRecord=Number(place?.placementRecord)
