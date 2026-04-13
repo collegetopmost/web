@@ -1475,5 +1475,172 @@
 .redColor{
 background-color: red
 }
+.career-glass {
+  position: relative;
+  padding: 80px 20px;
+//   background: linear-gradient(135deg, #1d2671, #c33764);
+  background: var(--primary-gradient);
+  overflow: hidden;
+
+  /* Animated background glow */
+  .bg-blur {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    // background: radial-gradient(circle, #ff00cc, transparent);
+    background: var(--primary-gradient);
+    top: -100px;
+    left: -100px;
+    filter: blur(120px);
+    animation: moveGlow 8s infinite alternate;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* LEFT */
+  .left {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+
+    .image-box {
+      position: relative;
+      animation: float 4s ease-in-out infinite;
+
+      img {
+        max-width: 350px;
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+      }
+
+      .bubble {
+        position: absolute;
+        top: -20px;
+        right: -10px;
+        background: #fff;
+        color: #333;
+        padding: 10px 15px;
+        border-radius: 20px;
+        font-size: 14px;
+        font-weight: bold;
+        animation: pop 2s infinite;
+      }
+    }
+  }
+
+  /* GLASS CARD */
+  .glass-card {
+    flex: 1;
+    padding: 40px;
+    border-radius: 20px;
+
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    color: #fff;
+
+    animation: fadeInUp 1s ease;
+
+    h2 {
+      font-size: 36px;
+      margin-bottom: 15px;
+
+      span {
+        color: #ffd700;
+        text-shadow: 0 0 10px #ffd700;
+      }
+    }
+
+    p {
+      margin-bottom: 25px;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+  }
+
+  /* BUTTON */
+  .glow-btn {
+    background: linear-gradient(45deg, #ff512f, #dd2476);
+    border: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+
+    &:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 20px #ff512f, 0 0 40px #dd2476;
+    }
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes pop {
+  0%,100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+@keyframes moveGlow {
+  0% { transform: translate(0,0); }
+  100% { transform: translate(100px,100px); }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .career-glass {
+    text-align: center;
+
+    .container {
+      flex-direction: column;
+    }
+
+    .glass-card {
+      padding: 25px;
+
+      h2 {
+        font-size: 26px;
+      }
+    }
+
+    .left img {
+      max-width: 250px;
+    }
+  }
+}
 
 @import '../../assets/scss/media.scss';

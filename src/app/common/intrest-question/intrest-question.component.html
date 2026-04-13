@@ -1,0 +1,91 @@
+<div class="dialog-wrapper">
+
+  <!-- HEADER -->
+  <div class="dialog-header">
+    <div class="header-left">
+      <h3>Find Your Interest</h3>
+      <span class="progress-text">
+        {{ isCompleted ? 'Completed' : (currentIndex + 1) + '/' + questions.length }}
+      </span>
+    </div>
+
+    <button class="close-btn" (click)="closeDialog()">✕</button>
+  </div>
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar">
+    <div class="progress-fill"
+         [style.width.%]="getProgress()">
+    </div>
+  </div>
+
+  <!-- BODY -->
+  <div class="question-card" [ngClass]="animationClass">
+
+    <!-- QUESTION -->
+    <h2 *ngIf="!isCompleted">
+      {{ currentQuestion?.question }}
+    </h2>
+
+    <!-- TYPE 1: TEXT OPTIONS -->
+     <ng-container *ngIf="!isCompleted"
+     >  
+       <div *ngIf="currentQuestion?.question_type === 'OPTIONAL'" class="options">
+      <ng-container    *ngFor="let opt of currentQuestion.answers">
+
+   <div class="option"
+        
+           (click)="selectAnswer(opt)">
+           
+        {{ opt?.answer }}
+      </div>
+   
+  
+
+      </ng-container>
+   
+    </div>
+ <div *ngIf="currentQuestion?.question_type == 'OPTIONAL_IMAGE'" class="options">
+    <div class="image-options" >
+      <div class="img-card"
+     *ngFor="let opt of currentQuestion.answers"
+           (click)="selectAnswer(opt)">
+        <img [src]="opt?.logoUrl" />
+        <p>{{ opt?.answer }}</p>
+      </div>
+    </div>
+ </div>
+
+
+    <!-- TYPE 3: INPUT -->
+    <div *ngIf="currentQuestion?.question_type === 'WRITTING'" class="input-box">
+      <textarea [(ngModel)]="currentQuestion.selectedAnswer"
+        placeholder="Write your answer..."></textarea>
+
+      <button class="next-btn" (click)="submitTextAnswer(currentQuestion)">
+        Next →
+      </button>
+    </div>
+</ng-container>
+
+    <!-- THANK YOU SCREEN -->
+    <div *ngIf="isCompleted" class="thank-you">
+      <img src="assets/images/thank-you.png" />
+      <h2>🎉 Awesome!</h2>
+      <p>Thanks for sharing your thoughts</p>
+
+      <button (click)="checkUserDeatils()" class="submit-btn">Submit</button>
+    </div>
+
+  </div>
+
+  <!-- FOOTER NAV -->
+  <div class="footer-nav" *ngIf="!isCompleted">
+    <button *ngIf="currentIndex > 0"
+            class="back-btn"
+            (click)="goBack()">
+      ← Back
+    </button>
+  </div>
+
+</div>

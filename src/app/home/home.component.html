@@ -182,14 +182,15 @@
 
 
     </section>
-    <section class="univercity_section">
+    <ng-container *ngFor="let group of universityGroup">
+    <section style="margin-top: 30px!important;" class="univercity_section">
         <div class="container">
-            <h5 class="small-title">Compare Universities Based Multiple Factors</h5>
-            <h2 class="section-heading">Explore Top Online Universitiess</h2>
+            <h5 class="small-title">{{group?.sub_title}}</h5>
+            <h2 class="section-heading">{{group?.title}}</h2>
             <div class="university-section">
                 <div class="university-grid">
 
-                    <div class="university-card" (click)="openUniversity(university?.fullName)" *ngFor="let university of universityList">
+                    <div class="university-card" (click)="openUniversity(university?.fullName)" *ngFor="let university of group?.universityList">
                         <div class="logo-box">
                             <img [src]="university?.logoUrl" [alt]="university?.name" />
                         </div>
@@ -207,7 +208,7 @@
             </div>
         </div>
     </section>
-
+</ng-container>
     <section class="export_section">
         <div class="mentors-section">
             <div class="header-top">
@@ -268,7 +269,65 @@
 
         </div>
     </section>
-    <section class="student_talk_container">
+    <!-- <section class="career-section">
+  <div class="container">
+    
+  
+    <div class="left">
+      <div class="image-wrapper">
+        <img src="assets/images/career_question.png" alt="Student Thinking" />
+        <div class="thought-bubble">🤔 Which career is best for me?</div>
+      </div>
+    </div>
+
+
+    <div class="right">
+      <h2 class="title">
+        Want to know your <span>interest?</span>
+      </h2>
+
+      <p class="subtitle">
+        Discover your true potential and find the perfect career path tailored just for you.
+      </p>
+
+      <button class="cta-btn">
+        🚀 Know Your Interest
+      </button>
+    </div>
+
+  </div>
+</section> -->
+<section class="career-glass">
+  <div class="bg-blur"></div>
+
+  <div class="container">
+    
+    <!-- LEFT IMAGE -->
+    <div class="left">
+      <div class="image-box">
+        <img src="assets/images/career_question.png" alt="student" />
+        <div class="bubble">🤔 Which career is best for me?</div>
+      </div>
+    </div>
+
+    <!-- RIGHT GLASS CARD -->
+    <div class="right glass-card">
+      <h2>
+        Want to know your <span>interest?</span>
+      </h2>
+
+      <p>
+        Discover your true potential and explore career paths perfectly matched with your passion.
+      </p>
+
+      <button (click)="openInterestPopup()" class="glow-btn">
+        🚀 Know Your Interest
+      </button>
+    </div>
+
+  </div>
+</section>    
+<section class="student_talk_container">
         <h5 class="small-title">Students Speak Their Experience</h5>
         <h2 class="section-heading">Their Journey, Their Words</h2>
         <div class="container">

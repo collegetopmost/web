@@ -187,26 +187,24 @@
       
             <div  class="p-0 col-12 col-lg-9 right_content_wrap col">
                 <div class="main_right_blcok">
-                    <div class="vp-container">
+                    <div *ngIf="iconicFacultyDetails?.name" class="vp-container">
   <div class="vp-card">
 
     <!-- LEFT: Message -->
     <div class="vp-message">
-      <h2 class="title">Message from Vice President</h2>
-      <p class="message-text">
-        "At our institution, we believe in innovation, dedication, and growth. 
-        Our mission is to empower students with knowledge and skills that shape the future. 
-        Together, let’s build a brighter tomorrow."
+      <h2 class="title">Message From &nbsp;{{iconicFacultyDetails?.post_of_employee}}</h2>
+      <p class="message-text" [innerHTML]="iconicFacultyDetails?.message">
+      
       </p>
     </div>
 
     <!-- RIGHT: Profile -->
     <div class="vp-profile">
       <div class="image-wrapper">
-        <img src="https://cdn-icons-png.flaticon.com/512/3135/3135789.png" alt="Abhisek Sharma" />
+        <img [src]="iconicFacultyDetails?.logoUrl" alt="{{iconicFacultyDetails?.name}}" />
       </div>
-      <h3 class="name">Abhisek Sharma</h3>
-      <p class="designation">Vice President</p>
+      <h3 class="name">{{iconicFacultyDetails?.name}}</h3>
+      <p class="designation">{{iconicFacultyDetails?.post_of_employee}}</p>
     </div>
 
   </div>
@@ -217,7 +215,7 @@
                         <div class="custom_list">
                             <ng-container *ngFor="let aboutus of aboutusDetails;let abIndex=index">
                                      <ng-container *ngIf="abIndex<3">
- <p>{{aboutus?.paragraph}}
+ <p [innerHTML]="aboutus?.paragraph">
         </p>
                                      </ng-container>
 
@@ -271,7 +269,7 @@
                             <p>&nbsp;</p>
       <ng-container *ngFor="let aboutus of aboutusDetails;let abIndex=index">
                                      <ng-container *ngIf="abIndex>2">
- <p>{{aboutus?.paragraph}}
+ <p [innerHTML]="aboutus?.paragraph"> 
         </p>
                                      </ng-container>
 
@@ -302,19 +300,21 @@
                         
                         </div>
                         <div>
+                            <ng-container *ngFor="let gal of gallary">
        <div class="gallery-container">
-  <h2 class="gallery-title">Photo Gallery</h2>
+  <h2 class="gallery-title">{{gal?.title}}</h2>
 
   <div class="gallery-grid">
     <div 
       class="gallery-item"
-      *ngFor="let img of images; let i = index"
-      (click)="openGallery(i)"
+      *ngFor="let img of gal?.imageArray; let i = index"
+      (click)="openGallery(i,gal?.imageArray)"
     >
-      <img [src]="img" alt="gallery" />
+      <img [src]="img?.logoUrl" alt="gallery" />
     </div>
   </div>
 </div>
+</ng-container>
                             <h3  *ngIf="courseDetails?.length" class="tabs_sub_title">Course Wise Updated Fees </h3>
                             <!-- <div class="d-flex align-items-center gap-2 flex-wrap">
                                 <p><a class="details_button primary">View Fees
@@ -353,13 +353,13 @@
 
    
      <ul class="UniversityFacts_list__MlMxd">
-     <li *ngFor="let explain of flow?.array" class="mb-3">{{explain?.explain}}</li>
+     <li *ngFor="let explain of flow?.array" [innerHTML]="explain?.explain" class="mb-3"></li>
     </ul>
  </ng-container>
   <ng-container *ngIf="flow?.type=='IMAGES'" >
     <div class="image-grid">
-      <div class="image-card" *ngFor="let img of flow?.array">
-        <img [src]="img?.logoUrl" alt="gallery image" />
+      <div class="image-card" *ngFor="let img of flow?.array;let i=index">
+        <img [src]="img?.logoUrl"    (click)="openGallery(i,flow?.array)" alt="gallery image" />
      
       </div>
     </div>
@@ -369,11 +369,11 @@
                           </ng-container>
                         </ng-container>
 
-  <div class="brochure-header">
+  <div *ngIf="brochureImages?.length" class="brochure-header">
     <h2>Brochure</h2>
     <button *ngIf="isBlur" (click)="unlock()">Unlock</button>
   </div>
-                   <section class="brochure-section">
+                   <section *ngIf="brochureImages?.length" class="brochure-section">
                  
 
 
@@ -384,9 +384,9 @@
     <div class="book" id="book" [class.blur-active]="isBlur">
      <div class="page"
      *ngFor="let img of brochureImages; let i = index"
-     [style.backgroundImage]="'url(' + img + ')'"
+     [style.backgroundImage]="'url(' + img?.logoUrl + ')'"
      [class.flipped]="i < currentPage"
-     [style.zIndex]="brochureImages.length - i">
+     [style.zIndex]="brochureImages.length - i"  (click)="checkBlur(i,brochureImages)" >
 </div>
     </div>
 

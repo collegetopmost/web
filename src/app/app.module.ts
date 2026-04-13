@@ -29,7 +29,9 @@ import {
   PathLocationStrategy,
 } from '@angular/common';
 import { LoaderComponent } from './loader/loader.component';
+import { IntrestQuestionComponent } from './common/intrest-question/intrest-question.component';
 import { ShowMorePopupComponent } from './compare-university/show-more-popup/show-more-popup.component';
+import { EnquiryFormShotComponent } from './common/enquiry-form-shot/enquiry-form-shot.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -51,9 +53,10 @@ import { ShowMorePopupComponent } from './compare-university/show-more-popup/sho
     ToastComponent,
     CourseFaqComponent,
     AskMentorComponent,
+    EnquiryFormShotComponent,
     LoaderComponent,
     ShowMorePopupComponent,
-    
+    IntrestQuestionComponent,
     //  SnackbarModule.forRoot(),
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'top',

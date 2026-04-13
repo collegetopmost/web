@@ -9,6 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopupSignupComponent } from '../common/popup-signup/popup-signup.component';
 import { CourseFaqComponent } from '../common/course-faq/course-faq.component';
 import { AskMentorComponent } from '../common/ask-mentor/ask-mentor.component';
+import { IntrestQuestionComponent } from '../common/intrest-question/intrest-question.component';
+import { EnquiryFormShotComponent } from '../common/enquiry-form-shot/enquiry-form-shot.component';
 @Component({
   selector: 'app-home',
   imports: [CommonModule, MatIcon],
@@ -27,10 +29,12 @@ export class HomeComponent {
     this.getListBanner()
     this.getListCourses();
     this.getUniversityList()
+    this.getUniversityGroup()
     this.getListExpert()
     this.getListstudentvideojourney()
     this.getListstudentSuccesStory()
     this.getfaqList()
+    this.getQustionList()
     //this.getListSub_Category()
   }
   courses: any = [];
@@ -94,6 +98,27 @@ export class HomeComponent {
         this.expertsOur = res?.data?.filter((f:any)=>f.typeOfExperts=='OUR_EXPERTS');
         this.expertsMentor=    this.sortBySrNo(this.expertsMentor)
         this.expertsOur=   this.sortBySrNo(this.expertsOur)
+      },
+      (error: any) => {},
+    );
+  }
+  questionList:any=[]
+    getQustionList() {
+    this.questionList = [];
+ 
+
+    this.api.getapi('getQuestionList').subscribe(
+      (res: any) => {
+    this.questionList=res?.data
+    this.questionList=this.sortBySrNo(this.questionList)
+    this.questionList?.forEach((ques:any)=>{
+      if(ques?.question_type === 'WRITTING'){
+        ques.selectedAnswer=null;
+      }
+      ques.answers=this.sortBySrNo( ques?.answers)
+    })
+    console.log("questionList",this.questionList);
+    
       },
       (error: any) => {},
     );
@@ -300,6 +325,25 @@ openConsultDialog(mentor: any) {
       (error: any) => {},
     );
   }
+  universityGroup:any=[]
+     getUniversityGroup() {
+    this.universityList = [];
+
+    this.api.getapi('getUniversityGroup').subscribe(
+      (res: any) => {
+        console.log('getUniversityGroup', res?.data);
+
+        this.universityGroup = res?.data;
+        this.universityGroup=this.sortBySrNo( this.universityGroup)
+             this.universityGroup?.forEach((group:any)=>{
+              group.universityList=this.sortBySrNo(group?.universityList)
+             })
+        
+      },
+      (error: any) => {},
+    );
+  }
+  
   selectedCourses:any=[]
   selectedCategory:any
   seeCouses(cat:any){
@@ -974,4 +1018,19 @@ this.selectedCourses=cat?.coursesInCat
   ngOnInit(): void {
  
   }
+  openInterestPopup() {
+    this.questionList?.forEach((ques:any)=>{
+         ques.selectedAnswer=null
+  
+    })
+  this.dialog.open(IntrestQuestionComponent, {
+    width: '600px',
+    height:'90vh',
+    maxWidth: '95vw',
+    panelClass: 'interest-dialog-container',
+    data:{questionList:this.questionList}
+  });
+}
+
+
 }

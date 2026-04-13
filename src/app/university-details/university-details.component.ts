@@ -197,16 +197,23 @@ export class UniversityDetailsComponent {
               faq.open = false;
             });
           }
+          this.iconicFacultyDetails=this.universityDetails.iconicFacultyDetails
+          this.broucherList=this.universityDetails.broucherDetails
+          this.brochureImages=this.sortBySrNo(this.broucherList)
+          this.gallary=this.universityDetails?.gallaryList
+          this.gallary=this.sortBySrNo(this.gallary)
+          this.gallary?.forEach((ele:any) => {
+            ele.imageArray=this.sortBySrNo(ele.imageArray)
+          });
         },
         (error: any) => {},
       );
   }
-brochureImages = [
-  'assets/images/mku-uni-new1.jpeg',
+  iconicFacultyDetails:any
+  broucherList:any=[]
+  gallary:any=[]
+brochureImages :any= [
 
-  'assets/images/mku-uni-new2.jpeg',
-  'https://images.unsplash.com/photo-1607013407627-6ee814329547?q=80&w=1200',
-  'https://images.unsplash.com/photo-1588072432836-e10032774350?q=80&w=1200'
 ];
 isBlur = true;
 
@@ -247,12 +254,20 @@ nextPage() {
   ];
 
 
-
-  openGallery(index: number) {
+checkBlur(index: number,images:any=[]){
+  if(!this.isBlur){
+this.openGallery(index,images)
+  }
+}
+  openGallery(index: number,images:any=[]) {
+    let imagesSendArr:any=[]
+    images?.forEach((f:any)=>{
+    imagesSendArr.push(f?.logoUrl)
+    })
       const isMobile = window.innerWidth < 768;
     this.dialog.open(GallaryDialogComponent, {
       data: {
-        images: this.images,
+        images: imagesSendArr,
         index: index
       },
        panelClass: 'gallery-dialog',

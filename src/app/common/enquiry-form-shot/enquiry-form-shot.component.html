@@ -1,0 +1,76 @@
+<div class="dialog-container">
+
+  <!-- HEADER -->
+  <div class="dialog-header">
+    <h2>Will Give You Guidenance</h2>
+    <button class="close-btn" (click)="close()">✕</button>
+  </div>
+
+  <!-- FORM -->
+  <form [formGroup]="form" *ngIf="!isSubmitted && form"  class="form-body">
+
+ 
+    <!-- NAME -->
+    <div class="floating-field">
+      <input 
+        type="text"
+        name="name"
+        formControlName="name" 
+        
+        required
+        placeholder=" " />
+      <label>Name</label>
+
+      <small class="error"   *ngIf="
+    form.get('name')?.invalid &&
+    (form.get('name')?.touched || form.get('name')?.dirty)
+  ">
+        Name is required
+      </small>
+    </div>
+
+    <!-- MOBILE -->
+    <div class="floating-field">
+      <input 
+        type="tel"
+        name="mobile"
+      formControlName="contactNo"
+      
+        required
+    
+       
+        placeholder=" " />
+      <label>Mobile Number</label>
+
+      <small class="error"   *ngIf="
+    form.get('contactNo')?.invalid &&
+    (form.get('contactNo')?.touched || form.get('contactNo')?.dirty)
+  ">
+        <span *ngIf="form.get('contactNo')?.hasError('required')">
+          Mobile number is required
+        </span>
+        <span *ngIf="form.get('contactNo')?.hasError('pattern')">
+          Enter valid 10-digit mobile number
+        </span>
+      </small>
+    </div>
+
+    <!-- SUBMIT -->
+    <button 
+      type="submit"
+      class="submit-btn"
+      (click)="submit()"
+      [disabled]="form.invalid">
+      Submit
+    </button>
+
+  </form>
+
+  <!-- THANK YOU STATE -->
+  <div *ngIf="isSubmitted" class="thank-you">
+    <div class="checkmark">✔</div>
+    <h3>Thank You!</h3>
+    <p>We will contact you soon</p>
+  </div>
+
+</div>
