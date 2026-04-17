@@ -11,14 +11,19 @@ import { HomeComponent } from './home/home.component';
 import { UniversityDetailsComponent } from './university-details/university-details.component';
 import { CompareUniversityComponent } from './compare-university/compare-university.component';
 import { AboutUsComponent } from './about-us/about-us.component';
-
+import { SchoolTopmostHomeComponent } from './school-topmost-home/school-topmost-home.component';
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'home', component: HomeComponent },
-    { path: 'university-details/:name', component: UniversityDetailsComponent },
-    { path: 'compare-university', component: CompareUniversityComponent },
+    // { path: '', component: HomeComponent },
+    // { path: 'home', component: HomeComponent },
+    // { path: 'school-topmost', component: SchoolTopmostHomeComponent },
+    // { path: 'university-details/:name', component: UniversityDetailsComponent },
+    // { path: 'compare-university', component: CompareUniversityComponent },
   
-    { path: 'about-us', component: AboutUsComponent },
+    // { path: 'about-us', component: AboutUsComponent },
+        {
+    path: '',
+    loadChildren: () => import('./ctm/ctm.module').then(m => m.CtmModule)
+  },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

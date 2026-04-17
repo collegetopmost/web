@@ -21,8 +21,8 @@ export class ApiService {
 
   
 frontendUrl="https://collegetopmost.com/beta2222"
-//rootUrl = 'http://localhost/collegetopmost/collegetopmost/collegetopmost/CollegeTopMostWebConnect/';
-rootUrl= "https://collegetopmost.com/adminad/backend/collegetopmost/CollegeTopMostWebConnect/"
+rootUrl = 'http://localhost/collegetopmost/collegetopmost/CollegeTopMostWebConnect/';
+//rootUrl= "https://collegetopmost.com/adminad/backend/collegetopmost/CollegeTopMostWebConnect/"
 
   postapi(x: any, object: any): any {
 

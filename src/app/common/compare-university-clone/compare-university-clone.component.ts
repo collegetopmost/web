@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+
 import { MatDialog } from '@angular/material/dialog';
 import { SearchUniversityComponent } from '../search-university/search-university.component';
 import { ApiService } from '../../api.service';
 import { AlertDialogComponent } from '../alert-dialog/alert-dialog.component';
 @Component({
   selector: 'app-compare-university-clone',
-  imports: [],
+    standalone: true,
+  imports: [CommonModule],
   templateUrl: './compare-university-clone.component.html',
   styleUrl: './compare-university-clone.component.scss'
 })

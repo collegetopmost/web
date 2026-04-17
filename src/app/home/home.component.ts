@@ -11,6 +11,7 @@ import { CourseFaqComponent } from '../common/course-faq/course-faq.component';
 import { AskMentorComponent } from '../common/ask-mentor/ask-mentor.component';
 import { IntrestQuestionComponent } from '../common/intrest-question/intrest-question.component';
 import { EnquiryFormShotComponent } from '../common/enquiry-form-shot/enquiry-form-shot.component';
+
 @Component({
   selector: 'app-home',
   imports: [CommonModule, MatIcon],
@@ -51,19 +52,23 @@ export class HomeComponent {
       (error: any) => {},
     );
   }
-  banner:any=[]
+  banners:any=[]
+  bannersMobile:any=[]
   getListBanner(){
-        this.banner = [];
+        this.banners = [];
 
     this.api.getapi('getListBanner').subscribe(
       (res: any) => {
    
 
-        this.banner = res?.data;
-        this.banner=    this.sortBySrNo(this.banner)
-           setInterval(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.banner.length;
-    }, 3500);
+        this.banners = res?.data.filter((f:any)=>f.banner_type=='DESKTOP');
+        this.bannersMobile = res?.data.filter((f:any)=>f.banner_type=='MOBILE');
+        this.banners=this.sortBySrNo(this.banners)
+        this.bannersMobile=this.sortBySrNo(this.bannersMobile)
+    //        setInterval(() => {
+    //   this.currentIndex = (this.currentIndex + 1) % this.banners.length;
+    //   this.currentIndexMobile = (this.currentIndexMobile + 1) % this.bannersMobile.length;
+    // }, 0);
     let last = -1;
     setInterval(() => {
       let next;
@@ -77,6 +82,109 @@ export class HomeComponent {
       (error: any) => {},
     );
   }
+  //currentIndex = 0;
+interval: any;
+
+touchStartX = 0;
+touchEndX = 0;
+
+// banners = [
+//   {
+//     desktop: 'assets/banners/banner1-desktop.jpg',
+//     mobile: 'assets/banners/banner1-mobile.jpg'
+//   },
+//   {
+//     desktop: 'assets/banners/banner2-desktop.jpg',
+//     mobile: 'assets/banners/banner2-mobile.jpg'
+//   }
+// ];
+
+
+slideInterval = 10000; // 10 sec
+
+
+
+startAutoSlide() {
+  this.stopAutoSlide(); // 🔥 important (old clear)
+
+  this.interval = setInterval(() => {
+    this.next();
+    this.nextMob();
+  }, this.slideInterval);
+}
+
+stopAutoSlide() {
+  if (this.interval) {
+    clearInterval(this.interval);
+  }
+}
+currentIndexMobile=0
+nextMob() {
+  this.currentIndexMobile = (this.currentIndexMobile + 1) % this.bannersMobile.length;
+ // this.currentIndex = (this.currentIndex + 1) % this.bannersMobile.length;
+  this.startAutoSlide(); // 🔥 reset timer
+}
+
+prevMob() {
+  this.currentIndexMobile =
+    (this.currentIndexMobile - 1 + this.bannersMobile.length) % this.bannersMobile.length;
+    //   this.currentIndex =
+    // (this.currentIndex - 1 + this.bannersMobile.length) % this.bannersMobile.length;
+  this.startAutoSlide(); // 🔥 reset timer
+}
+
+goTo(i: number) {
+  this.currentIndex = i;
+ 
+  this.startAutoSlide(); // 🔥 reset timer
+}
+goToMob(i: number) {
+
+  this.currentIndexMobile = i;
+  this.startAutoSlide(); // 🔥 reset timer
+}
+
+next() {
+  this.currentIndex = (this.currentIndex + 1) % this.banners.length;
+ // this.currentIndex = (this.currentIndex + 1) % this.bannersMobile.length;
+  this.startAutoSlide(); // 🔥 reset timer
+}
+
+prev() {
+  this.currentIndex =
+    (this.currentIndex - 1 + this.banners.length) % this.banners.length;
+    //   this.currentIndex =
+    // (this.currentIndex - 1 + this.bannersMobile.length) % this.bannersMobile.length;
+  this.startAutoSlide(); // 🔥 reset timer
+}
+
+autoSlide() {
+  this.interval = setInterval(() => {
+    this.next();
+  }, 10000);
+}
+
+
+
+/* 🔥 SWIPE SUPPORT */
+onTouchStart(event: TouchEvent) {
+  this.touchStartX = event.changedTouches[0].screenX;
+}
+
+onTouchEnd(event: TouchEvent) {
+  this.touchEndX = event.changedTouches[0].screenX;
+  this.handleSwipe();
+}
+
+handleSwipe() {
+  const diff = this.touchStartX - this.touchEndX;
+
+  if (diff > 50) {
+    this.nextMob(); // swipe left
+  } else if (diff < -50) {
+    this.prevMob(); // swipe right
+  }
+}
   getVideo(url:any){
      return  this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
@@ -1014,8 +1122,22 @@ this.selectedCourses=cat?.coursesInCat
     { top: '250px', right: '12%' },
     { top: '330px', right: '5%' },
   ];
+  setwidth(){
+        this.isMobile = window.innerWidth <= 768;
+  }
+  gotoSchooltopmost(){
+       const urls = this.router.serializeUrl(
+      this.router.createUrlTree(['/school-topmost'])
+    );
+    console.log('urls', urls);
 
+    let url = this.api.frontendUrl + '/school-topmost';
+        window.open(url, '_blank');
+  }
+isMobile:any
   ngOnInit(): void {
+    this.isMobile = window.innerWidth <= 768;
+   this.startAutoSlide();
  
   }
   openInterestPopup() {

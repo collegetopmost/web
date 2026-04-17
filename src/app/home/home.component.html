@@ -1,28 +1,86 @@
+
 <div class="home_page_container">
-    <section class="banner_section">
+    <!-- <section class="banner_section">
         <div *ngIf="banner?.length" class="banner-slider">
             <div class="slides" [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
-                <ng-container *ngFor="let item of banner; index as i">
+                <ng-container *ngFor="let item of banners; index as i">
                     <div class="slide" [ngStyle]="{'background-image': 'url(' + item.logoUrl + ')'}">
-                        <!-- <img [src]="item.image" alt="banner" /> 
-                        <div class="content">
-                            <h1 class="title animate-text">{{ item.title }}</h1>
-                            <p class="subtitle animate-fade">{{ item.subtitle }}</p>
-                            <button class="btn-primary">Join Now</button>
-                        </div>-->
+                      
                     </div>
                 </ng-container>
             </div>
 
-            <!-- Dots -->
+           
             <div class="dots">
-                <span *ngFor="let _ of banner; index as i" [class.active]="i === currentIndex"
+                <span *ngFor="let _ of banners; index as i" [class.active]="i === currentIndex"
                     (click)="currentIndex = i">
                 </span>
             </div>
         </div>
 
-    </section>
+    </section> -->
+<section  class="banner-section">
+    {{setwidth()}}
+  <div 
+    class="banner-wrapper"
+    (touchstart)="onTouchStart($event)"
+    (touchend)="onTouchEnd($event)"
+  >
+
+    <!-- SLIDES -->
+    <ng-container *ngIf="!isMobile">
+    <div 
+      class="banner-slide"
+      *ngFor="let banner of banners; let i = index"
+      [class.active]="i === currentIndex"
+      [style.background-image]="
+        'url(' + (isMobile ? banner.mobile : banner.desktop) + ')'
+      "
+    >
+     
+      <img  class="desktop-img" [src]="banner.logoUrl" />
+  
+    </div>
+    </ng-container>
+    <ng-container *ngIf="isMobile">
+            <div 
+      class="banner-slide"
+      *ngFor="let banner of bannersMobile; let i = index"
+      [class.active]="i === currentIndexMobile"
+      [style.background-image]="
+        'url(' + (isMobile ? banner.mobile : banner.desktop) + ')'
+      "
+    >
+      
+      <img class="mobile-img"  [src]="banner.logoUrl" />
+    </div>
+    </ng-container>
+    <!-- ARROWS -->
+         <ng-container *ngIf="!isMobile">
+    <button class="nav left" (click)="prev()">❮</button>
+    <button class="nav right" (click)="next()">❯</button>
+    </ng-container>
+   <ng-container *ngIf="isMobile">
+  <button class="nav left" (click)="prevMob()">❮</button>
+    <button class="nav right" (click)="nextMob()">❯</button>
+   </ng-container>
+    <!-- DOTS -->
+    <div *ngIf="!isMobile" class="dots">
+      <span 
+        *ngFor="let b of banners; let i = index"
+        [class.active]="i === currentIndex"
+        (click)="goTo(i)"
+      ></span>
+    </div>
+   <div *ngIf="isMobile" class="dots">
+      <span 
+        *ngFor="let b of bannersMobile; let i = index"
+        [class.active]="i === currentIndexMobile"
+        (click)="goToMob(i)"
+      ></span>
+    </div>
+  </div>
+</section>
     <section class="features_section">
         <div class="container">
             <div class="stats-section">
@@ -209,6 +267,32 @@
         </div>
     </section>
 </ng-container>
+<section class="school-ad-section">
+  <div class="container">
+
+    <!-- LEFT -->
+    <div class="glass-card content">
+      <h1 class="title">
+        School <span>Top Most</span> ✨
+      </h1>
+
+      <p class="description">
+        Find the best schools near you, compare facilities, explore rankings,
+        and secure a bright future 🚀
+      </p>
+
+      <button (click)="gotoSchooltopmost()" class="explore-btn">
+        Explore Now →
+      </button>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="image-container">
+      <img src="assets/images/schootopmostproimage.png" alt="Top Schools" />
+    </div>
+
+  </div>
+</section>
     <section class="export_section">
         <div class="mentors-section">
             <div class="header-top">
@@ -297,7 +381,9 @@
 
   </div>
 </section> -->
-<section class="career-glass">
+
+
+<section style="margin-top: 40px;" class="career-glass">
   <div class="bg-blur"></div>
 
   <div class="container">
@@ -469,16 +555,15 @@
                     <div class="contact-card mat-elevation-z4">
                         <span class="badge">24/7 Support</span>
                         <ul class="contact-list">
-                            <li><mat-icon>call</mat-icon> New Student: <strong>1800-420-5757</strong></li>
-                            <li><mat-icon>call</mat-icon> Existing Student: <strong>1800-309-7947</strong></li>
-                            <li><i class="mdi mdi-whatsapp"></i> WhatsApp Support: <strong>+91
-                                    7428805824</strong></li>
-                            <li><mat-icon>email</mat-icon> Email: <strong>cvcare&#64;collegevidya.com</strong></li>
-                            <li><mat-icon>schedule</mat-icon> Visit: <strong>(10 AM to 7 PM)</strong></li>
-                            <li><mat-icon>home</mat-icon> Book: <strong>Home Visit</strong></li>
+                            <li><mat-icon>call</mat-icon> New Student: <strong>9755664483</strong></li>
+                            <!-- <li><mat-icon>call</mat-icon> Existing Student: <strong>1800-309-7947</strong></li> -->
+                            <li><i class="mdi mdi-whatsapp"></i> WhatsApp Support: <strong>9755664483</strong></li>
+                            <li><mat-icon>email</mat-icon> Email: <strong>collegetopmost&#64;gmail.com</strong></li>
+                            <!-- <li><mat-icon>schedule</mat-icon> Visit: <strong>(10 AM to 7 PM)</strong></li>
+                            <li><mat-icon>home</mat-icon> Book: <strong>Home Visit</strong></li> -->
                         </ul>
 
-                        <button class="global_submit_button">
+                        <button (click)="openRegistration()" class="global_submit_button">
                             Book Your Expert Career Advice
                         </button>
                     </div>
@@ -503,7 +588,7 @@
                         <h2>College Top Most Checkilist</h2>
                         <p>Get personalized guidance based on your career goals.</p>
                     </div>
-                    <button class="cta-btn">Let's Talk →</button>
+                    <button (click)="openRegistration()"  class="cta-btn">Let's Talk →</button>
                 </div>
             </div>
         </div>
