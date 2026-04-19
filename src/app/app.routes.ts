@@ -24,6 +24,11 @@ export const routes: Routes = [
     path: '',
     loadChildren: () => import('./ctm/ctm.module').then(m => m.CtmModule)
   },
+      {
+    path: 'school-top-most',
+    loadChildren: () => import('./stm/stm.module').then(m => m.StmModule)
+  },
+  
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

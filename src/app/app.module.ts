@@ -33,7 +33,7 @@ import {
 // import { IntrestQuestionComponent } from './common/intrest-question/intrest-question.component';
 // import { ShowMorePopupComponent } from './compare-university/show-more-popup/show-more-popup.component';
 // import { EnquiryFormShotComponent } from './common/enquiry-form-shot/enquiry-form-shot.component';
- import { SchoolTopmostHomeComponent } from './school-topmost-home/school-topmost-home.component';
+ //import { SchoolTopmostHomeComponent } from './school-topmost-home/school-topmost-home.component';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -63,7 +63,7 @@ import {
     // IntrestQuestionComponent,
 
    //schooltopmost
-   SchoolTopmostHomeComponent,
+   //SchoolTopmostHomeComponent,
 
     //  SnackbarModule.forRoot(),
     RouterModule.forRoot(routes, {

@@ -1,0 +1,147 @@
+.banner-section {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* 🔥 WRAPPER (RATIO BASED) */
+.banner-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 5;   /* desktop */
+  overflow: hidden;
+}
+
+/* SLIDES */
+.banner-slide {
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+  transition: opacity 0.6s ease;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.banner-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* 🔥 BLUR BACKGROUND (NO BLACK SPACE) */
+.banner-slide::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: inherit;
+  filter: blur(25px) brightness(0.7);
+  transform: scale(1.1);
+
+  z-index: 0;
+}
+
+/* IMAGE */
+.banner-slide img {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;  /* full image always visible */
+  object-position: center;
+}
+
+/* DESKTOP / MOBILE SWITCH */
+.desktop-img {
+  display: block;
+}
+
+.mobile-img {
+  display: none;
+}
+
+/* NAV BUTTONS */
+.banner-section .nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  background: rgba(0,0,0,0.4);
+  border: none;
+  color: #fff;
+
+  font-size: 22px;
+  padding: 10px 14px;
+  cursor: pointer;
+  border-radius: 50%;
+
+  z-index: 2;
+  transition: 0.3s;
+}
+
+.banner-section .nav:hover {
+  background: rgba(0,0,0,0.7);
+}
+
+.banner-section .nav.left {
+  left: 15px;
+}
+
+.banner-section .nav.right {
+  right: 15px;
+}
+
+/* DOTS */
+.banner-section .dots {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+  z-index: 2;
+}
+
+.banner-section .dots span {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+
+  margin: 0 5px;
+  background: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  cursor: pointer;
+
+  transition: 0.3s;
+}
+
+.banner-section .dots span.active {
+  background: #fff;
+  transform: scale(1.2);
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+
+  .banner-wrapper {
+    aspect-ratio: 16 / 9; /* mobile ratio */
+  }
+
+  .desktop-img {
+    display: none;
+  }
+
+  .mobile-img {
+    display: block;
+  }
+
+  .banner-section .nav {
+    display: none;
+  }
+
+  .banner-section .dots span {
+    width: 12px;
+    height: 12px;
+  }
+}

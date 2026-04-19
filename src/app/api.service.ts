@@ -17,14 +17,14 @@ export class ApiService {
   
   }
 
- //frontendUrl="http://localhost:4200"
+// frontendUrl="http://localhost:4200"
 
   
 frontendUrl="https://collegetopmost.com/beta2222"
-rootUrl = 'http://localhost/collegetopmost/collegetopmost/CollegeTopMostWebConnect/';
-//rootUrl= "https://collegetopmost.com/adminad/backend/collegetopmost/CollegeTopMostWebConnect/"
+//rootUrl = 'http://localhost/collegetopmost/collegetopmost/CollegeTopMostWebConnect/';
+rootUrl= "https://collegetopmost.com/adminad/backend/collegetopmost/CollegeTopMostWebConnect/"
 
-  postapi(x: any, object: any): any {
+  postapi(x: any, object: any): any   {
 
     return this.http.post(this.rootUrl + x, object).pipe(map((res) => res));
   }

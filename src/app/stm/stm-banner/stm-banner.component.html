@@ -1,0 +1,62 @@
+<section  class="banner-section">
+    {{setwidth()}}
+  <div 
+    class="banner-wrapper"
+    (touchstart)="onTouchStart($event)"
+    (touchend)="onTouchEnd($event)"
+  >
+
+    <!-- SLIDES -->
+    <ng-container *ngIf="!isMobile">
+    <div 
+      class="banner-slide"
+      *ngFor="let banner of banners; let i = index"
+      [class.active]="i === currentIndex"
+      [style.background-image]="
+        'url(' + (isMobile ? banner.mobile : banner.desktop) + ')'
+      "
+    >
+     
+      <img  class="desktop-img" [src]="banner.logoUrl" />
+  
+    </div>
+    </ng-container>
+    <ng-container *ngIf="isMobile">
+            <div 
+      class="banner-slide"
+      *ngFor="let banner of bannersMobile; let i = index"
+      [class.active]="i === currentIndexMobile"
+      [style.background-image]="
+        'url(' + (isMobile ? banner.mobile : banner.desktop) + ')'
+      "
+    >
+      
+      <img class="mobile-img"  [src]="banner.logoUrl" />
+    </div>
+    </ng-container>
+    <!-- ARROWS -->
+         <ng-container *ngIf="!isMobile">
+    <button class="nav left" (click)="prev()">❮</button>
+    <button class="nav right" (click)="next()">❯</button>
+    </ng-container>
+   <ng-container *ngIf="isMobile">
+  <button class="nav left" (click)="prevMob()">❮</button>
+    <button class="nav right" (click)="nextMob()">❯</button>
+   </ng-container>
+    <!-- DOTS -->
+    <div *ngIf="!isMobile" class="dots">
+      <span 
+        *ngFor="let b of banners; let i = index"
+        [class.active]="i === currentIndex"
+        (click)="goTo(i)"
+      ></span>
+    </div>
+   <div *ngIf="isMobile" class="dots">
+      <span 
+        *ngFor="let b of bannersMobile; let i = index"
+        [class.active]="i === currentIndexMobile"
+        (click)="goToMob(i)"
+      ></span>
+    </div>
+  </div>
+</section>

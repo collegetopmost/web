@@ -1127,11 +1127,11 @@ this.selectedCourses=cat?.coursesInCat
   }
   gotoSchooltopmost(){
        const urls = this.router.serializeUrl(
-      this.router.createUrlTree(['/school-topmost'])
+      this.router.createUrlTree(['/school-top-most/'])
     );
     console.log('urls', urls);
 
-    let url = this.api.frontendUrl + '/school-topmost';
+    let url = this.api.frontendUrl + '/school-top-most/';
         window.open(url, '_blank');
   }
 isMobile:any

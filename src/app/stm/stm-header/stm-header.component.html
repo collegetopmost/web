@@ -1,0 +1,88 @@
+<header class="site-header">
+    <nav>
+        <div class="top_bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-8">
+                        <div class="left_nav">
+                            <ul class="header_nav_left list-unstyled">
+                                <li>
+                                    <a href="tel:9589883533" class="nav_icon_withtxt">
+                                        <i class="mdi mdi-phone-outline"></i>
+                                        <span class="nav_txt">9589883533</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a  href="mailto:topmostcollage&#64;gmail.com" class="nav_icon_withtxt">
+                                        <i class="mdi mdi-email-outline"></i>
+                                        <span class="nav_txt">topmostcollage&#64;gmail.com</span>
+                                    </a>
+                                </li>
+                                <li class="mobile_none">
+                                    <a> <i class="mdi mdi-facebook social-icon"></i></a>
+                                </li>
+                                <li class="mobile_none">
+                                    <a><i class="mdi mdi-instagram social-icon"></i></a>
+                                </li>
+                                <li class="mobile_none">
+                                    <a><i class="mdi mdi-linkedin social-icon"></i></a>
+                                </li>
+                                <li class="mobile_none">
+                                    <a><i class="mdi mdi-youtube social-icon"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 mobile_none">
+                        <div class="nav_icon_withtxt"><span class="nav_txt">What makes us different?</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="logowithmenu_bar" id="top_navigation_bar">
+            <div class="container">
+                <div class="row">
+                    <div class="col-6 col-md-3">
+                        <div class="logo_block">
+                            <a>
+                                <img class="responsive top_logo" src="assets/images/schooltopmostlogo.jpeg"
+                                    alt="logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-6 text-right d-md-none">
+                        <div class="hamburger" (click)="toggleMenu()">
+                            &#9776;
+                        </div>
+                    </div>
+                    <div class="col-md-9 d-none d-md-block">
+             <nav class="main-menu">
+  <ul class="top_menu_ul">
+    <li class="active"><a >Home</a></li>
+    <li><a> About Us</a></li>
+    <li><a>Compare</a></li>
+    <li><a >Contact Us</a></li>
+  </ul>
+</nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="mobile-sidebar" [class.open]="isMenuOpen">
+   <div class="mobile-menu">
+  <ul>
+    <li class="active">Home</li>
+    <li>About Us</li>
+    <li>University</li>
+    <li>Compare</li>
+    <li>Career</li>
+    <li>Contact Us</li>
+  </ul>
+</div>
+    </div>
+
+    <!-- Sidebar backdrop -->
+    <div [class.open_backdrop]="isMenuOpen" (click)="toggleMenu()"></div>
+</header>
