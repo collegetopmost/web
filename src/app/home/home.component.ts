@@ -61,8 +61,8 @@ export class HomeComponent {
       (res: any) => {
    
 
-        this.banners = res?.data.filter((f:any)=>f.banner_type=='DESKTOP');
-        this.bannersMobile = res?.data.filter((f:any)=>f.banner_type=='MOBILE');
+        this.banners = res?.data.filter((f:any)=>f.banner_type=='DESKTOP' && f.useType=='CTM');
+        this.bannersMobile = res?.data.filter((f:any)=>f.banner_type=='MOBILE' && f.useType=='CTM');
         this.banners=this.sortBySrNo(this.banners)
         this.bannersMobile=this.sortBySrNo(this.bannersMobile)
     //        setInterval(() => {

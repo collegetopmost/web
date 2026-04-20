@@ -23,7 +23,7 @@ openSearch() {
   ngOnInit(): void {
 
 this.getListBanner()
- 
+   this.loop();
   }
    sortBySrNo(arr:any) {
   return arr.sort((a:any, b:any) => a.srNo - b.srNo);
@@ -44,9 +44,9 @@ closeSearch() {
     this.api.getapi('getListBanner').subscribe(
       (res: any) => {
    
-
-        this.banners = res?.data.filter((f:any)=>f.banner_type=='DESKTOP');
-        this.bannersMobile = res?.data.filter((f:any)=>f.banner_type=='MOBILE');
+       
+        this.banners = res?.data.filter((f:any)=>f.banner_type=='DESKTOP' && f.useType=='STM');
+        this.bannersMobile = res?.data.filter((f:any)=>f.banner_type=='MOBILE' && f.useType=='STM');
         this.banners=this.sortBySrNo(this.banners)
         this.bannersMobile=this.sortBySrNo(this.bannersMobile)
     //        setInterval(() => {
@@ -180,5 +180,69 @@ closeSearch() {
   resetTilt(card: HTMLElement) {
     card.style.transform = `rotateX(0) rotateY(0) scale(1)`;
   }
+  parentCount = 0;
+  mentorCount = 0;
+  rating = 0;
 
+
+  loop() {
+    this.start();
+
+    setInterval(() => {
+      this.reset();
+      this.start();
+    }, 6000);
+  }
+
+  reset() {
+    this.parentCount = 0;
+    this.mentorCount = 0;
+    this.rating = 0;
+  }
+
+  start() {
+    this.animate('parentCount', 400);
+    this.animate('mentorCount', 500);
+    this.animateRating(4.8);
+  }
+
+  animate(field: 'parentCount' | 'mentorCount', target: number) {
+    let count = 0;
+
+    const interval = setInterval(() => {
+      count++;
+      this[field] = count;
+      if (count >= target) clearInterval(interval);
+    }, 8);
+  }
+
+  animateRating(target: number) {
+    let val = 0;
+
+    const interval = setInterval(() => {
+      val += 0.1;
+      this.rating = parseFloat(val.toFixed(1));
+      if (val >= target) clearInterval(interval);
+    }, 50);
+  }
+  onMove(event: MouseEvent) {
+  const card = event.currentTarget as HTMLElement;
+  const rect = card.getBoundingClientRect();
+
+  const x = event.clientX - rect.left;
+  const y = event.clientY - rect.top;
+
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+
+  const rotateX = -(y - centerY) / 12;
+  const rotateY = (x - centerX) / 12;
+
+  card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+}
+
+onLeave(event: MouseEvent) {
+  const card = event.currentTarget as HTMLElement;
+  card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+}
 }

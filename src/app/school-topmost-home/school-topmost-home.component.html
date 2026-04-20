@@ -1,6 +1,35 @@
-<app-stm-banner *ngIf="banners?.length" [banners]="banners" [bannersMobile]="bannersMobile">
+<app-stm-banner *ngIf="banners?.length||bannersMobile?.length" [banners]="banners" [bannersMobile]="bannersMobile">
 
 </app-stm-banner>
+<section class="tufx-section">
+  <div class="tufx-container">
+
+    <div class="tufx-card">
+      <div class="tufx-img-wrap">
+        <img  class="img-px" src="assets/images/stm/parents.png" alt="parents">
+      </div>
+      <h2 class="tufx-count">{{ parentCount }}+</h2>
+      <p class="tufx-title">Trusted by Parents</p>
+    </div>
+
+    <div class="tufx-card">
+      <div class="tufx-img-wrap">
+        <img class="img-px" src="assets/images/stm/mentor.png" alt="mentor">
+      </div>
+      <h2 class="tufx-count">{{ mentorCount }}+</h2>
+      <p class="tufx-title">Expert Members</p>
+    </div>
+
+    <div class="tufx-card">
+      <div class="tufx-img-wrap">
+        <img class="img-px" src="assets/images/stm/google.png" alt="google">
+      </div>
+      <h2 class="tufx-count">{{ rating }}</h2>
+      <p class="tufx-title">Google Rating</p>
+    </div>
+
+  </div>
+</section>
 <section>
     <div class="container">
 
