@@ -1,0 +1,505 @@
+/* SECTION */
+.sx-hero-banner {
+  width: 100%;
+  padding: 80px 5%;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  overflow: hidden;
+}
+
+/* CONTAINER */
+.sx-hero-container {
+  max-width: 1300px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+/* LEFT */
+.sx-hero-left {
+  flex: 1;
+  animation: sxFadeUp 1s ease;
+}
+
+/* TITLE */
+.sx-hero-title {
+  font-size: 48px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.sx-hero-title span {
+  background: linear-gradient(90deg, #00f2fe, #4facfe, #43e97b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sxGradientMove 5s linear infinite;
+}
+
+/* SUBTITLE */
+.sx-hero-subtitle {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #dcdcdc;
+  max-width: 500px;
+}
+
+/* BUTTONS */
+.sx-hero-buttons {
+  margin-top: 25px;
+  display: flex;
+  gap: 15px;
+}
+
+/* COMMON BTN */
+.sx-btn {
+  padding: 12px 22px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+/* PRIMARY */
+.sx-btn-primary {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: #fff;
+}
+
+.sx-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* WHATSAPP */
+.sx-btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+}
+.sx-btn-map {
+  background: red;
+  color: #fff;
+}
+.sx-btn-map:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.sx-btn-whatsapp:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+/* RIGHT MEDIA */
+.sx-hero-right {
+  flex: 1.2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: sxFadeIn 1.2s ease;
+}
+
+.sx-hero-right iframe,
+.sx-hero-right img {
+  width: 100%;
+  height: 380px;
+  border-radius: 15px;
+  object-fit: cover;
+  border: none;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+}
+
+/* ANIMATIONS */
+@keyframes sxFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sxFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes sxGradientMove {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px) {
+  .sx-hero-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .sx-hero-title {
+    font-size: 36px;
+  }
+
+  .sx-hero-right iframe,
+  .sx-hero-right img {
+    height: 300px;
+  }
+}
+
+@media (max-width: 576px) {
+    .sx-btn-primary {
+  background: linear-gradient(135deg, #4facfe, #00f2fe);
+  color: #fff;
+    width: 135px !important;
+}
+    .sx-btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+  width: 135px !important;
+}
+.sx-btn-map {
+  background: red;
+  color: #fff;
+    width: 135px !important;
+}
+  .sx-hero-banner {
+    padding: 50px 20px;
+  }
+
+  .sx-hero-title {
+    font-size: 28px;
+  }
+
+  .sx-hero-subtitle {
+    font-size: 15px;
+  }
+
+  .sx-hero-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .sx-btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .sx-hero-right iframe,
+  .sx-hero-right img {
+    height: 220px;
+  }
+}
+
+/* ================= SCHOOL-DISCOVER--START ================= */
+/* ===== SECTION ===== */
+.ultra-school-section {
+  padding: 60px 15px;
+  text-align: center;
+  background: linear-gradient(-45deg, #6a11cb, #2575fc, #ff6a00, #ee0979);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== TITLE ===== */
+.ultra-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  padding: 0 10px;
+}
+
+.ultra-title span {
+  background: linear-gradient(90deg, #fff, #ffcc70, #fff);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: shineText 3s linear infinite;
+}
+
+@keyframes shineText {
+  0% { background-position: -200px; }
+  100% { background-position: 200px; }
+}
+
+/* ===== CONTAINER ===== */
+.ultra-card-container {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+/* ===== CARD ===== */
+.ultra-card {
+  width: 260px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+
+  box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease, box-shadow 0.3s;
+}
+
+/* IMAGE SAFE */
+.ultra-card img {
+  width: 100%;
+  height: auto; /* 👈 IMPORTANT FIX */
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+/* HOVER */
+.ultra-card:hover img {
+  transform: scale(1.08);
+}
+
+.ultra-card:hover {
+  box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+}
+
+/* SPARKLE */
+.sparkle {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.ultra-card:hover .sparkle::before,
+.ultra-card:hover .sparkle::after {
+  content: "✨";
+  position: absolute;
+  font-size: 18px;
+  animation: sparkleMove 1s linear infinite;
+}
+
+.ultra-card:hover .sparkle::before {
+  top: 10%;
+  left: 15%;
+}
+
+.ultra-card:hover .sparkle::after {
+  bottom: 10%;
+  right: 20%;
+}
+
+@keyframes sparkleMove {
+  0% { transform: scale(1) rotate(0deg); opacity: 1; }
+  100% { transform: scale(1.5) rotate(180deg); opacity: 0; }
+}
+
+/* RIPPLE */
+.ultra-card span.ripple {
+  position: absolute;
+  border-radius: 50%;
+  transform: scale(0);
+  animation: rippleAnim 600ms linear;
+  background: rgba(255,255,255,0.5);
+}
+
+@keyframes rippleAnim {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ===== RESPONSIVE ===== */
+
+/* tablet */
+@media (max-width: 992px) {
+  .ultra-card {
+    width: 45%;
+  }
+}
+
+/* mobile */
+@media (max-width: 600px) {
+  .ultra-card-container {
+    gap: 15px;
+  }
+
+  .ultra-card {
+    width: 100%; /* 👈 FULL WIDTH */
+    max-width: 320px;
+    margin: 0 auto;
+  }
+
+  .ultra-title {
+    font-size: 22px;
+  }
+}
+/* ================= SCHOOL-DISCOVER-END ================= */
+
+
+
+/*================== LEFT MENU SECTION START============*/
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* 🔥 WRAPPER (VERY IMPORTANT) */
+.sx-wrapper {
+  position: relative;
+}
+
+/* LAYOUT */
+.sx-container {
+  display: flex;
+  gap: 20px;
+  background: #fff;
+}
+
+/* SIDEBAR STICKY (SCOPED) */
+.sx-sidebar {
+  width: 260px;
+
+  position: sticky;
+  top: 80px; /* 👈 adjust based on your header height */
+
+  align-self: flex-start;
+}
+
+/* PROGRESS */
+.sx-progress-bar {
+  height: 4px;
+  background: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.sx-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #ff7e5f, #6a11cb);
+}
+
+/* MENU */
+.sx-menu {
+  background: linear-gradient(180deg, #ff7e5f, #6a11cb);
+  border-radius: 16px;
+  padding: 10px;
+}
+
+.sx-menu-item {
+  padding: 12px;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.sx-menu-item:hover {
+  transform: translateX(6px);
+  background: rgba(255,255,255,0.2);
+}
+
+.sx-menu-item.active {
+  background: #fff;
+  color: #6a11cb;
+}
+
+/* UNDERLINE */
+.sx-underline {
+  position: absolute;
+  bottom: 6px;
+  left: 12px;
+  height: 3px;
+  width: 40%;
+  background: linear-gradient(90deg, #ff7e5f, #6a11cb);
+}
+
+/* ADS */
+.sx-ads {
+  margin-top: 20px;
+}
+
+.sx-ad-card {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+}
+
+.sx-ad-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.sx-ad-card p {
+  padding: 10px;
+  text-align: center;
+}
+
+/* CONTENT */
+.sx-content {
+  flex: 1;
+  scroll-snap-type: y mandatory;
+}
+
+/* SECTION */
+.sx-section {
+  height: 100vh;
+  scroll-snap-align: start;
+  margin-bottom: 30px;
+  padding: 30px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+
+/* 📱 MOBILE FIXED INSIDE SECTION ONLY */
+@media (max-width: 768px) {
+
+  .sx-container {
+    flex-direction: column;
+  }
+
+  .sx-sidebar {
+    width: 100%;
+
+    position: sticky;
+    top: 70px; /* 👈 header height */
+
+    z-index: 10;
+    background: #fff;
+  }
+
+  .sx-menu {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+  }
+
+  .sx-menu-item {
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .sx-ads {
+    display: none;
+  }
+}

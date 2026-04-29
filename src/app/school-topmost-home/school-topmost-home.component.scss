@@ -109,7 +109,7 @@
 /* ================= IMAGE (NO CROP FINAL) ================= */
 .image-box {
   width: 100%;
-  aspect-ratio: 1 / 1;   /* SAME SIZE EVERYWHERE */
+
   max-height: 220px;
 
   display: flex;
@@ -212,8 +212,22 @@
   }
 
   .image-box {
-    max-height: 180px;
+   
+    // max-height: 180px;
+     background:white;
+     border-radius: 12px;
+    height: 100%;
+    border-radius: 12px;
+ 
   }
+  .image-box img {
+  max-width: 100%;
+
+  max-height: 100%;
+  object-fit: contain;   /* 🔥 NEVER CROP */
+  display: block;
+   border-radius: 12px;
+}
 }
 /* ================= CAT-SUBCAT-END ================= */
 
@@ -368,7 +382,7 @@
 }
 /* ================= SCHOOL-DISCOVER-END ================= */
 
-
+/*================= counter-google-start =================*/
 .tufx-section {
   padding: 100px 20px 60px;
   background: linear-gradient(135deg, #eef2ff, #fdf2f8);
@@ -498,5 +512,238 @@
     margin-top: 60px;
   top: -72px;
         position: relative;
+  }
+}
+/*================= counter-google-end =================*/
+/*================= school-list =================*/
+/* =========================
+   WRAPPER
+========================= */
+.sgxpro-wrapper {
+  background: #ffffff;
+  padding: 40px 20px;
+}
+
+/* =========================
+   SECTION
+========================= */
+.sgxpro-section {
+  margin-bottom: 60px;
+}
+
+/* =========================
+   HEADING
+========================= */
+.sgxpro-heading-box {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sgxpro-heading {
+  font-size: 30px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #ff512f, #dd2476, #24c6dc);
+  background-size: 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: sgxproGradient 8s linear infinite;
+}
+
+@keyframes sgxproGradient {
+  0% { background-position: 0%; }
+  100% { background-position: 200%; }
+}
+
+.sgxpro-subheading {
+  font-size: 14px;
+  color: #666;
+}
+
+/* =========================
+   SCROLL CONTAINER
+========================= */
+.sgxpro-scroll-container {
+  position: relative;
+}
+
+.sgxpro-scroll {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+  scroll-snap-type: x mandatory;
+}
+
+.sgxpro-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* =========================
+   CARD
+========================= */
+.sgxpro-card {
+  min-width: 260px;
+  flex: 0 0 auto;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  scroll-snap-align: start;
+  transition: transform 0.3s ease;
+}
+
+.sgxpro-card:hover {
+  transform: translateY(-6px);
+}
+
+/* =========================
+   IMAGE (NO CROP EVER)
+========================= */
+.sgxpro-img-box {
+  width: 100%;
+  height: 180px;
+  background: linear-gradient(135deg, #f3f3f3, #e0e0e0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sgxpro-img-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* 🔥 NO CROP */
+}
+
+/* =========================
+   CONTENT
+========================= */
+.sgxpro-content {
+  padding: 12px;
+}
+
+.sgxpro-school-name {
+  font-size: 17px;
+  font-weight: 700;
+  background: linear-gradient(90deg, #ff9966, #ff5e62);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sgxpro-location {
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* =========================
+   NAV BUTTONS (DESKTOP)
+========================= */
+.sgxpro-nav {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  background: #fff;
+  border: none;
+  font-size: 26px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  z-index: 5;
+}
+
+.sgxpro-nav.left { left: -10px; }
+.sgxpro-nav.right { right: -10px; }
+
+/* =========================
+   SHIMMER LOADING
+========================= */
+.shimmer-wrapper {
+  overflow: hidden;
+}
+
+.shimmer-card {
+  min-width: 260px;
+  border-radius: 16px;
+  background: #f6f7f8;
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer-bg {
+  height: 180px;
+  background: #eaeaea;
+}
+
+.shimmer-line {
+  height: 14px;
+  background: #eaeaea;
+  margin: 10px;
+  border-radius: 6px;
+}
+
+.shimmer-line.small {
+  width: 60%;
+}
+
+/* shimmer animation */
+.shimmer-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150px;
+  width: 120px;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.7),
+    transparent
+  );
+  animation: sgxproShimmer 1.2s infinite;
+}
+
+@keyframes sgxproShimmer {
+  100% {
+    transform: translateX(350px);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+
+  .sgxpro-heading {
+    font-size: 24px;
+  }
+
+  .sgxpro-card {
+    min-width: 220px;
+  }
+
+  .sgxpro-img-box {
+    height: 160px;
+  }
+
+  .sgxpro-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .sgxpro-wrapper {
+    padding: 20px 10px;
+  }
+
+  .sgxpro-card {
+    min-width: 200px;
+  }
+
+  .sgxpro-img-box {
+    height: 150px;
   }
 }

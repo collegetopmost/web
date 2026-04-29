@@ -1,8 +1,9 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component,ViewChild, ViewChildren, ElementRef, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { StmBannerComponent } from '../stm/stm-banner/stm-banner.component';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-school-topmost-home',
   imports: [StmBannerComponent,CommonModule],
@@ -20,15 +21,11 @@ toggleMenu() {
 openSearch() {
   this.isSearchOpen = true;
 }
-  ngOnInit(): void {
-
-this.getListBanner()
-   this.loop();
-  }
+  
    sortBySrNo(arr:any) {
   return arr.sort((a:any, b:any) => a.srNo - b.srNo);
 }
-constructor( private api:ApiService){
+constructor( private api:ApiService,private router:Router){
 
 }
 
@@ -245,4 +242,133 @@ onLeave(event: MouseEvent) {
   const card = event.currentTarget as HTMLElement;
   card.style.transform = `rotateX(0deg) rotateY(0deg)`;
 }
+ loadingSchoolList = true;
+
+  sections: any[] = [];
+
+  ngOnInit() {
+    this.getSchoolGroup()
+this.getListBanner()
+   this.loop();
+    // simulate API loading
+    setTimeout(() => {
+      this.sections = [
+        {
+          title: 'Top Preschools',
+          subtitle: 'Best early education schools',
+          schools: [
+            {
+              name: 'Little Stars Preschool',
+              city: 'Delhi',
+              image: 'https://images.unsplash.com/photo-1588072432836-e10032774350'
+            },
+            {
+              name: 'Bright Kids Academy',
+              city: 'Mumbai',
+              image: 'https://images.unsplash.com/photo-1577896851231-70ef18881754'
+            },
+            {
+              name: 'Tiny Tots School',
+              city: 'Bangalore',
+              image: 'https://images.unsplash.com/photo-1596495577886-d920f1fb7238'
+            }
+          ]
+        },
+        {
+          title: 'Top Secondary Schools',
+          subtitle: 'Future leaders start here',
+          schools: [
+            {
+              name: 'Delhi Public School',
+              city: 'Delhi',
+              image: 'https://images.unsplash.com/photo-1562774053-701939374585'
+            },
+            {
+              name: 'St. Xavier School',
+              city: 'Kolkata',
+              image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7'
+            },
+            {
+              name: 'Modern School',
+              city: 'Jaipur',
+              image: 'https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b'
+            },
+                   {
+              name: 'Delhi Public School',
+              city: 'Delhi',
+              image: 'https://images.unsplash.com/photo-1562774053-701939374585'
+            },
+            {
+              name: 'St. Xavier School',
+              city: 'Kolkata',
+              image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7'
+            },
+            {
+              name: 'Modern School',
+              city: 'Jaipur',
+              image: 'https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b'
+            },
+                   {
+              name: 'Delhi Public School',
+              city: 'Delhi',
+              image: 'https://images.unsplash.com/photo-1562774053-701939374585'
+            },
+            {
+              name: 'St. Xavier School',
+              city: 'Kolkata',
+              image: 'https://images.unsplash.com/photo-1509062522246-3755977927d7'
+            },
+            {
+              name: 'Modern School',
+              city: 'Jaipur',
+              image: 'https://images.unsplash.com/photo-1591123120675-6f7f1aae0e5b'
+            }
+          ]
+        }
+      ];
+
+      this.loadingSchoolList = false;
+    }, 2000);
+
+  }
+  @ViewChildren('scrollRef') scrollContainers!: QueryList<ElementRef>;
+  scrollLeftSchool(index: number) {
+    const container = this.scrollContainers.toArray()[index].nativeElement;
+    container.scrollBy({ left: -300, behavior: 'smooth' });
+  }
+
+  scrollRightSchool(index: number) {
+    const container = this.scrollContainers.toArray()[index].nativeElement;
+    container.scrollBy({ left: 300, behavior: 'smooth' });
+  }
+    schoolGroup:any=[]
+     getSchoolGroup() {
+  
+this.loadingSchoolList=true
+    this.api.getapi('getSchoolGroup').subscribe(
+      (res: any) => {
+        console.log('getSchoolGroup', res?.data);
+
+        this.schoolGroup = res?.data;
+        this.schoolGroup=this.sortBySrNo( this.schoolGroup)
+             this.schoolGroup?.forEach((group:any)=>{
+              group.schoolList=this.sortBySrNo(group?.schoolList)
+             })
+        this.loadingSchoolList=false
+      },
+      (error: any) => {
+        this.loadingSchoolList=false
+      },
+    );
+  }
+    openSchool(name:any) {
+        const urls = this.router.serializeUrl(
+      this.router.createUrlTree(['/school-details'])
+    );
+      
+
+    let url = this.api.frontendUrl + '/school-top-most/school-details/' + name;
+        window.open(url, '_blank');
+          console.log('urls', urls);
+  }
 }

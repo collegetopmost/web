@@ -7,6 +7,7 @@ import { CompareUniversityComponent } from '../compare-university/compare-univer
 import { AboutUsComponent } from '../about-us/about-us.component';
 import { SchoolTopmostHomeComponent } from '../school-topmost-home/school-topmost-home.component';
 import { StudentTopmostBaseComponent } from './student-topmost-base/student-topmost-base.component';
+import { SchoolDetailsComponent } from '../school-details/school-details.component';
 // export const routesCtm: Routes = [
 //   { path: '', component: HomeComponent },   // 👈 landing page
 //   { path: 'home', component: HomeComponent },
@@ -22,6 +23,7 @@ export const routesStm: Routes = [ {
       { path: '', component: SchoolTopmostHomeComponent },   // 👈 landing
 
       { path: 'home', component: SchoolTopmostHomeComponent },
+            { path: 'school-details/:name', component: SchoolDetailsComponent },
     //   { path: 'university-details/:name', component: UniversityDetailsComponent },
     //   { path: 'compare-university', component: CompareUniversityComponent },
     //   { path: 'about-us', component: AboutUsComponent }

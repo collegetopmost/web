@@ -66,7 +66,7 @@
   </div>
 
   <!-- PRODUCTS -->
-  <div *ngIf="!loading" class="product-grid">
+  <div *ngIf="!loading"  class="product-grid">
 
     <div class="product-card" *ngFor="let product of filteredProducts">
 
@@ -74,7 +74,7 @@
       <div class="trending">TRENDING</div>
 
       <div class="image-box">
-        <img [src]="product.image" />
+        <img src="https://collegetopmost.com/adminad/backend/collegetopmost/public/university/53551777130170.png" />
       </div>
 
       <div class="product-name">{{product.name}}</div>
@@ -127,3 +127,51 @@
 
 </div>
 </section>
+<div class="sgxpro-wrapper">
+
+  <div class="sgxpro-section" *ngFor="let section of schoolGroup; let i = index">
+
+    <!-- HEADING -->
+    <div class="sgxpro-heading-box">
+      <h2 class="sgxpro-heading">{{ section.title }}</h2>
+      <p class="sgxpro-subheading">{{ section.sub_title }}</p>
+    </div>
+
+    <!-- 🔥 SHIMMER LOADING -->
+    <div class="sgxpro-scroll shimmer-wrapper" *ngIf="loadingSchoolList">
+      <div class="sgxpro-card shimmer-card" *ngFor="let s of [1,2,3,4]">
+        <div class="sgxpro-img-box shimmer-bg"></div>
+        <div class="sgxpro-content">
+          <div class="shimmer-line"></div>
+          <div class="shimmer-line small"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ✅ ACTUAL CONTENT -->
+    <div class="sgxpro-scroll-container" *ngIf="!loadingSchoolList">
+
+      <button class="sgxpro-nav left" (click)="scrollLeftSchool(i)">‹</button>
+
+      <div class="sgxpro-scroll" #scrollRef>
+        <div (click)="openSchool(school?.fullName)" class="sgxpro-card" *ngFor="let school of section?.schoolList">
+
+          <div class="sgxpro-img-box">
+            <img [src]="school.logoUrl" loading="lazy" />
+          </div>
+
+          <div class="sgxpro-content">
+            <h3 class="sgxpro-school-name">{{ school?.name }}</h3>
+            <p class="sgxpro-location">{{ school?.cityDetail?.name }}, India</p>
+          </div>
+
+        </div>
+      </div>
+
+      <button class="sgxpro-nav right" (click)="scrollRightSchool(i)">›</button>
+
+    </div>
+
+  </div>
+
+</div>

@@ -1,0 +1,132 @@
+<section class="sx-hero-banner">
+  <div class="sx-hero-container">
+
+    <!-- LEFT CONTENT -->
+    <div class="sx-hero-left">
+      <h1 class="sx-hero-title">
+        Welcome to <span>{{universityDetails?.fullName}}</span>
+      </h1>
+
+      <p class="sx-hero-subtitle">
+        Affiliated By {{universityDetails?.accreditedDeatils?.name}}
+      </p>
+
+      <div class="sx-hero-buttons">
+        <a href="#" class="sx-btn sx-btn-primary">Know More</a>
+        <a href="https://wa.me/917000881628" target="_blank" class="sx-btn sx-btn-whatsapp">
+          WhatsApp
+        </a>
+          <a href="https://wa.me/917000881628" target="_blank" class="sx-btn sx-btn-map">
+          Map
+        </a>
+      </div>
+    </div>
+
+    <!-- RIGHT MEDIA -->
+    <div class="sx-hero-right">
+      <!-- OPTION 1: IMAGE -->
+       <ng-container *ngIf="universityDetails?.showImageAsBanner==1" >
+      <img [src]="universityDetails?.bannerImageUrl" alt="School Banner">
+</ng-container>
+      <!-- OPTION 2: YOUTUBE VIDEO -->
+        <ng-container *ngIf="universityDetails?.youtubeSanitizeLink && universityDetails?.showImageAsBanner==0">
+      <iframe 
+     [src]="universityDetails?.youtubeSanitizeLink"
+        frameborder="0"
+        allowfullscreen>
+      </iframe>
+      </ng-container>
+    </div>
+
+  </div>
+</section>
+
+<div class="sx-container">
+
+  <!-- SIDEBAR -->
+  <div class="sx-sidebar">
+
+    <!-- PROGRESS -->
+    <div class="sx-progress-bar">
+      <div class="sx-progress-fill" id="sxProgress"></div>
+    </div>
+
+    <!-- MENU -->
+    <div class="sx-menu">
+      <div
+        *ngFor="let item of sections"
+        (click)="scrollTo(item.id)"
+        [class.active]="activeSection === item.id"
+        class="sx-menu-item"
+      >
+        {{ item.label }}
+        <div class="sx-underline" *ngIf="activeSection === item.id"></div>
+      </div>
+    </div>
+
+    <!-- ADS -->
+    <!-- <div class="sx-ads">
+      <div class="sx-ad-card">
+        <img src="https://images.unsplash.com/photo-1588072432836-e10032774350" />
+        <p>Green Valley School</p>
+      </div>
+
+      <div class="sx-ad-card">
+        <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754" />
+        <p>Sunrise Public School</p>
+      </div>
+    </div> -->
+
+  </div>
+
+  <!-- CONTENT -->
+  <div class="sx-content">
+    <section *ngFor="let item of sections"
+             [id]="item.id"
+             class="sx-section">
+
+      <h2>{{ item.label }}</h2>
+      <p>Content for {{ item.label }}</p>
+
+    </section>
+  </div>
+
+</div>
+<div class="ultra-school-section">
+
+  <h2 class="ultra-title">
+    <span>Discover Perfect School for Your Child</span>
+  </h2>
+
+  <div class="ultra-card-container">
+
+    <div class="ultra-card"
+         #card
+         (mousemove)="tilt($event, card)"
+         (mouseleave)="resetTilt(card)"
+         (click)="ripple($event)">
+      <img src="assets/images/stm/card1.png" alt="">
+      <div class="sparkle"></div>
+    </div>
+
+    <div class="ultra-card"
+         #card
+         (mousemove)="tilt($event, card)"
+         (mouseleave)="resetTilt(card)"
+         (click)="ripple($event)">
+      <img src="assets/images/stm/card2.png" alt="">
+      <div class="sparkle"></div>
+    </div>
+
+    <div class="ultra-card"
+         #card
+         (mousemove)="tilt($event, card)"
+         (mouseleave)="resetTilt(card)"
+         (click)="ripple($event)">
+      <img src="assets/images/stm/card3.png" alt="">
+      <div class="sparkle"></div>
+    </div>
+
+  </div>
+
+</div>
